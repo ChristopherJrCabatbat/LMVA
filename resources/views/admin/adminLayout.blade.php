@@ -33,6 +33,12 @@
 
     <main>
         <h1 class="h1">Admin Dashboard</h1>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="btn btn-primary"><i
+                    class="me-2 fa-solid fa-arrow-right-from-bracket rotate"></i>
+                {{ __('Log Out') }}</button>
+        </form>
     </main>
 
     <footer></footer>

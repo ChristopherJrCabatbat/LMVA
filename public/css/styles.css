@@ -1,0 +1,8 @@
+.nav-letterSpacing {
+    letter-spacing: 2px;
+}
+
+.nav-link {
+    font-size: 1.15rem;
+    margin-right: 10px;
+}
