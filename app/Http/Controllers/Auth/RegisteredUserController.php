@@ -19,7 +19,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('start.register');
     }
 
     /**
@@ -30,16 +30,39 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            // 'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        // $user = User::create([
+        //     // 'name' => $request->name,
+        //     'email' => $request->email,
+        //     'username' => $request->username,
+        //     'first_name' => $request->first_name,
+        //     'last_name' => $request->last_name,
+        //     'contact_number' => $request->contact_number,
+        //     'password' => Hash::make($request->password),
+        // ]);
+
+        // $user = new User([
+        //     'email' => $request->email,
+        //     'username' => $request->username,
+        //     'first_name' => $request->first_name,
+        //     'last_name' => $request->last_name,
+        //     'contact_number' => $request->contact_number,
+        //     'password' => Hash::make($request->password),
+        // ]);
+
+        $user = new User;
+        $user->email = $request->input('email');
+        $user->username = $request->input('username');
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->contact_number = $request->input('contact_number');
+        $user->password = Hash::make($request->input('password'));
+
+        $user->save();
 
         event(new Registered($user));
 
