@@ -1,8 +1,64 @@
 .nav-letterSpacing {
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
-.nav-link {
-    font-size: 1.15rem;
-    margin-right: 10px;
+.sign-up {
+    text-decoration: none;
+}
+
+.sign-up:hover {
+    text-decoration: underline;
+}
+
+
+/* Sidebar */
+.sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    padding-top: 20px;
+    z-index: 1;
+    border-right: 1px solid #dee2e6;
+}
+.sidebar .user-info {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 60px;
+}
+.sidebar .user-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+.sidebar .user-info .username {
+    font-weight: bold;
+}
+.sidebar .user-info .position {
+    font-size: 0.9em;
+    color: #6c757d;
+}
+
+/* Sidebar Links */
+.sidebar .nav-link {
+    color: #333;
+    padding: 10px 20px;
+}
+.sidebar .nav-link:hover {
+    background-color: #bebebe;
+}
+.sidebar .nav-link.side-active {
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* End Sidebar */
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    padding-top: 7vh;
 }
