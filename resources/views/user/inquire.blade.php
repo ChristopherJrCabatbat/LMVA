@@ -1,6 +1,6 @@
-@extends('admin.adminLayout')
+@extends('user.userLayout')
 
-@section('title', 'Admin Dashboard')
+@section('title', 'User Dashboard')
 
 @section('styles-links')
 
@@ -8,26 +8,18 @@
 
 @section('sidebar')
     <li class="nav-item">
-        <a class="nav-link side-active" href="content_dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
+        <a class="nav-link" href="/user/dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
     </li>
     <hr />
+
     <li class="nav-item">
-        <a class="nav-link" href="content_dashboard"><i class="fa-solid fa-gauge me-2"></i> Accounts</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="content_dashboard"><i class="fa-solid fa-gauge me-2"></i> DERM</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="content_dashboard"><i class="fa-solid fa-gauge me-2"></i> Reports</a>
+        <a class="nav-link side-active" href="/user/inquire"><i class="me-2 fa-solid fa-user"></i> Inquire</a>
     </li>
 
-    {{-- <li class="nav-item">
-        <a class="nav-link" href="/user/inquire"><i class="me-2 fa-solid fa-user"></i> Inquire</a>
-    </li>
-
+    {{-- <hr /> --}}
     <li class="nav-item">
         <a class="nav-link" href="attendance"><i class="me-2 fa-solid fa-clipboard-user"></i> Number of Inquiries</a>
-    </li> --}}
+    </li>
 
     {{-- <li class="nav-item">
         <a class="nav-link" href="leave"><i class="me-2 fa-solid fa-arrow-right-from-bracket"></i> Leave</a>

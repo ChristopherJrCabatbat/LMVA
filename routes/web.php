@@ -20,12 +20,36 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-// route::get('admin/dashboard', [LoginController::class, 'admin'])->middleware(['auth', 'login']);
 
-// route::get('staff/dashboard', [LoginController::class, 'staff'])->middleware(['auth', 'login']);
+// Admin Routes
+Route::group([
+    'prefix' => 'admin', 'as' => 'admin.',
+    'middleware' => ['auth', 'verified', 'login'],
+], function () {
 
-Route::middleware(['auth', 'login'])->group(function () {
-    Route::get('admin/dashboard', [LoginController::class, 'admin']);
-    Route::get('staff/dashboard', [LoginController::class, 'staff']);
-    Route::get('user/dashboard', [LoginController::class, 'user']);
+    Route::get('/dashboard', [LoginController::class, 'admin']);
+
+});
+
+
+// Staff Routes
+Route::group([
+    'prefix' => 'staff', 'as' => 'staff.',
+    'middleware' => ['auth', 'verified', 'login'],
+], function () {
+
+    Route::get('/dashboard', [LoginController::class, 'staff']);
+
+});
+
+
+// User Routes
+Route::group([
+    'prefix' => 'user', 'as' => 'user.',
+    'middleware' => ['auth', 'verified', 'login'],
+], function () {
+
+    Route::get('/dashboard', [LoginController::class, 'user']);    
+    Route::get('/inquire', [LoginController::class, 'inquire']);
+
 });

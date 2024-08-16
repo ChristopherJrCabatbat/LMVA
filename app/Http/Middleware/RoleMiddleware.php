@@ -14,39 +14,74 @@ class RoleMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
+
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
 
-        if ($user->role === 'Admin' && $request->path() !== 'admin/dashboard') {
-            return redirect('admin/dashboard');
-        }
+        // Define the allowed routes for each role
+        $allowedRoutes = [
+            'Admin' => ['admin/dashboard'],
+            'Staff' => ['staff/dashboard'],
+            'User' => [
+                'user/dashboard',
+                'user/inquire',
+            ],
+            // Add other user routes here
+        ];
 
-        if ($user->role === 'Staff' && $request->path() !== 'staff/dashboard') {
-            return redirect('staff/dashboard');
-        }
-       
-        if ($user->role === 'User' && $request->path() !== 'user/dashboard') {
-            return redirect('user/dashboard');
+        $role = $user->role;
+
+        // If the current path is not in the allowed routes for the role, redirect to the role's dashboard
+        if (!in_array($request->path(), $allowedRoutes[$role] ?? [])) {
+            return redirect($allowedRoutes[$role][0]); // Redirect to the first allowed route (dashboard)
         }
 
         return $next($request);
     }
-    
-    // public function handle(Request $request, Closure $next, $role)
+
+
+    // public function handle(Request $request, Closure $next): Response
     // {
-    //     // if (Auth::check() && Auth::user()->role === $role) {
-    //     //     return $next($request);
-    //     // }
+    //     $user = Auth::user();
+    //     $role = $user->role;
 
-    //     // return redirect('/')->with('error', 'You do not have access to this page.');
+    //     // Define the dashboard routes and allowed routes for each role
+    //     $roleRoutes = [
+    //         'Admin' => [
+    //             'dashboard' => 'admin/dashboard',
+    //             'allowed' => ['admin/*'],
+    //         ],
+    //         'Staff' => [
+    //             'dashboard' => 'staff/dashboard',
+    //             'allowed' => ['staff/*'],
+    //         ],
+    //         'User' => [
+    //             'dashboard' => 'user/dashboard',
+    //             'allowed' => ['user/*'],
+    //         ],
+    //     ];
 
-    //     if (Auth::user()->role === 'Admin') {
-    //         return redirect('admin/dashboard');
+    //     // Get the routes for the user's role
+    //     $routes = $roleRoutes[$role] ?? null;
+
+    //     // Redirect to the dashboard if the user is logging in or accessing the root path
+    //     if ($request->path() === 'login' || $request->path() === '/') {
+    //         return redirect($routes['dashboard']);
     //     }
 
-    //     elseif (Auth::user()->role === 'Staff') {
-    //         return redirect('staff/dashboard');
+    //     // Check if the current path is allowed for the user's role
+    //     $allowed = false;
+    //     foreach ($routes['allowed'] as $allowedRoute) {
+    //         if ($request->is($allowedRoute)) {
+    //             $allowed = true;
+    //             break;
+    //         }
+    //     }
+
+    //     // If the route is not allowed, redirect to the user's dashboard
+    //     if (!$allowed) {
+    //         return redirect($routes['dashboard'])->with('error', 'You do not have access to that page.');
     //     }
 
     //     return $next($request);

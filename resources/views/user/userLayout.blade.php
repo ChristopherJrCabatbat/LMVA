@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
 
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/lmva-icon.jpg') }}">
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
@@ -21,10 +22,10 @@
         background-position: center;
         min-height: 100vh;
         /* padding-top: 60px; */
-        animation: slideshow 15s infinite;
+        /* animation: slideshow 15s infinite; */
     }
 
-    @keyframes slideshow {
+    /* @keyframes slideshow {
         0% {
             background-image: url("{{ asset('images/lmvapic1.jpg') }}");
         }
@@ -40,10 +41,10 @@
         100% {
             background-image: url("{{ asset('images/lmvapic1.jpg') }}");
         }
-    }
+    } */
 </style>
 
-<body>
+<body style="background-color: #D1E9F6">
     @if (session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -109,12 +110,12 @@
     <main class="main-content">
         <div class="container pt-5">
             <h1 class="h1">User Dashboard</h1>
-            <form method="POST" action="{{ route('logout') }}">
+            {{-- <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="btn btn-primary"><i
                         class="me-2 fa-solid fa-arrow-right-from-bracket rotate"></i>
                     {{ __('Log Out') }}</button>
-            </form>
+            </form> --}}
         </div>
     </main>
 
