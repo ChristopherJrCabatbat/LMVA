@@ -8,7 +8,6 @@
 
 @section('nav-links')
     <a class="nav-link nav-letterSpacing active" aria-current="page" href="/">HOME</a>
-    <a class="nav-link nav-letterSpacing" href="#">CONTACT</a>
     <a class="nav-link nav-letterSpacing" href="{{ route('login') }}">LOGIN</a>
     <a class="nav-link nav-letterSpacing" href="{{ route('register') }}">REGISTER</a>
 @endsection

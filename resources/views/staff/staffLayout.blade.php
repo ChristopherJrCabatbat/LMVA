@@ -21,30 +21,10 @@
         background-size: cover;
         background-position: center;
         min-height: 100vh;
-        /* padding-top: 60px; */
-        animation: slideshow 15s infinite;
-    }
-
-    @keyframes slideshow {
-        0% {
-            background-image: url("{{ asset('images/lmvapic1.jpg') }}");
-        }
-
-        35% {
-            background-image: url("{{ asset('images/lmvapic2.jpg') }}");
-        }
-
-        75% {
-            background-image: url("{{ asset('images/lmvapic3.jpg') }}");
-        }
-
-        100% {
-            background-image: url("{{ asset('images/lmvapic1.jpg') }}");
-        }
     }
 </style>
 
-<body>
+<body style="background-color: #D1E9F6">
     @if (session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -52,49 +32,56 @@
             });
         </script>
     @endif
-    {{-- @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
+
+    @if (session('error'))
+        <div class="alert alert-danger" id="error-alert">
+            <i class="fa-solid fa-triangle-exclamation"></i> {{ session('error') }}
         </div>
-    @endif --}}
+    @endif
 
     <header>
-       {{-- Top Navbar --}}
-<nav class="navbar fixed-top navbar-expand-lg p-0" style="background-color: white; border-bottom: 1px solid #dee2e6;">
-    <div class="container">
-        <a class="navbar-brand logo" href="#">
-            <img src="{{ asset('images/lmva-logo.png') }}" class="img-fluid" style="width: 110px; height: 100%" alt="User Image" />
-        </a>
-        <div id="">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                @if (Auth::check())
-                    <li class="nav-item dropdown" style="position: relative;">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-user"></i>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="position: absolute; top: 100%; left: 0; right: 0; margin-top: 0; z-index: 1000;">
-                            <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="me-2 fa-solid fa-user"></i> Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
+        {{-- Top Navbar --}}
+        <nav class="navbar fixed-top navbar-expand-lg p-0"
+            style="background-color: white; border-bottom: 1px solid #dee2e6;">
+            <div class="container">
+                <a class="navbar-brand logo" href="#">
+                    <img src="{{ asset('images/lmva-logo.png') }}" class="img-fluid" style="width: 110px; height: 100%"
+                        alt="User Image" />
+                </a>
+                <div id="">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        @if (Auth::check())
+                            <li class="nav-item dropdown" style="position: relative;">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-user"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown"
+                                    style="position: absolute; top: 100%; left: 0; right: 0; margin-top: 0; z-index: 1000;">
+                                    <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i
+                                                class="me-2 fa-solid fa-user"></i> Profile</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item"><i
+                                                    class="me-2 fa-solid fa-arrow-right-from-bracket rotate"></i>
+                                                {{ __('Log Out') }}</button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </li>
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item"><i class="me-2 fa-solid fa-arrow-right-from-bracket rotate"></i>
-                                        {{ __('Log Out') }}</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                @endif
-            </ul>
-        </div>
-    </div>
-</nav>
+                        @endif
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
 
         {{-- Side Navbar --}}
-         <div class="sidebar">
+        <div class="sidebar">
             <div class="user-info">
                 <div class="username">Hello, {{ Auth::user()->first_name }}!</div>
                 <div class="position">You are logged in as {{ Auth::user()->role }}.</div>
@@ -108,15 +95,7 @@
     </header>
 
     <main class="main-content">
-        <div class="container pt-5">
-            <h1 class="h1">Staff Dashboard</h1>
-            {{-- <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="btn btn-primary"><i
-                        class="me-2 fa-solid fa-arrow-right-from-bracket rotate"></i>
-                    {{ __('Log Out') }}</button>
-            </form> --}}
-        </div>
+       @yield('main-content')
     </main>
 
     <footer></footer>
@@ -126,7 +105,22 @@
     <script src="{{ asset('js/scripts.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.js') }}"></script>
-    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Automatically close the alert after 5 seconds
+            setTimeout(function() {
+                const errorAlert = document.getElementById('error-alert');
+                if (errorAlert) {
+                    errorAlert.style.transition = 'opacity 0.5s ease';
+                    errorAlert.style.opacity = '0';
+                    setTimeout(function() {
+                        errorAlert.remove();
+                    }, 500); // Wait for the transition to complete before removing
+                }
+            }, 5000); // 5 seconds
+        });
+    </script>
 
 </body>
 

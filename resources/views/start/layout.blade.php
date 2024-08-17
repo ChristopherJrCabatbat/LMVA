@@ -85,30 +85,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         @yield('nav-links')
-                        {{-- @if (Auth::check())
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ Auth::user()->photo ? asset(Auth::user()->photo) : asset('images/employee.png') }}"
-                                        alt="User Image" class="rounded-circle" style="width: 30px; height: 30px;">
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i
-                                                class="me-2 fa-solid fa-user"></i> Profile</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li>
-                                        <form method="POST" action="{{ route('logout') }}">
-                                            @csrf
-                                            <button type="submit" class="dropdown-item"><i
-                                                    class="me-2 fa-solid fa-arrow-right-from-bracket rotate"></i>
-                                                {{ __('Log Out') }}</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif --}}
                     </ul>
                 </div>
 
@@ -123,7 +99,7 @@
     <footer class="pt-4" style="background-color: white;">
         <div class="container">
             <div class="container text-center">
-                <div class="row row-cols-4">
+                <div class="row row-cols-5">
                     <div class="col d-flex flex-column">
                         <div class="footer-header-links fw-bold fs-5 mb-2">DISCOVER</div>
                         <div class="container-footer-links">
@@ -151,6 +127,14 @@
                         <div class="footer-header-links fw-bold fs-5 mb-2">LOCATION</div>
                         <div class="container-footer-links">
                             <div class="footer-links">Novaliches, Quezon City, Metro Manila</div>
+                        </div>
+                    </div>
+                    <div class="col d-flex flex-column">
+                        <div class="footer-header-links fw-bold fs-5 mb-2">CONTACT US</div>
+                        <div class="container-footer-links">
+                            <div class="footer-links">0987654321</div>
+                            <div class="footer-links">contact@gmail.com</div>
+                            <div class="footer-links">contact.example.73</div>
                         </div>
                     </div>
                 </div>

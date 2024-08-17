@@ -1,6 +1,6 @@
 @extends('user.userLayout')
 
-@section('title', 'User Inquire')
+@section('title', 'User Number of Inquiries')
 
 @section('styles-links')
 
@@ -13,11 +13,11 @@
     <hr />
 
     <li class="nav-item">
-        <a class="nav-link side-active" href="#"><i class="me-2 fa-solid fa-user"></i> Inquire</a>
+        <a class="nav-link" href="/user/inquire"><i class="me-2 fa-solid fa-user"></i> Inquire</a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="/user/numberInquiries"><i class="me-2 fa-solid fa-clipboard-user"></i> Number of
+        <a class="nav-link side-active" href="#"><i class="me-2 fa-solid fa-clipboard-user"></i> Number of
             Inquiries</a>
     </li>
 
@@ -26,7 +26,7 @@
 
 @section('main-content')
     <div class="container pt-5">
-        <h1 class="h1">User Inquire</h1>
+        <h1 class="h1">User Number of Inquiries</h1>
     </div>
 @endsection
 

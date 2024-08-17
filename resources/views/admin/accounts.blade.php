@@ -26,11 +26,11 @@
 
 @section('sidebar')
     <li class="nav-item">
-        <a class="nav-link side-active" href="#"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
+        <a class="nav-link" href="/admin/dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
     </li>
     <hr />
     <li class="nav-item">
-        <a class="nav-link" href="/admin/accounts"><i class="fa-solid fa-users me-2"></i> Accounts</a>
+        <a class="nav-link side-active" href="#"><i class="fa-solid fa-users me-2"></i> Accounts</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/admin/derm"><i class="fa-solid fa-notes-medical me-2"></i> DERM</a>
@@ -43,7 +43,7 @@
 
 @section('main-content')
     <div class="container pt-5">
-        <h1 class="h1">Admin Dashboard</h1>
+        <h1 class="h1">Admin Accounts</h1>
     </div>
 @endsection
 

@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('start.home');
@@ -27,7 +30,10 @@ Route::group([
     'middleware' => ['auth', 'verified', 'login'],
 ], function () {
 
-    Route::get('/dashboard', [LoginController::class, 'admin']);
+    Route::get('/dashboard', [AdminController::class, 'dashboard']);
+    Route::get('/accounts', [AdminController::class, 'accounts']);
+    Route::get('/derm', [AdminController::class, 'derm']);
+    Route::get('/reports', [AdminController::class, 'reports']);
 
 });
 
@@ -38,7 +44,9 @@ Route::group([
     'middleware' => ['auth', 'verified', 'login'],
 ], function () {
 
-    Route::get('/dashboard', [LoginController::class, 'staff']);
+    Route::get('/patientRecord', [StaffController::class, 'patientRecord']);
+    Route::get('/scan', [StaffController::class, 'scan']);
+    Route::get('/inquiry', [StaffController::class, 'inquiry']);
 
 });
 
@@ -49,7 +57,8 @@ Route::group([
     'middleware' => ['auth', 'verified', 'login'],
 ], function () {
 
-    Route::get('/dashboard', [LoginController::class, 'user']);    
-    Route::get('/inquire', [LoginController::class, 'inquire']);
+    Route::get('/dashboard', [UserController::class, 'dashboard']);    
+    Route::get('/inquire', [UserController::class, 'inquire']);
+    Route::get('/numberInquiries', [UserController::class, 'numberInquiries']);
 
 });

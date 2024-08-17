@@ -26,7 +26,7 @@
 
 @section('sidebar')
     <li class="nav-item">
-        <a class="nav-link side-active" href="#"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
+        <a class="nav-link" href="/admin/dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
     </li>
     <hr />
     <li class="nav-item">
@@ -36,14 +36,14 @@
         <a class="nav-link" href="/admin/derm"><i class="fa-solid fa-notes-medical me-2"></i> DERM</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/admin/reports"><i class="fa-solid fa-newspaper me-2"></i> Reports</a>
+        <a class="nav-link side-active" href="#"><i class="fa-solid fa-newspaper me-2"></i> Reports</a>
     </li>
 
 @endsection
 
 @section('main-content')
     <div class="container pt-5">
-        <h1 class="h1">Admin Dashboard</h1>
+        <h1 class="h1">Admin Reports</h1>
     </div>
 @endsection
 

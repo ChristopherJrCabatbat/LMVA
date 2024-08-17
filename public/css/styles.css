@@ -45,7 +45,8 @@
 /* Sidebar Links */
 .sidebar .nav-link {
     color: #333;
-    padding: 10px 20px;
+    padding: 15px 20px;
+    font-size: 1.1rem;
 }
 .sidebar .nav-link:hover {
     background-color: #bebebe;
@@ -61,4 +62,14 @@
     margin-left: 250px;
     padding: 20px;
     padding-top: 7vh;
+}
+
+
+/* Alert Message */
+#error-alert {
+    z-index: 100000;
+    width: 42%;
+    position: absolute;
+    bottom: 0;
+    right: 1%;
 }
