@@ -28,8 +28,8 @@
         /* Ensures the image doesn't repeat */
         background-attachment: fixed;
         /* Makes the background image fixed when scrolling */
-        min-height: 94vh;
-        padding-top: 10.2vh;
+        min-height: 97vh;
+        padding-top: 10.5vh;
         margin-top: 1rem;
         animation: slideshow 15s infinite;
     }

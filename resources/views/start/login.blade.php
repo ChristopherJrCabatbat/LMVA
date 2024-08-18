@@ -27,7 +27,9 @@
                     <x-text-input id="email" class="form-control" type="email" name="email" :value="old('email')"
                         required autofocus autocomplete="username" placeholder="" />
                     <x-input-label class="form-label" for="email" :value="__('Email')" />
-                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    {{-- <i class="fa-solid fa-triangle-exclamation"></i> --}}
+                    <x-input-error :messages="$errors->get('email')" class="mt-3 login-error text-start alert alert-danger" />
+                   
                 </div>
                 <!-- Password -->
                 <div class="mb-3 form-floating">

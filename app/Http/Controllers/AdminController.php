@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 
@@ -12,7 +13,11 @@ class AdminController extends Controller
     }
     public function accounts()
     {
-        return view('admin.accounts');
+        $staffs = User::where('role', 'Staff')->get();
+        $users = User::where('role', 'User')->get();
+
+        // $users = User::all();
+        return view('admin.accounts', compact('staffs', 'users'));
     }
     public function derm()
     {

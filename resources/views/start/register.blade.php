@@ -6,7 +6,7 @@
 
     <style>
         main {
-            padding-top: 33vh;
+            padding-top: 33.4vh;
             min-height: 147vh;
         }
 

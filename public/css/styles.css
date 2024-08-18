@@ -10,7 +10,6 @@
     text-decoration: underline;
 }
 
-
 /* Sidebar */
 .sidebar {
     height: 100vh;
@@ -64,7 +63,6 @@
     padding-top: 7vh;
 }
 
-
 /* Alert Message */
 #error-alert {
     z-index: 100000;
@@ -73,3 +71,42 @@
     bottom: 0;
     right: 1%;
 }
+
+.login-error {
+    list-style: none;
+    padding-left: 1rem;
+}
+
+/* Table */
+
+.table-responsive {
+    min-width: 400px;
+    /* overflow: hidden; */
+    /* background-color: white; */
+    /* background-color: rgba(255, 255, 255, 0.55); */
+    /* background-color: #212529;  */
+    border: 1px solid #03346E;
+
+}
+
+.table {
+    border-radius: 40px;
+    /* overflow: hidden; */
+    position: relative;
+    border: 1px solid #03346E;
+    
+}
+
+button.add, button.manageDropdown1 {
+    background-color: #03346E;
+}
+
+button.add:hover, button.manageDropdown1:hover {
+    background-color: #002046;
+    color: white;
+}
+
+/* .manageDropdown111 {
+    position: absolute !important;
+    bottom: 1%;
+} */
