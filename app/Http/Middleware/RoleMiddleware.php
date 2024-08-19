@@ -40,7 +40,8 @@ class RoleMiddleware
             session()->flash('error', $message);
 
             // Redirect to the first allowed route (dashboard)
-            return redirect($allowedRoutes[$role][0]);
+            // return redirect($allowedRoutes[$role][0]);
+            return back();
         }
 
         return $next($request);

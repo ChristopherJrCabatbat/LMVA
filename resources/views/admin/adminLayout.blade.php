@@ -24,7 +24,7 @@
     }
 </style>
 
-<body style="background-color: white">
+<body style="background-color: rgb(218, 218, 218)">
     @if (session('success'))
         <script>
             document.addEventListener('DOMContentLoaded', function() {

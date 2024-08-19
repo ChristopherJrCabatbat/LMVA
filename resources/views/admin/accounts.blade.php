@@ -44,161 +44,206 @@
 @section('main-content')
     <div class="container pt-5 d-flex flex-column gap-5">
         {{-- Staff Table --}}
-        <div class="table-responsive text-center p-3 bg-dark" data-bs-theme="dark">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="mb-0 text-white"><i class="fa-solid fa-users me-2"></i> Staff Accounts</h5>
-                <form action="employee/create">
-                    <button class="btn add" type="submit"><i class="fas fa-plus"></i>
-                        Add Staff
-                    </button>
-                </form>
+        <div class="container pt-5 d-flex flex-column gap-5">
+
+            {{-- Staff Table --}}
+            <div class="table-responsive text-center p-3 bg-light" id="staffTable">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0"><i class="fa-solid fa-users me-2"></i> Staff Accounts</h5>
+
+                    {{-- <div class="d-flex justify-content-center"> --}}
+                    {{-- <button class="btn btn-primary me-2" id="showStaff">Show Staff Accounts</button> --}}
+                    <button class="btn btn-secondary" id="showUsers">Show User Accounts</button>
+                    {{-- </div> --}}
+
+                    <form action="employee/create">
+                        <button class="btn add" type="submit"><i class="fas fa-plus"></i> Add Staff</button>
+                    </form>
+                </div>
+                <table class="table table-bordered bg-dark rounded" data-bs-theme="dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Username</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Contact Number</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($staffs as $staff)
+                            <tr class="table-light" style="border: 1px solid #03346E">
+                                <td>{{ $staff->username }}</td>
+                                <td>{{ $staff->first_name }}</td>
+                                <td>{{ $staff->last_name }}</td>
+                                <td>{{ $staff->contact_number }}</td>
+                                <td>{{ $staff->email }}</td>
+                                <td class="position-relative">
+                                    <div class="dropdown-custom">
+                                        <button class="btn btn-sm dropdown-toggle manageDropdown1" type="button">
+                                            <i class="fas fa-gear"></i> Manage
+                                        </button>
+                                        <ul class="dropdown-menu-custom dropdown-menu-end">
+                                            <li>
+                                                <a class="dropdown-item" href="employee/{{ $staff->id }}">
+                                                    <i class="fas fa-eye" style="color: green"></i> View
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="employee/{{ $staff->id }}/edit">
+                                                    <i class="fas fa-pen-to-square" style="color: blue"></i> Edit
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <form action="employee/{{ $staff->id }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="dropdown-item">
+                                                        <i class="fa-solid fa-trash" style="color: red"></i> Delete
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center">There are no staff accounts.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+                {{-- Staff Pagination --}}
+                <nav aria-label="Staff Pagination">
+                    {{-- <ul class="pagination justify-content-end"> --}}
+                    <!-- Add your pagination links here -->
+                    </ul>
+                </nav>
             </div>
-            <table class="table table-bordered bg-dark rounded" data-bs-theme="dark">
-                <thead class="">
-                    <tr>
-                        <th scope="col">Username</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Contact Number</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($staffs as $staffs)
+
+            {{-- User Table --}}
+            <div class="table-responsive text-center p-3 bg-light d-none" id="userTable">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0"><i class="fa-solid fa-users me-2"></i> User Accounts</h5>
+
+                    <button class="btn btn-primary" id="showStaff">Show Staff Accounts</button>
+
+                    <form action="employee/create">
+                        <button class="btn add" type="submit"><i class="fas fa-plus"></i> Add User</button>
+                    </form>
+                </div>
+                <table class="table table-bordered bg-dark rounded" data-bs-theme="dark">
+                    <thead>
                         <tr>
-                            <td>{{ $staffs->username }}</td>
-                            <td>{{ $staffs->first_name }}</td>
-                            <td>{{ $staffs->last_name }}</td>
-                            <td>{{ $staffs->contact_number }}</td>
-                            <td>{{ $staffs->email }}</td>
-                            <td class="position-relative">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm dropdown-toggle manageDropdown1" type="button"
-                                        id="manageDropdown11" data-bs-toggle="dropdown" aria-expanded="false"><i
-                                            class="fas fa-gear"></i>
-                                        Manage
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end manageDropdown111"
-                                        aria-labelledby="manageDropdown1" style="max-height: 16vh">
-                                        <li>
-                                            <a class="dropdown-item" href="employee/{{ $staffs->id }}"><i
-                                                    class="fas fa-eye" style="color: green"></i> View</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="employee/{{ $staffs->id }}/edit"><i
-                                                    class="fas fa-pen-to-square" style="color: blue"></i> Edit</a>
-                                        </li>
-
-                                        <li>
-                                            <form action="employee/{{ $staffs->id }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"
-                                                        style="color: red"></i> Delete</button>
-                                            </form>
-
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
+                            <th scope="col">Username</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Contact Number</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Actions</th>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="6" class="text-center">There are no users.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        @forelse ($users as $user)
+                            <tr class="table-light" style="border: 1px solid #03346E">
+                                <td>{{ $user->username }}</td>
+                                <td>{{ $user->first_name }}</td>
+                                <td>{{ $user->last_name }}</td>
+                                <td>{{ $user->contact_number }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td class="position-relative">
+                                    <div class="dropdown-custom">
+                                        <button class="btn btn-sm dropdown-toggle manageDropdown1" type="button">
+                                            <i class="fas fa-gear"></i> Manage
+                                        </button>
+                                        <ul class="dropdown-menu-custom dropdown-menu-end">
+                                            <li>
+                                                <a class="dropdown-item" href="employee/{{ $user->id }}">
+                                                    <i class="fas fa-eye" style="color: green"></i> View
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="employee/{{ $user->id }}/edit">
+                                                    <i class="fas fa-pen-to-square" style="color: blue"></i> Edit
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <form action="employee/{{ $user->id }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="dropdown-item">
+                                                        <i class="fa-solid fa-trash" style="color: red"></i> Delete
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center">There are no user accounts.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+                {{-- User Pagination --}}
+                <nav aria-label="User Pagination">
+                    <ul class="pagination justify-content-end">
+                        {{-- {{ $users->links('pagination::bootstrap-5') }} --}}
 
-        {{-- User Table --}}
-        <div class="table-responsive text-center p-3 bg-dark" data-bs-theme="dark">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="mb-0 text-white"><i class="fa-solid fa-users me-2"></i> User Accounts</h5>
-                <form action="employee/create">
-                    <button class="btn add" type="submit"><i class="fas fa-plus"></i>
-                        Add User
-                    </button>
-                </form>
+                        <!-- Add your pagination links here -->
+                    </ul>
+                </nav>
             </div>
-            <table class="table table-bordered bg-dark rounded" data-bs-theme="dark">
-                <thead class="">
-                    <tr>
-                        <th scope="col">Username</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Contact Number</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($users as $users)
-                        <tr>
-                            <td>{{ $users->username }}</td>
-                            <td>{{ $users->first_name }}</td>
-                            <td>{{ $users->last_name }}</td>
-                            <td>{{ $users->contact_number }}</td>
-                            <td>{{ $users->email }}</td>
-                            <td class="position-relative">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm dropdown-toggle manageDropdown1" type="button"
-                                        id="manageDropdown11" data-bs-toggle="dropdown" aria-expanded="false"><i
-                                            class="fas fa-gear"></i>
-                                        Manage
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-end manageDropdown111"
-                                        aria-labelledby="manageDropdown1" style="max-height: 16vh">
-                                        <li>
-                                            <a class="dropdown-item" href="employee/{{ $users->id }}"><i
-                                                    class="fas fa-eye" style="color: green"></i> View</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="employee/{{ $users->id }}/edit"><i
-                                                    class="fas fa-pen-to-square" style="color: blue"></i> Edit</a>
-                                        </li>
-
-                                        <li>
-                                            <form action="employee/{{ $users->id }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="dropdown-item"><i class="fa-solid fa-trash"
-                                                        style="color: red"></i> Delete</button>
-                                            </form>
-
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="6" class="text-center">There are no users.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
         </div>
     </div>
 @endsection
 
 @section('scripts')
-    {{-- <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var dropdownElements = document.querySelectorAll(".manageDropdown11");
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownButtons = document.querySelectorAll('.manageDropdown1');
+            const dropdownMenus = document.querySelectorAll('.dropdown-menu-custom');
 
-            dropdownElements.forEach(function(dropdown) {
-                dropdown.addEventListener("click", function(event) {
-                    // var dropdownMenu = this.nextElementSibling;
-                    var dropdownMenu = document.querySelectorAll(".manageDropdown111");
-                    var rect = dropdown.getBoundingClientRect();
-                    dropdownMenu.style.position = "absolute";
-                    dropdownMenu.style.bottom = rect.bottom - 70 + "px"; // Adjust the top position
-                    dropdownMenu.style.left = rect.left - 87 + "px"; // Adjust the left position
-                    dropdownMenu.style.width = "200px"; // Adjust as needed
+            dropdownButtons.forEach((dropdownButton, index) => {
+                const dropdownMenu = dropdownMenus[index];
+
+                dropdownButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdownMenus.forEach((menu) => menu.classList.remove(
+                        'show')); // Close other open menus
+                    dropdownMenu.classList.toggle('show'); // Toggle the current menu
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (!dropdownButton.contains(e.target)) {
+                        dropdownMenu.classList.remove('show');
+                    }
                 });
             });
         });
-    </script> --}}
+    </script>
+
+    <script>
+        document.getElementById('showStaff').addEventListener('click', function() {
+            document.getElementById('staffTable').classList.remove('d-none');
+            document.getElementById('userTable').classList.add('d-none');
+            this.classList.add('btn-primary');
+            this.classList.remove('btn-secondary');
+            document.getElementById('showUsers').classList.add('btn-secondary');
+            document.getElementById('showUsers').classList.remove('btn-primary');
+        });
+
+        document.getElementById('showUsers').addEventListener('click', function() {
+            document.getElementById('userTable').classList.remove('d-none');
+            document.getElementById('staffTable').classList.add('d-none');
+            this.classList.add('btn-primary');
+            this.classList.remove('btn-secondary');
+            document.getElementById('showStaff').classList.add('btn-secondary');
+            document.getElementById('showStaff').classList.remove('btn-primary');
+        });
+    </script>
 @endsection

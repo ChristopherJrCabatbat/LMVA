@@ -73,7 +73,7 @@
     <header>
         <nav class="navbar fixed-top navbar-expand-lg p-0" {{-- style="background-color: #e3f2fd;" --}} style="background-color: white;">
             <div class="container">
-                <a class="navbar-brand logo" href="#">
+                <a class="navbar-brand logo" href="/">
                     <img src="{{ asset('images/lmva-logo.png') }}" class="img-fluid" style="width: 110px; height: 100%"
                         alt="Logo" />
                 </a>
