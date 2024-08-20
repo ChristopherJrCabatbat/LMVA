@@ -36,8 +36,8 @@
                         <button class="btn add" type="submit"><i class="fas fa-plus"></i> Add Report</button>
                     </form> --}}
                     <form action="" class="d-flex">
-                        <input type="search" class="form-control-custom rounded-start-custom">
-                        <button class="btn-custom add rounded-end-custom" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <input type="search" class="form-control-custom rounded-start-custom" placeholder="Search something...">
+                        <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
 
                 </div>
@@ -53,11 +53,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($staffs as $staff)
+                    @forelse ($users as $user)
                         <tr class="table-light" style="border: 1px solid #03346E">
-                            <td>{{ $staff->email }}</td>
-                            <td>{{ $staff->contact_number }}</td>
-                            <td>{{ $staff->first_name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->contact_number }}</td>
+                            <td>{{ $user->first_name }}</td>
                             <td>GCash</td>
                         </tr>
                     @empty

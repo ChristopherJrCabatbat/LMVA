@@ -5,7 +5,7 @@
 @section('styles-links')
     <style>
         main {
-            padding-top: 13vh;
+            padding-top: 12vh;
             min-height: 150vh;
         }
 

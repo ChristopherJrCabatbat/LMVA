@@ -51,73 +51,6 @@ main {
  }
 
 
-
- /* Derm Search */
- .form-control-custom {
-    display: block;
-    width: 100%;
-    height: calc(1.5em + 0.75rem + 2px);
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #002046;
-    border-radius: 0;
-    /* transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; */
-    border-color: #002046; /* Custom border color */
-}
-
-.form-control-custom:focus {
-    color: #212529;
-    background-color: #fff;
-    border-color: #002046   ;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
-.btn-custom {
-    display: inline-block;
-    font-weight: 400;
-    color: #212529;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    user-select: none;
-    background-color: #002046;
-    border: 1px solid #002046;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: 0;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.btn-custom:hover {
-    background-color: #002046;
-    /* border-color: #dae0e5; */
-}
-
-.btn-custom:focus {
-    color: #212529;
-    background-color: #e2e6ea;
-    /* border-color: #dae0e5; */
-    box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
-}
-
-.rounded-start-custom {
-    border-top-left-radius: 0.375rem;
-    border-bottom-left-radius: 0.375rem;
-}
-
-.rounded-end-custom {
-    border-top-right-radius: 0.375rem;
-    border-bottom-right-radius: 0.375rem;
-}
-
-
 /* Log out */
 .dropdown-menu .dropdown-item {
     color: white !important;
@@ -131,4 +64,15 @@ main {
 
 a.print i.fa-print:hover {
     color: #004aa5;
+}
+
+
+ /* Custom Search */
+ .form-control-custom {
+    border: 1px solid #002046;
+ }
+
+.btn-custom {
+    background-color: #002046;
+    border: 1px solid #002046;
 }

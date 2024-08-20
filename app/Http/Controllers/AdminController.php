@@ -90,7 +90,7 @@ class AdminController extends Controller
     // Report Controllers
     public function reports()
     {
-        $staffs = User::where('role', 'Staff')->get();
-        return view('admin.reports', compact('staffs'));
+        $users = User::where('role', 'User')->get();
+        return view('admin.reports', compact('users'));
     }
 }

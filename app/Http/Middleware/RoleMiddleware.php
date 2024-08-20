@@ -35,9 +35,12 @@ class RoleMiddleware
             ],
             'User'  => [
                 'user/dashboard',
+
                 'user/inquire',
+                'user/inquireAdd',
+                
                 'user/numberInquiries',
-            ], // Add other user routes here
+            ],
         ];
 
         // If the current path is not in the allowed routes for the role, flash a simplified error message

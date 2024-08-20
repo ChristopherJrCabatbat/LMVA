@@ -25,7 +25,7 @@
 
 @section('main-content')
     <div class="container pt-5 d-flex flex-column gap-5">
-        <div class="container d-flex flex-column">
+        <div class="d-flex flex-column">
 
             <div class="table-responsive text-center p-3 bg-light">
                 <form action="{{ route('admin.dashboardStore') }}" method="POST">
@@ -37,7 +37,7 @@
                         <input type="file" name="derm" class="form-control" id="derm" placeholder="">
                     </div>
                     <div class="d-grid my-3">
-                        <button class="btn btn-primary add" type="submit">Submit Record</button>
+                        <button class="btn btn-primary dark-blue" type="submit">Submit Record</button>
                     </div>
 
                 </form>

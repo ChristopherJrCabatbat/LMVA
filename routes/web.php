@@ -52,9 +52,11 @@ Route::group([
     'middleware' => ['auth', 'verified', 'login'],
 ], function () {
 
-    Route::get('/patientRecord', [StaffController::class, 'patientRecord']);
-    Route::get('/scan', [StaffController::class, 'scan']);
-    Route::get('/inquiry', [StaffController::class, 'inquiry']);
+    Route::get('/patientRecord', [StaffController::class, 'patientRecord'])->name('patientRecord');
+
+    Route::get('/scan', [StaffController::class, 'scan'])->name('scan');
+
+    Route::get('/inquiry', [StaffController::class, 'inquiry'])->name('inquiry');
 
 });
 
@@ -65,8 +67,12 @@ Route::group([
     'middleware' => ['auth', 'verified', 'login'],
 ], function () {
 
-    Route::get('/dashboard', [UserController::class, 'dashboard']);    
-    Route::get('/inquire', [UserController::class, 'inquire']);
-    Route::get('/numberInquiries', [UserController::class, 'numberInquiries']);
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');    
+
+    // Inquiry Routes
+    Route::get('/inquire', [UserController::class, 'inquire'])->name('inquire');
+    Route::get('/inquireAdd', [UserController::class, 'inquireAdd'])->name('inquireAdd');
+
+    Route::get('/numberInquiries', [UserController::class, 'numberInquiries'])->name('numberInquiries');
 
 });

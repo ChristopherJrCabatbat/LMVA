@@ -13,7 +13,8 @@
     <hr />
 
     <li class="nav-item">
-        <a class="nav-link side-active" href="#"><i class="me-2 fa-solid fa-magnifying-glass-arrow-right"></i> Inquire</a>
+        <a class="nav-link side-active" href="#"><i class="me-2 fa-solid fa-magnifying-glass-arrow-right"></i>
+            Inquire</a>
     </li>
 
     <li class="nav-item">
@@ -25,8 +26,43 @@
 @endsection
 
 @section('main-content')
-    <div class="container pt-5">
-        <h1 class="h1">User Inquire</h1>
+    <div class="container pt-5 d-flex flex-column gap-5">
+        <div class="d-flex flex-column">
+
+            <div class="table-responsive text-center p-3 bg-light">
+                <form action="{{ route('admin.dermStore') }}" method="POST">
+                    @csrf
+                    <h3 class="mb-3"><i class="fa-solid fa-magnifying-glass-arrow-right me-2"></i> Inquire</h3>
+
+                    {{-- <div class="mb-3 form-floating">
+                        <input type="text" name="derm" class="form-control" id="derm" placeholder="">
+                        <label for="derm" class="form-label">Patient Name</label>
+                    </div> --}}
+                    <div class="mb-3 d-flex flex-column align-items-start">
+                        <label for="derm" class="form-label">Patient Name</label>
+                        <input type="text" name="derm" class="form-control" id="derm"
+                            placeholder="e.g. John Doe">
+                    </div>
+
+                    <div class="mb-3 d-flex flex-column align-items-start">
+                        <label for="derm" class="form-label">Date:</label>
+                        <input type="date" name="derm" class="form-control" id="derm" placeholder="">
+                    </div>
+
+                    <div class="mb-3 d-flex flex-column align-items-start">
+                        <label for="derm" class="form-label">Inquiry Details:</label>
+                        <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Type something here..."></textarea>
+                    </div>
+
+
+                    <div class="d-grid my-3">
+                        <button class="btn btn-primary" type="submit">Submit Inquiry</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
     </div>
 @endsection
 

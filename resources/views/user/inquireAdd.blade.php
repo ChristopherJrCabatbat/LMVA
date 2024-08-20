@@ -1,6 +1,6 @@
-@extends('admin.adminLayout')
+@extends('user.userLayout')
 
-@section('title', 'Add DERM')
+@section('title', 'User Inquire')
 
 @section('styles-links')
 
@@ -8,18 +8,20 @@
 
 @section('sidebar')
     <li class="nav-item">
-        <a class="nav-link" href="/admin/dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
+        <a class="nav-link" href="/user/dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
     </li>
     <hr />
+
     <li class="nav-item">
-        <a class="nav-link" href="/admin/accounts"><i class="fa-solid fa-users me-2"></i> Accounts</a>
+        <a class="nav-link side-active" href="#"><i class="me-2 fa-solid fa-magnifying-glass-arrow-right"></i>
+            Inquire</a>
     </li>
+
     <li class="nav-item">
-        <a class="nav-link side-active" href="#"><i class="fa-solid fa-notes-medical me-2"></i> DERM</a>
+        <a class="nav-link" href="/user/numberInquiries"><i class="me-2 fa-solid fa-magnifying-glass-chart"></i> Number of
+            Inquiries</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/admin/reports"><i class="fa-solid fa-newspaper me-2"></i> Reports</a>
-    </li>
+
 
 @endsection
 
@@ -37,7 +39,7 @@
                         <label for="derm" class="form-label">DERM Name</label>
                     </div>
                     <div class="d-grid my-3">
-                        <button class="btn btn-primary dark-blue" type="submit">Generate QR Code</button>
+                        <button class="btn btn-primary" type="submit">Generate QR Code</button>
                     </div>
 
                 </form>
