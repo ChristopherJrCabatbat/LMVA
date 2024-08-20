@@ -18,8 +18,14 @@ class RoleMiddleware
         $allowedRoutes = [
             'Admin' => [
                 'admin/dashboard',
+                'admin/dashboardAdd',
+
                 'admin/accounts',
+
                 'admin/derm',
+                'admin/dermAdd',
+                'admin/dermStore',
+
                 'admin/reports',
             ],
             'Staff' => [
@@ -28,7 +34,7 @@ class RoleMiddleware
                 'staff/inquiry',
             ],
             'User'  => [
-                'user/dashboard', 
+                'user/dashboard',
                 'user/inquire',
                 'user/numberInquiries',
             ], // Add other user routes here
@@ -47,4 +53,3 @@ class RoleMiddleware
         return $next($request);
     }
 }
-

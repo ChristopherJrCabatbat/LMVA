@@ -3,25 +3,6 @@
 @section('title', 'Admin Accounts')
 
 @section('styles-links')
-
-    <style>
-        .sidebar {
-            border-right: 1px solid #03346E;
-        }
-
-        .sidebar .nav-item .nav-link {
-            color: white;
-        }
-
-        .sidebar .nav-item .nav-link:hover {
-            background-color: #03346E;
-        }
-
-        .sidebar .nav-item .nav-link.side-active:hover {
-            background-color: #0d6efd;
-        }
-    </style>
-
 @endsection
 
 @section('sidebar')
@@ -43,23 +24,31 @@
 
 @section('main-content')
     <div class="container pt-5 d-flex flex-column gap-5">
-        {{-- Staff Table --}}
-        <div class="container pt-5 d-flex flex-column gap-5">
+        <div class="d-flex flex-column">
 
             {{-- Staff Table --}}
             <div class="table-responsive text-center p-3 bg-light" id="staffTable">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0"><i class="fa-solid fa-users me-2"></i> Staff Accounts</h5>
+                    <div class="d-flex justify-content-center align-items-center gap-4">
+                        <h5 class="mb-0"><i class="fa-solid fa-user me-2"></i> Staff Accounts</h5>
+                        <button class="btn btn-outline-primary d-flex align-items-center gap-2" id="showUsers"
+                            title="Switch to User Accounts">
+                            <i class="fa-solid fa-right-left"></i>
+                            <i class="fa-solid fa-users"></i>
+                        </button>
+                    </div>
 
-                    {{-- <div class="d-flex justify-content-center"> --}}
-                    {{-- <button class="btn btn-primary me-2" id="showStaff">Show Staff Accounts</button> --}}
-                    <button class="btn btn-secondary" id="showUsers">Show User Accounts</button>
-                    {{-- </div> --}}
-
-                    <form action="employee/create">
-                        <button class="btn add" type="submit"><i class="fas fa-plus"></i> Add Staff</button>
-                    </form>
+                    <div class="d-flex gap-4">
+                        <form action="employee/create">
+                            <button class="btn add" type="submit"><i class="fas fa-plus"></i> Add Staff</button>
+                        </form>
+                        <form action="" class="d-flex">
+                            <input type="search" class="form-control-custom rounded-start-custom">
+                            <button class="btn-custom add rounded-end-custom" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
+                    </div>
                 </div>
+
                 <table class="table table-bordered bg-dark rounded" data-bs-theme="dark">
                     <thead>
                         <tr>
@@ -126,14 +115,26 @@
             {{-- User Table --}}
             <div class="table-responsive text-center p-3 bg-light d-none" id="userTable">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0"><i class="fa-solid fa-users me-2"></i> User Accounts</h5>
+                    <div class="d-flex justify-content-center align-items-center gap-4">
+                        <h5 class="mb-0"><i class="fa-solid fa-users me-2"></i> User Accounts</h5>
+                        <button class="btn btn-outline-primary d-flex align-items-center gap-2" id="showStaff"
+                            title="Switch to Staff Accounts">
+                            <i class="fa-solid fa-right-left"></i>
+                            <i class="fa-solid fa-user"></i>
+                        </button>
+                    </div>
 
-                    <button class="btn btn-primary" id="showStaff">Show Staff Accounts</button>
-
-                    <form action="employee/create">
-                        <button class="btn add" type="submit"><i class="fas fa-plus"></i> Add User</button>
-                    </form>
+                    <div class="d-flex gap-4">
+                        <form action="employee/create">
+                            <button class="btn add" type="submit"><i class="fas fa-plus"></i> Add User</button>
+                        </form>
+                        <form action="" class="d-flex">
+                            <input type="search" class="form-control-custom rounded-start-custom">
+                            <button class="btn-custom add rounded-end-custom" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
+                    </div>
                 </div>
+
                 <table class="table table-bordered bg-dark rounded" data-bs-theme="dark">
                     <thead>
                         <tr>
@@ -198,11 +199,13 @@
                     </ul>
                 </nav>
             </div>
+
         </div>
     </div>
 @endsection
 
 @section('scripts')
+    {{-- Manage dropdown --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dropdownButtons = document.querySelectorAll('.manageDropdown1');
@@ -227,23 +230,18 @@
         });
     </script>
 
-    <script>
-        document.getElementById('showStaff').addEventListener('click', function() {
-            document.getElementById('staffTable').classList.remove('d-none');
-            document.getElementById('userTable').classList.add('d-none');
-            this.classList.add('btn-primary');
-            this.classList.remove('btn-secondary');
-            document.getElementById('showUsers').classList.add('btn-secondary');
-            document.getElementById('showUsers').classList.remove('btn-primary');
-        });
 
-        document.getElementById('showUsers').addEventListener('click', function() {
-            document.getElementById('userTable').classList.remove('d-none');
-            document.getElementById('staffTable').classList.add('d-none');
-            this.classList.add('btn-primary');
-            this.classList.remove('btn-secondary');
-            document.getElementById('showStaff').classList.add('btn-secondary');
-            document.getElementById('showStaff').classList.remove('btn-primary');
-        });
-    </script>
+   {{-- Table shift between staff and user --}}
+<script>
+    document.getElementById('showStaff').addEventListener('click', function() {
+        document.getElementById('staffTable').classList.remove('d-none');
+        document.getElementById('userTable').classList.add('d-none');
+    });
+
+    document.getElementById('showUsers').addEventListener('click', function() {
+        document.getElementById('userTable').classList.remove('d-none');
+        document.getElementById('staffTable').classList.add('d-none');
+    });
+</script>
+
 @endsection

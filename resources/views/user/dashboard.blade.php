@@ -16,7 +16,6 @@
             <a class="nav-link" href="/user/inquire"><i class="me-2 fa-solid fa-magnifying-glass-arrow-right"></i> Inquire</a>
         </li>
 
-        {{-- <hr /> --}}
         <li class="nav-item">
             <a class="nav-link" href="/user/numberInquiries"><i class="me-2 fa-solid fa-magnifying-glass-chart"></i> Number
                 of Inquiries</a>

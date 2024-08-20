@@ -20,7 +20,7 @@
     background-color: white;
     padding-top: 29px;
     z-index: 1;
-    border-right: 1px solid #dee2e6;
+    border-right: 1px solid #0d6efd;
 }
 .sidebar .user-info {
     text-align: center;
@@ -140,11 +140,13 @@
 button.add, button.manageDropdown1 {
     background-color: #002046 !important;
     color: white !important;
+    border-color: #002046 !important;
 }
 
 button.add:hover, button.manageDropdown1:hover {
-    background-color: #002046;
+    background-color: #004395 !important;
     color: white;
+    border-color: #004395 !important;
 }
 
 button.add:active, button.manageDropdown1:active {
@@ -158,7 +160,11 @@ button.add:focus, button.manageDropdown1:focus {
 }
 
 
-/* .manageDropdown111 {
-    position: absolute !important;
-    bottom: 1%;
-} */
+/* Profile - Log out */
+li.profile-logout a.dropdown-item:focus {
+    color: black !important;
+}
+
+li.profile-logout a.dropdown-item:active, li.profile-logout button.dropdown-item:active {
+    color: black !important;
+}

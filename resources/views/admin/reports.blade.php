@@ -4,24 +4,6 @@
 
 @section('styles-links')
 
-    <style>
-        .sidebar {
-            border-right: 1px solid #03346E;
-        }
-
-        .sidebar .nav-item .nav-link {
-            color: white;
-        }
-
-        .sidebar .nav-item .nav-link:hover {
-            background-color: #03346E;
-        }
-
-        .sidebar .nav-item .nav-link.side-active:hover {
-            background-color: #0d6efd;
-        }
-    </style>
-
 @endsection
 
 @section('sidebar')
@@ -42,9 +24,60 @@
 @endsection
 
 @section('main-content')
-    <div class="container pt-5">
-        <h1 class="h1">Admin Reports</h1>
+<div class="container pt-5 d-flex flex-column gap-5">
+    <div class="d-flex flex-column">
+
+        <div class="table-responsive text-center p-3 bg-light" id="staffTable">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0"><i class="fa-solid fa-notes-medical me-2"></i> Reports</h5>
+
+                <div class="d-flex gap-4">
+                    {{-- <form action="dermAdd">
+                        <button class="btn add" type="submit"><i class="fas fa-plus"></i> Add Report</button>
+                    </form> --}}
+                    <form action="" class="d-flex">
+                        <input type="search" class="form-control-custom rounded-start-custom">
+                        <button class="btn-custom add rounded-end-custom" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+
+                </div>
+            </div>
+
+            <table class="table table-bordered bg-dark rounded" data-bs-theme="dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Email</th>
+                        <th scope="col">Contact Number</th>
+                        <th scope="col">Inquiry Details</th>
+                        <th scope="col">Payment Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($staffs as $staff)
+                        <tr class="table-light" style="border: 1px solid #03346E">
+                            <td>{{ $staff->email }}</td>
+                            <td>{{ $staff->contact_number }}</td>
+                            <td>{{ $staff->first_name }}</td>
+                            <td>GCash</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="text-center">There are no derm.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+
+            {{-- Staff Pagination --}}
+            {{-- <nav aria-label="Staff Pagination">
+                <ul class="pagination justify-content-end">
+                <!-- Add your pagination links here -->
+                </ul>
+            </nav> --}}
+        </div>
+
     </div>
+</div>
 @endsection
 
 @section('scripts')

@@ -10,19 +10,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/lmva-icon.jpg') }}">
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin-styles.css') }}">
 
     @yield('styles-links')
 
     <script src="https://kit.fontawesome.com/f416851b63.js" crossorigin="anonymous"></script>
 </head>
-
-<style>
-    main {
-        background-size: cover;
-        background-position: center;
-        min-height: 100vh;
-    }
-</style>
 
 <body style="background-color: rgb(218, 218, 218)">
     @if (session('success'))
@@ -57,7 +50,7 @@
                                     <i class="fa-solid fa-user"></i>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown"
-                                    style="position: absolute; top: 100%; left: 0; right: 0; margin-top: 0; z-index: 1000;">
+                                    style="position: absolute; top: 100%; left: 0; right: 0; margin-top: 0; z-index: 1000;  ">
                                     <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i
                                                 class="me-2 fa-solid fa-user"></i> Profile</a></li>
                                     <li>

@@ -13,11 +13,11 @@
     <hr />
 
     <li class="nav-item">
-        <a class="nav-link" href="/user/inquire"><i class="me-2 fa-solid fa-user"></i> Inquire</a>
+        <a class="nav-link" href="/user/inquire"><i class="me-2 fa-solid fa-magnifying-glass-arrow-right"></i> Inquire</a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link side-active" href="#"><i class="me-2 fa-solid fa-clipboard-user"></i> Number of
+        <a class="nav-link side-active" href="#"><i class="me-2 fa-solid fa-magnifying-glass-chart"></i> Number of
             Inquiries</a>
     </li>
 

@@ -58,12 +58,12 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown"
                                     style="position: absolute; top: 100%; left: 0; right: 0; margin-top: 0; z-index: 1000;">
-                                    <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i
+                                    <li class="profile-logout"><a class="dropdown-item" href="{{ route('profile.edit') }}"><i
                                                 class="me-2 fa-solid fa-user"></i> Profile</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li>
+                                    <li class="profile-logout">
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
                                             <button type="submit" class="dropdown-item"><i
@@ -95,7 +95,7 @@
     </header>
 
     <main class="main-content">
-       @yield('main-content')
+        @yield('main-content')
     </main>
 
     <footer></footer>

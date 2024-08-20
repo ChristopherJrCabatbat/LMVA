@@ -42,7 +42,7 @@
     <header>
         {{-- Top Navbar --}}
         <nav class="navbar fixed-top navbar-expand-lg p-0"
-            style="background-color: white; border-bottom: 1px solid #dee2e6;">
+            style="background-color: white; border-bottom: 1px solid #0d6efd;">
             <div class="container">
                 <a class="navbar-brand logo" href="#">
                     <img src="{{ asset('images/lmva-logo.png') }}" class="img-fluid" style="width: 110px; height: 100%"
@@ -58,12 +58,12 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown"
                                     style="position: absolute; top: 100%; left: 0; right: 0; margin-top: 0; z-index: 1000;">
-                                    <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i
+                                    <li class="profile-logout"><a class="dropdown-item" href="{{ route('profile.edit') }}"><i
                                                 class="me-2 fa-solid fa-user"></i> Profile</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li>
+                                    <li class="profile-logout">
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
                                             <button type="submit" class="dropdown-item"><i

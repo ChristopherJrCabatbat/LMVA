@@ -30,9 +30,17 @@ Route::group([
     'middleware' => ['auth', 'verified', 'login'],
 ], function () {
 
-    Route::get('/dashboard', [AdminController::class, 'dashboard']);
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboardAdd', [AdminController::class, 'dashboardAdd'])->name('dashboardAdd');
+    Route::post('/dashboardStore', [AdminController::class, 'dashboardStore'])->name('dashboardStore');
+
+
     Route::get('/accounts', [AdminController::class, 'accounts']);
-    Route::get('/derm', [AdminController::class, 'derm']);
+    
+    Route::get('/derm', [AdminController::class, 'derm'])->name('derm');
+    Route::get('/dermAdd', [AdminController::class, 'dermAdd'])->name('dermAdd');
+    Route::post('/dermStore', [AdminController::class, 'dermStore'])->name('dermStore');
+
     Route::get('/reports', [AdminController::class, 'reports']);
 
 });
