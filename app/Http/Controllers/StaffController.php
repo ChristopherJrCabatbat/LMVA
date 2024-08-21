@@ -19,13 +19,14 @@ class StaffController extends Controller
     // Scan Controller
     public function scan()
     {
-        return view('staff.scan');
+        $derms = Derm::all();
+        return view('staff.scan', compact('derms'));
     }
 
     // Inquiry Controller
     public function inquiry()
     {
-        $staffs = User::where('role', 'Staff')->get();
-        return view('staff.inquiry', compact('staffs'));
+        $users = User::where('role', 'User')->get();
+        return view('staff.inquiry', compact('users'));
     }
 }

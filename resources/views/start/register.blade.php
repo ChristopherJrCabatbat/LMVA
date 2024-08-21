@@ -100,8 +100,8 @@
                         <a href="{{ route('login') }}" class="sign-up">Log in</a>
                     </div>
                 </div>
+            </form>
         </div>
-        </form>
     </div>
 @endsection
 

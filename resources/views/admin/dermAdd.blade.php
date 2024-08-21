@@ -10,7 +10,6 @@
     <li class="nav-item">
         <a class="nav-link" href="/admin/dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
     </li>
-    <hr />
     <li class="nav-item">
         <a class="nav-link" href="/admin/accounts"><i class="fa-solid fa-users me-2"></i> Accounts</a>
     </li>
@@ -27,7 +26,7 @@
     <div class="container pt-5 d-flex flex-column gap-5">
         <div class="d-flex flex-column">
 
-            <div class="table-responsive text-center p-3 bg-light">
+            <div class="table-responsive text-center p-4 bg-light">
                 <form action="{{ route('admin.dermStore') }}" method="POST">
                     @csrf
                     <h3 class="mb-3"><i class="fa-solid fa-plus me-2"></i> Add Derm</h3>

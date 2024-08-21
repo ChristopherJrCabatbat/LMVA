@@ -10,7 +10,6 @@
     <li class="nav-item">
         <a class="nav-link side-active" href="/admin/dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
     </li>
-    <hr />
     <li class="nav-item">
         <a class="nav-link" href="/admin/accounts"><i class="fa-solid fa-users me-2"></i> Accounts</a>
     </li>

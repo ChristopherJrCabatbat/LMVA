@@ -10,7 +10,7 @@
     <li class="nav-item">
         <a class="nav-link" href="/user/dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
     </li>
-    <hr />
+    {{-- <hr /> --}}
 
     <li class="nav-item">
         <a class="nav-link side-active" href="#"><i class="me-2 fa-solid fa-magnifying-glass-arrow-right"></i>

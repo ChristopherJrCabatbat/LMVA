@@ -79,6 +79,7 @@
                 <div class="username text-white">Hello, {{ Auth::user()->first_name }}!</div>
                 <div class="position">You are logged in as {{ Auth::user()->role }}.</div>
             </div>
+            <hr />
 
             <ul class="nav flex-column text-white">
                 @yield('sidebar')

@@ -58,8 +58,9 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown"
                                     style="position: absolute; top: 100%; left: 0; right: 0; margin-top: 0; z-index: 1000;">
-                                    <li class="profile-logout"><a class="dropdown-item" href="{{ route('profile.edit') }}"><i
-                                                class="me-2 fa-solid fa-user"></i> Profile</a></li>
+                                    <li class="profile-logout"><a class="dropdown-item"
+                                            href="{{ route('profile.edit') }}"><i class="me-2 fa-solid fa-user"></i>
+                                            Profile</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -87,6 +88,7 @@
                 <div class="position">You are logged in as {{ Auth::user()->role }}.</div>
                 {{-- <div class="position">{{ Auth::user()->role }}</div> --}}
             </div>
+            <hr />
 
             <ul class="nav flex-column">
                 @yield('sidebar')

@@ -28,9 +28,26 @@ class UserController extends Controller
 
     // NumberInquiries Controller
 
+    // public function numberInquiries()
+    // {
+    //     $users = User::where('role', 'User')->get();
+    //     return view('user.numberInquiries', compact('users'));
+    // }
+
     public function numberInquiries()
     {
-        $staffs = User::where('role', 'Staff')->get();
-        return view('user.numberInquiries', compact('staffs'));
+        // Get the currently logged-in user's ID
+        $userId = auth()->user()->id;
+
+        // $userId = auth()->user();
+        // dd($userId); // Debug the user object
+
+
+        // Retrieve only the logged-in user's inquiries
+        $users = User::where('role', 'User')
+            ->where('id', $userId) // Filter by logged-in user ID
+            ->get();
+
+        return view('user.numberInquiries', compact('users'));
     }
 }

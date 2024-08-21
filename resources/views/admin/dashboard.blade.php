@@ -9,7 +9,6 @@
     <li class="nav-item">
         <a class="nav-link side-active" href="#"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
     </li>
-    <hr />
     <li class="nav-item">
         <a class="nav-link" href="/admin/accounts"><i class="fa-solid fa-users me-2"></i> Accounts</a>
     </li>
@@ -35,8 +34,10 @@
                             <button class="btn dark-blue" type="submit"><i class="fas fa-plus"></i> Add Record</button>
                         </form>
                         <form action="" class="d-flex">
-                            <input type="search" class="form-control-custom rounded-start-custom" placeholder="Search something...">
-                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="search" class="form-control-custom rounded-start-custom"
+                                placeholder="Search something...">
+                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i
+                                    class="fa-solid fa-magnifying-glass"></i></button>
                         </form>
 
                     </div>

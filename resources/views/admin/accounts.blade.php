@@ -9,7 +9,6 @@
     <li class="nav-item">
         <a class="nav-link" href="/admin/dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
     </li>
-    <hr />
     <li class="nav-item">
         <a class="nav-link side-active" href="#"><i class="fa-solid fa-users me-2"></i> Accounts</a>
     </li>
@@ -39,7 +38,7 @@
                     </div>
 
                     <div class="d-flex gap-4">
-                        <form action="employee/create">
+                        <form action="{{ route('admin.accountsAddStaff') }}">
                             <button class="btn dark-blue" type="submit"><i class="fas fa-plus"></i> Add Staff</button>
                         </form>
                         <form action="" class="d-flex">
@@ -125,7 +124,7 @@
                     </div>
 
                     <div class="d-flex gap-4">
-                        <form action="employee/create">
+                        <form action="{{ route('admin.accountsAddUser') }}">
                             <button class="btn dark-blue" type="submit"><i class="fas fa-plus"></i> Add User</button>
                         </form>
                         <form action="" class="d-flex">

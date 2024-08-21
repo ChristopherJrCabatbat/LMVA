@@ -3,14 +3,12 @@
 @section('title', 'Admin DERM')
 
 @section('styles-links')
-
 @endsection
 
 @section('sidebar')
     <li class="nav-item">
         <a class="nav-link" href="/admin/dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
     </li>
-    <hr />
     <li class="nav-item">
         <a class="nav-link" href="/admin/accounts"><i class="fa-solid fa-users me-2"></i> Accounts</a>
     </li>
@@ -52,21 +50,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($staffs as $staff)
+                        @forelse ($derms as $derm)
                             <tr class="table-light" style="border: 1px solid #03346E">
-                                <td>{{ $staff->username }}</td>
-                                <td>{{ $staff->first_name }}</td>
-                                <td>
-                                    <a href="" class="print" style="color: #002046;"><i class="fa-solid fa-print fs-3"></i></a>
+                                <!-- Display the DERM name -->
+                                <td class="align-middle fs-4">{{ $derm->derm }}</td>
+                
+                                <!-- Display the QR code image -->
+                                <td class="align-middle">
+                                    <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="100" height="100">
+                                </td>
+                
+                                <!-- Print button -->
+                                <td class="align-middle">
+                                    <a href="{{ asset($derm->qr_code) }}" download class="print" style="color: #002046;">
+                                        <i class="fa-solid fa-print fs-1"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center">There are no derm.</td>
+                                <td colspan="3" class="text-center">There are no derms available.</td>
                             </tr>
                         @endforelse
                     </tbody>
-                </table>
+                </table>            
 
                 {{-- Staff Pagination --}}
                 {{-- <nav aria-label="Staff Pagination">

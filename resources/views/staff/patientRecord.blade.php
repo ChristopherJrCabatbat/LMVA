@@ -10,7 +10,6 @@
     <li class="nav-item">
         <a class="nav-link side-active" href="#"><i class="fa-solid fa-clipboard me-2"></i> Patient Record</a>
     </li>
-    <hr />
     <li class="nav-item">
         <a class="nav-link" href="/staff/scan"><i class="fa-solid fa-qrcode me-2"></i> Scan</a>
     </li>
@@ -63,7 +62,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center">There are no derm.</td>
+                                <td colspan="6" class="text-center">There are no patient record.</td>
                             </tr>
                         @endforelse
                     </tbody>

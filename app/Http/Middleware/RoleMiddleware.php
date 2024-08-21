@@ -21,6 +21,10 @@ class RoleMiddleware
                 'admin/dashboardAdd',
 
                 'admin/accounts',
+                'admin/accountsAddStaff',
+                'admin/accountsAddStaffStore',
+                'admin/accountsAddUser',
+                'admin/accountsAddUserStore',
 
                 'admin/derm',
                 'admin/dermAdd',

@@ -8,17 +8,19 @@
 
     @section('sidebar')
         <li class="nav-item">
-            <a class="nav-link side-active" href="#"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
+            <a class="nav-link side-active" href="/user/dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
         </li>
-        <hr />
+        {{-- <hr /> --}}
 
         <li class="nav-item">
-            <a class="nav-link" href="/user/inquire"><i class="me-2 fa-solid fa-magnifying-glass-arrow-right"></i> Inquire</a>
+            <a class="nav-link" href="/user/inquire"><i class="me-2 fa-solid fa-magnifying-glass-arrow-right"></i>
+                Inquire</a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="/user/numberInquiries"><i class="me-2 fa-solid fa-magnifying-glass-chart"></i> Number
-                of Inquiries</a>
+            <a class="nav-link" href="/user/numberInquiries"><i class="me-2 fa-solid fa-magnifying-glass-chart"></i>
+                Number of
+                Inquiries</a>
         </li>
 
     @endsection

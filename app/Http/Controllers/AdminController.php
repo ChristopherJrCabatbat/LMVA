@@ -14,6 +14,11 @@ use BaconQrCode\Renderer\Image\PngRenderer;
 use BaconQrCode\Renderer\RendererInterface;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class AdminController extends Controller
 {
@@ -43,14 +48,79 @@ class AdminController extends Controller
         return view('admin.accounts', compact('staffs', 'users'));
     }
 
+    public function accountsAddStaff()
+    {
+        return view('admin.accountsAddStaff');
+    }
+
+    public function accountsAddStaffStore(Request $request): RedirectResponse
+    {
+        $request->validate([
+            // 'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = new User;
+        $user->email = $request->input('email');
+        $user->username = $request->input('username');
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->contact_number = $request->input('contact_number');
+        $user->role = "Staff";
+        $user->password = Hash::make($request->input('password'));
+
+        $user->save();
+
+        // event(new Registered($user));
+
+        // Auth::login($user);
+
+        return redirect()->route('admin.accounts')->with('success', 'Account added successfully!');
+    }
+
+    public function accountsAddUser()
+    {
+        return view('admin.accountsAddUser');
+    }
+
+    public function accountsAddUserStore(Request $request): RedirectResponse
+    {
+        $request->validate([
+            // 'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = new User;
+        $user->email = $request->input('email');
+        $user->username = $request->input('username');
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->contact_number = $request->input('contact_number');
+        $user->role = "User";
+        $user->password = Hash::make($request->input('password'));
+
+        $user->save();
+
+        // event(new Registered($user));
+
+        // Auth::login($user);
+
+        return redirect()->route('admin.accounts')->with('success', 'Account added successfully!');
+        // return redirect('user/dashboard');
+    }
+
+
+
 
     // DERM Controller
     public function derm()
     {
-        $staffs = User::where('role', 'Staff')->get();
-        $users = User::where('role', 'User')->get();
+        $derms = Derm::all();
 
-        return view('admin.derm', compact('staffs', 'users'));
+        // Passing the derm records to the view
+        return view('admin.derm', compact('derms'));
     }
 
     public function dermAdd()

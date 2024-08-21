@@ -34,8 +34,11 @@ Route::group([
     Route::get('/dashboardAdd', [AdminController::class, 'dashboardAdd'])->name('dashboardAdd');
     Route::post('/dashboardStore', [AdminController::class, 'dashboardStore'])->name('dashboardStore');
 
-
-    Route::get('/accounts', [AdminController::class, 'accounts']);
+    Route::get('/accounts', [AdminController::class, 'accounts'])->name('accounts');
+    Route::get('/accountsAddStaff', [AdminController::class, 'accountsAddStaff'])->name('accountsAddStaff');
+    Route::post('/accountsAddStaffStore', [AdminController::class, 'accountsAddStaffStore'])->name('accountsAddStaffStore');
+    Route::get('/accountsAddUser', [AdminController::class, 'accountsAddUser'])->name('accountsAddUser');
+    Route::post('/accountsAddUserStore', [AdminController::class, 'accountsAddUserStore'])->name('accountsAddUserStore');
     
     Route::get('/derm', [AdminController::class, 'derm'])->name('derm');
     Route::get('/dermAdd', [AdminController::class, 'dermAdd'])->name('dermAdd');

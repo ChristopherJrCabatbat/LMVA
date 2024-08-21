@@ -10,7 +10,7 @@
     <li class="nav-item">
         <a class="nav-link" href="/user/dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
     </li>
-    <hr />
+    {{-- <hr /> --}}
 
     <li class="nav-item">
         <a class="nav-link" href="/user/inquire"><i class="me-2 fa-solid fa-magnifying-glass-arrow-right"></i>
@@ -48,27 +48,29 @@
                     </div>
                 </div>
 
-                <table class="table table-bordered bg-dark rounded" data-bs-theme="dark">
+                <table class="table table-bordered table-blue table-info rounded">
                     <thead>
                         <tr>
-                            <th scope="col">DERM</th>
-                            <th scope="col">QR Code</th>
-                            <th scope="col">Print</th>
+                            {{-- <th scope="col">Email</th> --}}
+                            {{-- <th scope="col">Contact Number</th> --}}
+                            <th>No.</th>
+                            <th scope="col">Inquiry Details</th>
+                            <th scope="col">Payment Method</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($staffs as $staff)
+                        {{-- @forelse ($users as $user) --}}
+                        @forelse ($users as $index => $user)
                             <tr class="table-light" style="border: 1px solid #03346E">
-                                <td>{{ $staff->username }}</td>
-                                <td>{{ $staff->first_name }}</td>
-                                <td>
-                                    <a href="" class="print" style="color: #002046;"><i
-                                            class="fa-solid fa-print fs-3"></i></a>
-                                </td>
+                                {{-- <td>{{ $user->email }}</td> --}}
+                                {{-- <td>{{ $user->contact_number }}</td> --}}
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $user->first_name }}</td>
+                                <td>GCash</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center">There are no derm.</td>
+                                <td colspan="6" class="text-center">There are no inquiries.</td>
                             </tr>
                         @endforelse
                     </tbody>
