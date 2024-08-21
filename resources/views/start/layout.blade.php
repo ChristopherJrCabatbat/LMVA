@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
 
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/lmva-icon.jpg') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/lmva-icon.png') }}">
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
@@ -71,7 +71,7 @@
     @endif --}}
 
     <header>
-        <nav class="navbar fixed-top navbar-expand-lg p-0" {{-- style="background-color: #e3f2fd;" --}} style="background-color: white;">
+        <nav class="navbar fixed-top navbar-expand-lg p-0" style="background-color: white; border-bottom: 1px solid rgb(35, 52, 140);">
             <div class="container">
                 <a class="navbar-brand logo" href="/">
                     <img src="{{ asset('images/lmva-logo.png') }}" class="img-fluid" style="width: 110px; height: 100%"
@@ -96,7 +96,7 @@
         @yield('main-content')
     </main>
 
-    <footer class="pt-4" style="background-color: white;">
+    <footer class="pt-4" style="background-color: white; border-top: 1px solid rgb(35, 52, 140);">
         <div class="container">
             <div class="container text-center">
                 <div class="row row-cols-5">

@@ -3,29 +3,7 @@
 @section('title', 'Home Page')
 
 @section('styles-links')
-    <style>
-        main {
-            padding-top: 12vh;
-            min-height: 150vh;
-        }
-
-        h1.services {
-            background-color: rgb(35, 52, 140, 0.9);
-            border: 1px solid rgb(35, 52, 140);
-
-            /* background-color: rgb(32, 186, 236, 0.9); */
-            /* border: 1px solid rgb(32, 186, 236); */
-
-            box-shadow: 0 4px 12px rgba(35, 52, 140, 0.5), 0 8px 24px rgba(35, 52, 140, 0.4);
-            width: 25rem;
-
-        }
-
-        .card {
-            box-shadow: 0 4px 12px rgba(35, 52, 140, 0.5), 0 8px 24px rgba(35, 52, 140, 0.4);
-            background-color: rgb(255, 255, 255, 0.8);
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/home-styles.css') }}">
 @endsection
 
 @section('nav-links')
@@ -52,46 +30,60 @@
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     <div class="col">
                         <div
-                            class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
-                            <img src="{{ asset('images/medical.png') }}" class="card-img-top mt-3" alt="..."
-                                style="height: 100%; width: 100px">
+                            class="card card-ikot h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
+
+                            <img src="{{ asset('images/home-icons/scribe.png') }}" class="card-img-top mt-3" alt="...">
 
                             <div class="card-body">
                                 <h5 class="card-title">Virtual Medical Scribe</h5>
-                                <p class="card-text">LMVA provides healthcare professional who remotely accompanies a
-                                    physician during patient visits, taking critical notes and documenting each encounter.
-                                    They handle all electronic medical records and clinical charting off-site, allowing
-                                    physicians to focus on in-person patient care.</p>
+                                <p class="card-text">Healthcare professionals remotely assist physicians during patient visits by taking detailed notes and managing electronic medical records. This allows physicians to focus on in-person patient care.</p>
+                            </div>
+
+                            {{-- Flip Effect --}}
+                            {{-- <div class="card-inner" >
+                                <div class="card-front">
+                                    <img src="{{ asset('images/home-icons/scribe.png') }}" class="card-img-top mt-3" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Virtual Medical Scribe</h5>
+                                        <p class="card-text">Healthcare professionals remotely assist physicians during
+                                            patient visits by taking detailed notes and managing electronic medical records.
+                                            This allows physicians to focus on in-person patient care.</p>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <img src="{{ asset('images/home-icons/scribe.png') }}" class="card-img-top mt-3" alt="...">
+                                    <div class="card-body pb-5">
+                                        <h5 class="card-title">Ikot Sheesh</h5>
+                                        <p class="card-text">You can visit our site here: <a href="">youtube.com</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div> --}}
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div
+                            class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
+                            <img src="{{ asset('images/home-icons/medical.png') }}" class="card-img-top mt-3" alt="...">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Virtual Administrative Assistant</h5>
+                                <p class="card-text">
+                                    We help manage daily tasks efficiently, including scheduling, email management, and file
+                                    organization, so you can focus on growing your business.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div
                             class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
-                            <img src="{{ asset('images/medical.png') }}" class="card-img-top mt-3" alt="..."
-                                style="height: 100%; width: 100px">
+                            <img src="{{ asset('images/home-icons/dental.png') }}" class="card-img-top mt-3" alt="...">
 
                             <div class="card-body">
-                                <h5 class="card-title">Virtual Medical Scribe</h5>
-                                <p class="card-text">LMVA provides healthcare professional who remotely accompanies a
-                                    physician during patient visits, taking critical notes and documenting each encounter.
-                                    They handle all electronic medical records and clinical charting off-site, allowing
-                                    physicians to focus on in-person patient care.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div
-                            class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
-                            <img src="{{ asset('images/medical.png') }}" class="card-img-top mt-3" alt="..."
-                                style="height: 100%; width: 100px">
-
-                            <div class="card-body">
-                                <h5 class="card-title">Virtual Medical Scribe</h5>
-                                <p class="card-text">LMVA provides healthcare professional who remotely accompanies a
-                                    physician during patient visits, taking critical notes and documenting each encounter.
-                                    They handle all electronic medical records and clinical charting off-site, allowing
-                                    physicians to focus on in-person patient care.</p>
+                                <h5 class="card-title">Dental Virtual Assistants</h5>
+                                <p class="card-text">We manage administrative tasks like scheduling, communication, billing,
+                                    and insurance coordination, allowing dental professionals to focus on patient care.</p>
                             </div>
                         </div>
                     </div>
@@ -99,33 +91,44 @@
 
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     <div class="col">
-                        <div class="card h-100">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer.</p>
+                        <div
+                            class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
+                            <img src="{{ asset('images/home-icons/desk.png') }}" class="card-img-top mt-3" alt="...">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Virtual Front Desk</h5>
+                                <p class="card-text">Offers remote front desk support, including call handling, appointment
+                                    scheduling, and customer inquiries. Ensures clients receive professional and timely
+                                    assistance, enhancing their experience while allowing in-office staff to focus on other
+                                    priorities.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card h-100">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional
-                                    content.</p>
+                        <div
+                            class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
+                            <img src="{{ asset('images/home-icons/telepresence.png') }}" class="card-img-top mt-3" alt="...">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Telepresence Virtual Assistant</h5>
+                                <p class="card-text">
+                                    Provides real-time, remote support through video conferencing and communication tools.
+                                    Offers live assistance for tasks like meetings, presentations, customer service, and
+                                    more, ensuring a professional presence without being physically on-site.
+                                </p>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card h-100">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This card has even longer content than the first to show that equal
-                                    height action.</p>
+                        <div
+                            class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
+                            <img src="{{ asset('images/home-icons/receptionist.png') }}" class="card-img-top mt-3" alt="...">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Virtual Medical Receptionist</h5>
+                                <p class="card-text">Efficiently manages patient appointments, phone calls, and medical
+                                    records, allowing healthcare providers to focus on patient care while maintaining a
+                                    smooth and professional front office.</p>
                             </div>
                         </div>
                     </div>
@@ -133,37 +136,46 @@
 
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     <div class="col">
-                        <div class="card h-100">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This content is a little bit longer.</p>
+                        <div
+                            class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
+                            <img src="{{ asset('images/home-icons/healthcare.png') }}" class="card-img-top mt-3" alt="...">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Healthcare Virtual Assistant</h5>
+                                <p class="card-text">We assist with managing tasks like appointment scheduling, patient
+                                    communication, billing, and insurance coordination, allowing healthcare professionals to
+                                    focus on patient care.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card h-100">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional
-                                    content.</p>
+                        <div
+                            class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
+                            <img src="{{ asset('images/home-icons/vet.png') }}" class="card-img-top mt-3" alt="...">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Veterinary Virtual Assistants</h5>
+                                <p class="card-text">
+                                    We handle tasks such as appointment scheduling, client communication, billing, and
+                                    insurance coordination, allowing veterinary professionals to focus on animal care.</p>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card h-100">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                    additional content. This card has even longer content than the first to show that equal
-                                    height action.</p>
+                        <div
+                            class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
+                            <img src="{{ asset('images/home-icons/transcription.png') }}" class="card-img-top mt-3" alt="...">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Medical Transcription</h5>
+                                <p class="card-text">
+                                    We provide medical transcription services, accurately converting spoken medical notes
+                                    into written records, allowing healthcare professionals to focus on patient care.</p>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         @endif
     </div>

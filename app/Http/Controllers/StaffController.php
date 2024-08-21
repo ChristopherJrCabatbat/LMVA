@@ -11,7 +11,9 @@ class StaffController extends Controller
 {
     public function patientRecord()
     {
-        return view('staff.patientRecord');
+        $staffs = User::where('role', 'Staff')->get();
+        $users = User::where('role', 'User')->get();
+        return view('staff.patientRecord', compact('staffs', 'users'));
     }
 
     // Scan Controller

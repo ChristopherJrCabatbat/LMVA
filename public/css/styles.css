@@ -1,3 +1,25 @@
+body {
+    overflow-x: hidden;
+}
+
+.login-container {
+    box-shadow: 0 4px 12px rgba(35, 52, 140, 0.5),
+        0 8px 24px rgba(35, 52, 140, 0.4);
+    background-color: rgb(255, 255, 255, 0.85);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.login-container:hover {
+    /* transform: scale(1.05); */
+    box-shadow: 0 8px 16px rgba(35, 52, 140, 0.7), 0 16px 32px rgba(35, 52, 140, 0.6);
+    background-color: rgb(255, 255, 255, 0.96);
+}
+
+.staff-user-nav {
+    background-color: white;
+    border-bottom: 1px solid #0d6efd;
+}
+
 .nav-letterSpacing {
     letter-spacing: 1px;
 }
@@ -77,20 +99,26 @@
     padding-left: 1rem;
 }
 
+/* Home Page Services */
+.card img.card-img-top {
+    height: 100px;
+    width: 100%;
+    object-fit: contain;
+}
 
 /* Table */
 
 .table-responsive {
     min-width: 400px;
     overflow: hidden;
-    border: 1px solid #03346E;
+    border: 1px solid #03346e;
 }
 
 .table {
     border-radius: 40px;
     overflow: hidden;
     position: relative;
-    border: 1px solid #03346E;
+    border: 1px solid #03346e;
 }
 
 .dropdown-custom {
@@ -137,41 +165,44 @@
     cursor: pointer;
 }
 
-button.dark-blue, button.manageDropdown1 {
+button.dark-blue,
+button.manageDropdown1 {
     background-color: #002046 !important;
     color: white !important;
     border-color: #002046 !important;
 }
 
-button.dark-blue:hover, button.manageDropdown1:hover {
+button.dark-blue:hover,
+button.manageDropdown1:hover {
     background-color: #004395 !important;
     color: white;
     border-color: #004395 !important;
 }
 
-button.dark-blue:active, button.manageDropdown1:active {
+button.dark-blue:active,
+button.manageDropdown1:active {
     background-color: #002046 !important;
     color: white !important;
 }
 
-button.dark-blue:focus, button.manageDropdown1:focus {
+button.dark-blue:focus,
+button.manageDropdown1:focus {
     background-color: #002046 !important;
     color: white !important;
 }
-
 
 /* Profile - Log out */
 li.profile-logout a.dropdown-item:focus {
     color: black !important;
 }
 
-li.profile-logout a.dropdown-item:active, li.profile-logout button.dropdown-item:active {
+li.profile-logout a.dropdown-item:active,
+li.profile-logout button.dropdown-item:active {
     color: black !important;
 }
 
-
- /* Custom Search */
- .form-control-custom {
+/* Custom Search */
+.form-control-custom {
     display: block;
     width: 100%;
     height: calc(1.5em + 0.75rem + 2px);
@@ -191,7 +222,7 @@ li.profile-logout a.dropdown-item:active, li.profile-logout button.dropdown-item
 .form-control-custom:focus {
     color: #212529;
     background-color: #fff;
-    border-color: #002046   ;
+    border-color: #002046;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
@@ -210,7 +241,8 @@ li.profile-logout a.dropdown-item:active, li.profile-logout button.dropdown-item
     font-size: 1rem;
     line-height: 1.5;
     border-radius: 0;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .btn-custom:hover {

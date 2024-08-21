@@ -28,8 +28,8 @@
     <div class="container text-center w-75 d-flex justify-content-center align-content-center flex-column p-4"
         style="height: 80vh">
 
-        <div class="container mt-5 p-5 rounded form-container" style="background-color: white;">
-            <img src="{{ asset('images/lmva-icon.jpg') }}" class="img-fluid mb-3" style="width: 60px; height: 60px;"
+        <div class="container mt-5 p-5 rounded form-container login-container">
+            <img src="{{ asset('images/lmva-icon.png') }}" class="img-fluid mb-3" style="width: 60px; height: 60px;"
                 alt="Logo" />
             <h2 class="h2 mb-3">Sign Up</h2>
             <form method="POST" action="{{ route('register') }}">
