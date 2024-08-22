@@ -53,7 +53,7 @@
                 </thead>
                 <tbody>
                     @forelse ($users as $user)
-                        <tr class="table-light" style="border: 1px solid #03346E">
+                        <tr class="table-light light-border" style="border: 1px solid #03346E">
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->contact_number }}</td>
                             <td>{{ $user->first_name }}</td>

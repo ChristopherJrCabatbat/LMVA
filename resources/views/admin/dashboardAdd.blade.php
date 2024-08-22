@@ -27,13 +27,18 @@
         <div class="d-flex flex-column">
 
             <div class="table-responsive text-center p-3 bg-light">
-                <form action="{{ route('admin.dashboardStore') }}" method="POST">
+                <form action="{{ route('admin.dashboardStore') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <h3 class="mb-3"><i class="fa-solid fa-plus me-2"></i> Add Record</h3>
 
                     <div class="mb-3 d-flex flex-column justify-content-start align-items-start">
-                        <label for="derm" class="form-label">Click to attach Record:</label>
-                        <input type="file" name="derm" class="form-control" id="derm" placeholder="">
+                        <label for="file_details" class="form-label">File Details:</label>
+                        <input type="text" name="file_details" class="form-control" id="file_details" placeholder="Details about the file..." title="This field is not required." autofocus>
+                    </div>
+
+                    <div class="mb-3 d-flex flex-column justify-content-start align-items-start">
+                        <label for="file" class="form-label">Click to attach Record:</label>
+                        <input type="file" name="file" class="form-control" id="file" placeholder="" required>
                     </div>
                     <div class="d-grid my-3">
                         <button class="btn btn-primary dark-blue" type="submit">Submit Record</button>

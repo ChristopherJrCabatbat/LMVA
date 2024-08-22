@@ -11,7 +11,19 @@ class UserController extends Controller
 {
     public function dashboard()
     {
-        return view('user.dashboard');
+        // Get the currently logged-in user's ID
+        $userId = auth()->user()->id;
+
+        // $userId = auth()->user();
+        // dd($userId); // Debug the user object
+
+
+        // Retrieve only the logged-in user's inquiries
+        $users = User::where('role', 'User')
+            ->where('id', $userId) // Filter by logged-in user ID
+            ->get();
+
+        return view('user.dashboard', compact('users'));
     }
 
     // Inquire Controller

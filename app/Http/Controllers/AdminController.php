@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Derm;
+use App\Models\Record;
 
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
@@ -26,15 +27,47 @@ class AdminController extends Controller
     // Dashboard Controllers
     public function dashboard()
     {
-        $staffs = User::where('role', 'Staff')->get();
-        $users = User::where('role', 'User')->get();
-        return view('admin.dashboard', compact('staffs', 'users'));
+        // $staffs = User::where('role', 'Staff')->get();
+        // $users = User::where('role', 'User')->get();
+        $records = Record::all();
+        return view('admin.dashboard', compact('records'));
     }
 
     public function dashboardAdd()
     {
         return view('admin.dashboardAdd');
     }
+
+    public function dashboardStore(Request $request)
+    {
+        // Validate the incoming data
+        $request->validate([
+            'file_details' => 'nullable|string|max:255',
+            'file' => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:2048',
+            'category' => 'nullable|string|max:255',
+        ]);
+
+        // Handle file upload
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $originalFileName = $file->getClientOriginalName(); // Get the original file name
+
+            // Store the file in the public storage
+            $filePath = $file->store('records', 'public');
+
+            // Save the record to the database
+            Record::create([
+                'file_details' => $request->input('file_details'),
+                'file' => $filePath,
+                'category' => $request->input('category'),
+                'original_file_name' => $originalFileName, // Save the original file name
+            ]);
+        }
+
+        // Redirect or return a response
+        return redirect()->route('admin.dashboard')->with('success', 'Record added successfully!');
+    }
+
 
 
 
@@ -56,9 +89,14 @@ class AdminController extends Controller
     public function accountsAddStaffStore(Request $request): RedirectResponse
     {
         $request->validate([
-            // 'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+            ],
+            'password_confirmation' => ['required', 'same:password'],
         ]);
 
         $user = new User;
@@ -76,7 +114,7 @@ class AdminController extends Controller
 
         // Auth::login($user);
 
-        return redirect()->route('admin.accounts')->with('success', 'Account added successfully!');
+        return redirect()->route('admin.accounts')->with('success', 'Account created successfully!');
     }
 
     public function accountsAddUser()
@@ -87,9 +125,14 @@ class AdminController extends Controller
     public function accountsAddUserStore(Request $request): RedirectResponse
     {
         $request->validate([
-            // 'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+            ],
+            'password_confirmation' => ['required', 'same:password'],
         ]);
 
         $user = new User;
@@ -117,7 +160,8 @@ class AdminController extends Controller
     // DERM Controller
     public function derm()
     {
-        $derms = Derm::all();
+        // $derms = Derm::all();
+        $derms = Derm::paginate(3);
 
         // Passing the derm records to the view
         return view('admin.derm', compact('derms'));
@@ -130,9 +174,9 @@ class AdminController extends Controller
 
     public function dermStore(Request $request)
     {
-        // Validate the incoming data
+        // Validate the incoming data with a uniqueness constraint
         $request->validate([
-            'derm' => 'required|string|max:255',
+            'derm' => 'required|string|max:255|unique:derms,derm', // Ensure 'derm' is unique in the 'derms' table
         ]);
 
         // Generate a random QR code
@@ -156,6 +200,7 @@ class AdminController extends Controller
         // Redirect or return a response
         return redirect()->route('admin.derm')->with('success', 'Derm added successfully!');
     }
+
 
     // Report Controllers
     public function reports()

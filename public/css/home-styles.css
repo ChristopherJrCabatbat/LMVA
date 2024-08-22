@@ -1,3 +1,14 @@
+.home-logout {
+    background-color: rgb(255, 255, 255, 0.7);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(35, 52, 140, 0.5), 0 8px 24px rgba(35, 52, 140, 0.4);
+}
+.home-logout:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(35, 52, 140, 0.7), 0 16px 32px rgba(35, 52, 140, 0.6);
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
 main {
     padding-top: 11vh;
     min-height: 150vh;

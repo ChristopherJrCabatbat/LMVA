@@ -6,6 +6,21 @@
 
 @endsection
 
+@section('modals')
+    <!-- Full-screen QR Code Modal -->
+    <div id="qrCodeModal" class="qr-code-modal">
+        <span class="close" onclick="closeQRCode()">&times;</span>
+        <img class="qr-code-modal-content" id="qrCodeImage">
+    </div>
+
+    <!-- Hidden Print Area -->
+    <div id="printArea" style="visibility:hidden; position: absolute; top: 0; left: 0;">
+        <div id="printContent" style="text-align: center;">
+            <!-- Content will be injected here dynamically -->
+        </div>
+    </div>
+@endsection
+
 @section('sidebar')
     <li class="nav-item">
         <a class="nav-link" href="/staff/patientRecord"><i class="fa-solid fa-clipboard me-2"></i> Patient Record</a>
@@ -41,6 +56,7 @@
                     </div>
                 </div>
 
+
                 <table class="table table-bordered table-blue table-info rounded">
                     <thead>
                         <tr>
@@ -51,18 +67,21 @@
                     </thead>
                     <tbody>
                         @forelse ($derms as $derm)
-                            <tr class="table-light" style="border: 1px solid #03346E">
+                            <tr class="table-light light-border" style="border: 1px solid #03346E">
                                 <!-- Display the DERM name -->
                                 <td class="align-middle fs-4">{{ $derm->derm }}</td>
-                
+
                                 <!-- Display the QR code image -->
                                 <td class="align-middle">
-                                    <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="100" height="100">
+                                    <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="100" height="100"
+                                        class="qr-thumbnail" onclick="showQRCode('{{ asset($derm->qr_code) }}')">
                                 </td>
-                
+
                                 <!-- Print button -->
                                 <td class="align-middle">
-                                    <a href="{{ asset($derm->qr_code) }}" download class="print" style="color: #002046;">
+                                    <a class="print" href="#"
+                                        onclick="printDerm('{{ $derm->derm }}', '{{ asset($derm->qr_code) }}')"
+                                        style="color: #002046;">
                                         <i class="fa-solid fa-print fs-1"></i>
                                     </a>
                                 </td>

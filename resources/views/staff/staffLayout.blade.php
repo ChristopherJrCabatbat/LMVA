@@ -40,6 +40,8 @@
         </div>
     @endif
 
+    @yield('modals')
+
     <header>
         {{-- Top Navbar --}}
         <nav class="navbar fixed-top navbar-expand-lg p-0 staff-user-nav">

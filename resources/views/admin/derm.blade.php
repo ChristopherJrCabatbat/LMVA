@@ -5,6 +5,21 @@
 @section('styles-links')
 @endsection
 
+@section('modals')
+    <!-- Full-screen QR Code Modal -->
+    <div id="qrCodeModal" class="qr-code-modal">
+        <span class="close" onclick="closeQRCode()">&times;</span>
+        <img class="qr-code-modal-content" id="qrCodeImage">
+    </div>
+
+    <!-- Hidden Print Area -->
+    <div id="printArea" style="visibility:hidden; position: absolute; top: 0; left: 0;">
+        <div id="printContent" style="text-align: center;">
+            <!-- Content will be injected here dynamically -->
+        </div>
+    </div>
+@endsection
+
 @section('sidebar')
     <li class="nav-item">
         <a class="nav-link" href="/admin/dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
@@ -27,20 +42,23 @@
 
             <div class="table-responsive text-center p-3 bg-light" id="staffTable">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="mb-0"><i class="fa-solid fa-notes-medical me-2"></i> DERM</h5>
+                    <h5 class="mb-0"><i class="fa-solid fa-notes-medical me-2"></i> DERM</h5>
 
                     <div class="d-flex gap-4">
                         <form action="dermAdd">
                             <button class="btn dark-blue" type="submit"><i class="fas fa-plus"></i> Add DERM</button>
                         </form>
                         <form action="" class="d-flex">
-                            <input type="search" class="form-control-custom rounded-start-custom" placeholder="Search something...">
-                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="search" class="form-control-custom rounded-start-custom"
+                                placeholder="Search something...">
+                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i
+                                    class="fa-solid fa-magnifying-glass"></i></button>
                         </form>
 
                     </div>
                 </div>
 
+                <!-- Existing Table -->
                 <table class="table table-bordered bg-dark rounded" data-bs-theme="dark">
                     <thead>
                         <tr>
@@ -51,18 +69,21 @@
                     </thead>
                     <tbody>
                         @forelse ($derms as $derm)
-                            <tr class="table-light" style="border: 1px solid #03346E">
+                            <tr class="table-light light-border" style="border: 1px solid #03346E">
                                 <!-- Display the DERM name -->
                                 <td class="align-middle fs-4">{{ $derm->derm }}</td>
-                
+
                                 <!-- Display the QR code image -->
                                 <td class="align-middle">
-                                    <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="100" height="100">
+                                    <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="100" height="100"
+                                        class="qr-thumbnail" onclick="showQRCode('{{ asset($derm->qr_code) }}')">
                                 </td>
-                
+
                                 <!-- Print button -->
                                 <td class="align-middle">
-                                    <a href="{{ asset($derm->qr_code) }}" download class="print" style="color: #002046;">
+                                    <a class="print" href="#"
+                                        onclick="printDerm('{{ $derm->derm }}', '{{ asset($derm->qr_code) }}')"
+                                        style="color: #002046;">
                                         <i class="fa-solid fa-print fs-1"></i>
                                     </a>
                                 </td>
@@ -73,19 +94,14 @@
                             </tr>
                         @endforelse
                     </tbody>
-                </table>            
+                </table>
 
-                {{-- Staff Pagination --}}
-                {{-- <nav aria-label="Staff Pagination">
-                    <ul class="pagination justify-content-end">
-                    <!-- Add your pagination links here -->
-                    </ul>
-                </nav> --}}
+                <!-- Include the Pagination Component -->
+                @include('admin.components.pagination', ['derms' => $derms])
+
             </div>
-
         </div>
-    </div>
-@endsection
+    @endsection
 
-@section('scripts')
-@endsection
+    @section('scripts')
+    @endsection

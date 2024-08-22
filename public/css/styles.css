@@ -1,4 +1,4 @@
-body {
+body, main {
     overflow-x: hidden;
 }
 
@@ -99,6 +99,10 @@ body {
     padding-left: 1rem;
 }
 
+select {
+    cursor: pointer;
+}
+
 /* Home Page Services */
 .card img.card-img-top {
     height: 100px;
@@ -119,6 +123,10 @@ body {
     overflow: hidden;
     position: relative;
     border: 1px solid #03346e;
+}
+
+tbody tr.light-border {
+    border: 1px solid #03346E
 }
 
 .dropdown-custom {
@@ -266,3 +274,112 @@ li.profile-logout button.dropdown-item:active {
     border-top-right-radius: 0.375rem;
     border-bottom-right-radius: 0.375rem;
 }
+
+.view-file {
+    color: white;
+    background-color: #002046;
+    text-decoration: none;
+}
+
+.view-file:hover {
+    /* color: #0d6efd; */
+    /* text-decoration: underline; */
+    background-color: #004395;
+}
+
+
+ /* Full-Screen Modal Styles */
+ .qr-thumbnail {
+    cursor: pointer;
+ }
+
+ .qr-code-modal {
+    display: none;
+    position: fixed;
+    z-index: 999999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9); /* Black background with opacity */
+    
+}
+
+.qr-code-modal-content {
+    margin: auto;
+    display: block;
+    width: auto;
+    height: 80vh;
+    margin-top: 10vh;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbbbbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+ /* Full Screen End */
+
+ /* Print Styles */
+a.print i.fa-print:hover {
+    color: #004aa5;
+    cursor: pointer;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #printArea, #printArea * {
+        visibility: visible;
+    }
+    #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+}
+/* End Print */
+
+
+/* Custom Pagination */
+/* .custom-pagination-link {
+    color: rgb(0, 32, 70);
+    border-color: rgb(0, 32, 70, 0.3);
+}
+
+.custom-pagination-link:hover {
+    color: #002046;
+    border: 1px solid #002046;
+    background-color: rgb(0, 67, 149,0.3);
+}
+
+.custom-active .page-link {
+    background-color: #002046;
+    color: white;
+    border: 1px solid #002046;
+}
+
+.page-item.disabled .page-link {
+    background-color: rgba(24, 49, 79, 0.2);
+    color: #002046;
+    border-color: rgb(0, 32, 70, 0.3);
+} */
+/* End Custom Pagination */

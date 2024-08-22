@@ -16,7 +16,7 @@
     <div class="container">
         @if (Auth::check())
             <div class="home-logout p-4 w-75 rounded">
-                <h2 class="h2">You are currently logged in, press the log out button.</h2>
+                <h2 class="h2">You are currently logged in, please press the log out button.</h2>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="btn btn-primary"><i
@@ -36,7 +36,9 @@
 
                             <div class="card-body">
                                 <h5 class="card-title">Virtual Medical Scribe</h5>
-                                <p class="card-text">Healthcare professionals remotely assist physicians during patient visits by taking detailed notes and managing electronic medical records. This allows physicians to focus on in-person patient care.</p>
+                                <p class="card-text">Healthcare professionals remotely assist physicians during patient
+                                    visits by taking detailed notes and managing electronic medical records. This allows
+                                    physicians to focus on in-person patient care.</p>
                             </div>
 
                             {{-- Flip Effect --}}
@@ -65,7 +67,8 @@
                     <div class="col">
                         <div
                             class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
-                            <img src="{{ asset('images/home-icons/medical.png') }}" class="card-img-top mt-3" alt="...">
+                            <img src="{{ asset('images/home-icons/medical.png') }}" class="card-img-top mt-3"
+                                alt="...">
 
                             <div class="card-body">
                                 <h5 class="card-title">Virtual Administrative Assistant</h5>
@@ -107,7 +110,8 @@
                     <div class="col">
                         <div
                             class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
-                            <img src="{{ asset('images/home-icons/telepresence.png') }}" class="card-img-top mt-3" alt="...">
+                            <img src="{{ asset('images/home-icons/telepresence.png') }}" class="card-img-top mt-3"
+                                alt="...">
 
                             <div class="card-body">
                                 <h5 class="card-title">Telepresence Virtual Assistant</h5>
@@ -122,7 +126,8 @@
                     <div class="col">
                         <div
                             class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
-                            <img src="{{ asset('images/home-icons/receptionist.png') }}" class="card-img-top mt-3" alt="...">
+                            <img src="{{ asset('images/home-icons/receptionist.png') }}" class="card-img-top mt-3"
+                                alt="...">
 
                             <div class="card-body">
                                 <h5 class="card-title">Virtual Medical Receptionist</h5>
@@ -138,7 +143,8 @@
                     <div class="col">
                         <div
                             class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
-                            <img src="{{ asset('images/home-icons/healthcare.png') }}" class="card-img-top mt-3" alt="...">
+                            <img src="{{ asset('images/home-icons/healthcare.png') }}" class="card-img-top mt-3"
+                                alt="...">
 
                             <div class="card-body">
                                 <h5 class="card-title">Healthcare Virtual Assistant</h5>
@@ -164,7 +170,8 @@
                     <div class="col">
                         <div
                             class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
-                            <img src="{{ asset('images/home-icons/transcription.png') }}" class="card-img-top mt-3" alt="...">
+                            <img src="{{ asset('images/home-icons/transcription.png') }}" class="card-img-top mt-3"
+                                alt="...">
 
                             <div class="card-body">
                                 <h5 class="card-title">Medical Transcription</h5>

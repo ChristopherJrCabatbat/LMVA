@@ -33,67 +33,92 @@
                         @csrf
                         {{-- Email --}}
                         <div class="mb-3 form-floating">
-                            <input required type="email" autofocus class="form-control" id="email" name="email"
-                                aria-describedby="emailHelp" placeholder="" />
+                            <input required type="email" autofocus
+                                   class="form-control @error('email') is-invalid @enderror" 
+                                   id="email" name="email" placeholder="" 
+                                   value="{{ old('email') }}" />
                             <label for="exampleInputEmail1" class="form-label">Email</label>
                             <div id="emailHelp" class="form-text text-start">
                                 We'll never share your email with anyone else.
                             </div>
+                            @error('email')
+                                <div class="mt-3 login-error text-start alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-
+                    
                         {{-- Username --}}
                         <div class="mb-3 form-floating">
-                            <input required type="text" class="form-control" id="username" name="username"
-                                aria-describedby="emailHelp" placeholder="" />
-                            <label for="exampleInputEmail1" class="form-label">Username</label>
+                            <input required type="text" class="form-control @error('username') is-invalid @enderror"
+                                   id="username" name="username" placeholder="" 
+                                   value="{{ old('username') }}" />
+                            <label for="exampleInputUsername" class="form-label">Username</label>
+                            @error('username')
+                                <div class="mt-3 login-error text-start alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-
+                    
                         {{-- First Name --}}
                         <div class="mb-3 form-floating">
                             <input required type="text" class="form-control" id="first_name" name="first_name"
-                                aria-describedby="emailHelp" placeholder="" />
-                            <label for="exampleInputEmail1" class="form-label">First Name</label>
+                                   placeholder="" value="{{ old('first_name') }}" />
+                            <label for="exampleInputFirstName" class="form-label">First Name</label>
                         </div>
-
+                    
                         {{-- Last Name --}}
                         <div class="mb-3 form-floating">
                             <input required type="text" class="form-control" id="last_name" name="last_name"
-                                aria-describedby="emailHelp" placeholder="" />
-                            <label for="exampleInputEmail1" class="form-label">Last Name</label>
+                                   placeholder="" value="{{ old('last_name') }}" />
+                            <label for="exampleInputLastName" class="form-label">Last Name</label>
                         </div>
-
+                    
                         {{-- Contact Number --}}
                         <div class="mb-3 form-floating">
                             <input required type="text" class="form-control" id="contact_number" name="contact_number"
-                                aria-describedby="emailHelp" placeholder="" />
-                            <label for="exampleInputEmail1" class="form-label">Contact Number</label>
+                                   placeholder="" value="{{ old('contact_number') }}" />
+                            <label for="exampleInputContactNumber" class="form-label">Contact Number</label>
                         </div>
-
+                    
                         {{-- Password --}}
                         <div class="mb-3 form-floating">
-                            <input required type="password" id="password" name="password" class="form-control"
-                                aria-describedby="passwordHelpBlock" placeholder="" />
-                            <label for="inputPassword5" class="form-label">Password</label>
+                            <input required type="password" id="password" name="password"
+                                   class="form-control @error('password') is-invalid @enderror"
+                                   aria-describedby="passwordHelpBlock" placeholder="" />
+                            <label for="inputPassword" class="form-label">Password</label>
+                            @error('password')
+                                <div class="mt-3 login-error text-start alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-
+                    
                         {{-- Confirm Password --}}
                         <div class="mb-3 form-floating">
                             <input required type="password" id="password_confirmation" name="password_confirmation"
-                                class="form-control" aria-describedby="passwordHelpBlock" placeholder="" />
-                            <label for="inputPassword5" class="form-label">Confirm Password</label>
+                                   class="form-control @error('password_confirmation') is-invalid @enderror"
+                                   aria-describedby="passwordHelpBlock" placeholder="" />
+                            <label for="inputPasswordConfirmation" class="form-label">Confirm Password</label>
                             <div id="passwordHelpBlock" class="form-text text-start">
-                                Your password must be 8-20 characters long, contain letters and
-                                numbers, and must not contain spaces, special characters, or
-                                emoji.
+                                Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
                             </div>
+                            @error('password_confirmation')
+                                <div class="mt-3 login-error text-start alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-
+                    
                         <div class="d-grid mt-3">
                             <x-primary-button class="btn dark-blue">
                                 {{ __('Add User') }}
                             </x-primary-button>
                         </div>
                     </form>
+                    
+
                 </div>
             </div>
 

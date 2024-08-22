@@ -32,12 +32,9 @@
 
             <div class="table-responsive text-center p-3 bg-light" id="staffTable">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0"><i class="fa-solid fa-notes-medical me-2"></i> Inquiries</h5>
+                    <h5 class="mb-0"><i class="fa-solid fa-magnifying-glass-chart me-2"></i> Number of Inquiries</h5>
 
                     <div class="d-flex gap-4">
-                        {{-- <form action="dermAdd">
-                            <button class="btn dark-blue" type="submit"><i class="fas fa-plus"></i> Inquire</button>
-                        </form> --}}
                         <form action="" class="d-flex">
                             <input type="search" class="form-control-custom rounded-start-custom"
                                 placeholder="Search something...">
@@ -51,22 +48,16 @@
                 <table class="table table-bordered table-blue table-info rounded">
                     <thead>
                         <tr>
-                            {{-- <th scope="col">Email</th> --}}
-                            {{-- <th scope="col">Contact Number</th> --}}
                             <th>No.</th>
                             <th scope="col">Inquiry Details</th>
-                            <th scope="col">Payment Method</th>
                         </tr>
                     </thead>
                     <tbody>
                         {{-- @forelse ($users as $user) --}}
                         @forelse ($users as $index => $user)
-                            <tr class="table-light" style="border: 1px solid #03346E">
-                                {{-- <td>{{ $user->email }}</td> --}}
-                                {{-- <td>{{ $user->contact_number }}</td> --}}
+                            <tr class="table-light light-border" style="border: 1px solid #03346E">
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $user->first_name }}</td>
-                                <td>GCash</td>
                             </tr>
                         @empty
                             <tr>

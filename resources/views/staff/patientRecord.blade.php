@@ -51,7 +51,7 @@
                     </thead>
                     <tbody>
                         @forelse ($staffs as $staff)
-                            <tr class="table-light">
+                            <tr class="table-light light-border">
                                 <td>{{ $staff->username }}</td>
                                 <td>{{ $staff->first_name }}</td>
                                 <td>{{ $staff->first_name }}</td>

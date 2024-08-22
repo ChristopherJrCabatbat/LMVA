@@ -19,6 +19,7 @@ class RoleMiddleware
             'Admin' => [
                 'admin/dashboard',
                 'admin/dashboardAdd',
+                'admin/dashboardStore',
 
                 'admin/accounts',
                 'admin/accountsAddStaff',

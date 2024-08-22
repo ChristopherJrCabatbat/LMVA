@@ -5,7 +5,7 @@ main {
 }
 
 .sidebar {
-    border-right: 1px solid #03346E;
+    border-right: 1px solid #03346e;
 }
 
 .sidebar .nav-item .nav-link {
@@ -13,43 +13,43 @@ main {
 }
 
 .sidebar .nav-item .nav-link:hover {
-    background-color: #03346E;
+    background-color: #03346e;
 }
 
 .sidebar .nav-item .nav-link.side-active:hover {
     background-color: #0d6efd;
 }
 
+/* Icon Button Styling */
+#showUsers,
+#showStaff {
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
- /* Icon Button Styling */
- #showUsers,
- #showStaff {
-     padding: 6px 12px;
-     border-radius: 5px;
-     font-size: 14px;
-     transition: background-color 0.2s, color 0.2s;
-     display: flex;
-     align-items: center;
-     gap: 8px;
- }
+#showStaff.btn-outline-primary,
+#showUsers.btn-outline-primary {
+    border-color: #212529;
+    background-color: #fff;
+    color: #212529;
+}
 
- #showStaff.btn-outline-primary, #showUsers.btn-outline-primary {
-     border-color: #212529;
-     background-color: #fff;
-     color: #212529;
- }
+#showStaff.btn-outline-primary:hover,
+#showUsers.btn-outline-primary:hover {
+    background-color: #03346e;
+    color: white;
+    border-color: #03346e;
+}
 
- #showStaff.btn-outline-primary:hover, #showUsers.btn-outline-primary:hover {
-     background-color: #03346E;
-     color: white;
-     border-color: #03346E;
- }
-
- #showUsers i,
- #showStaff i {
-     font-size: 16px;
- }
-
+#showUsers i,
+#showStaff i {
+    font-size: 16px;
+}
 
 /* Log out */
 .dropdown-menu .dropdown-item {
@@ -62,13 +62,9 @@ main {
 }
 /* End log out */
 
-a.print i.fa-print:hover {
-    color: #004aa5;
-}
 
-
- /* Custom Search */
- /* .form-control-custom {
+/* Custom Search */
+/* .form-control-custom {
     border: 1px solid #002046;
  }
 
@@ -76,3 +72,31 @@ a.print i.fa-print:hover {
     background-color: #002046;
     border: 1px solid #002046;
 } */
+
+
+
+/* Custom Pagination */
+.custom-pagination-link {
+    color: #002046; /* Default text color */
+    border-color: rgba(0, 32, 70, 0.3); /* Default border color */
+}
+
+.custom-pagination-link:hover {
+    color: #ffffff; /* Text color on hover */
+    background-color: #0056b3; /* Softer blue background on hover */
+    border-color: #0056b3; /* Border color on hover */
+}
+
+.custom-active .page-link {
+    background-color: #002046; /* Background color for active page */
+    color: #ffffff; /* Text color for active page */
+    border-color: #002046; /* Border color for active page */
+}
+
+.page-item.disabled .page-link {
+    background-color: rgba(0, 67, 149, 0.1); /* Light background for disabled items */
+    color: rgba(0, 32, 70, 0.5); /* Muted text color for disabled items */
+    border-color: rgba(0, 32, 70, 0.3); /* Border color for disabled items */
+}
+
+/* End Custom Pagination */

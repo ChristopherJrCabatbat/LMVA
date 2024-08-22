@@ -61,7 +61,7 @@
                     </thead>
                     <tbody>
                         @forelse ($staffs as $staff)
-                            <tr class="table-light" style="border: 1px solid #03346E">
+                            <tr class="table-light light-border" style="border: 1px solid #03346E">
                                 <td>{{ $staff->username }}</td>
                                 <td>{{ $staff->first_name }}</td>
                                 <td>{{ $staff->last_name }}</td>
@@ -147,7 +147,7 @@
                     </thead>
                     <tbody>
                         @forelse ($users as $user)
-                            <tr class="table-light" style="border: 1px solid #03346E">
+                            <tr class="table-light light-border" style="border: 1px solid #03346E">
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->first_name }}</td>
                                 <td>{{ $user->last_name }}</td>
