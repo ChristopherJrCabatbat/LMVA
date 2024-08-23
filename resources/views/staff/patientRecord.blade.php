@@ -25,7 +25,7 @@
 
             <div class="table-responsive text-center p-3 bg-light" id="staffTable">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0"><i class="fa-solid fa-laptop-medical me-2"></i> Patient Records</h5>
+                    <h5 class="mb-0"><i class="fa-solid fa-clipboard me-2"></i> Patient Records</h5>
 
                     <div class="d-flex gap-4">
                         {{-- <form action="dashboardAdd">
@@ -44,36 +44,36 @@
                 <table class="table table-bordered table-blue table-info rounded">
                     <thead>
                         <tr>
-                            <th scope="col">File Name</th>
+                            <th scope="col">File Details</th>
                             <th scope="col">File</th>
-                            <th scope="col">Categorize</th>
+                            {{-- <th scope="col">Categorize</th> --}}
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($staffs as $staff)
+                        @forelse ($records as $record)
                             <tr class="table-light light-border">
-                                <td>{{ $staff->username }}</td>
-                                <td>{{ $staff->first_name }}</td>
-                                <td>{{ $staff->first_name }}</td>
-                                {{-- <td>
-                                <a href="" class="print" style="color: #002046;"><i
-                                        class="fa-solid fa-print fs-3"></i></a>
-                            </td> --}}
+                                <!-- Display the file details or fallback to the original file name -->
+                                <td class="align-middle">
+                                    {{ $record->file_details ?: $record->original_file_name }}
+                                </td>
+                                <td class="py-3">
+                                    <a href="{{ asset('storage/' . $record->file) }}" class="view-file rounded p-2 px-3"
+                                        target="_blank" title="This will open the file to a new tab.">
+                                        {{ $record->original_file_name }}
+                                    </a>
+                                </td>
                             </tr>
                         @empty
-                            <tr>
+                            <tr class="table-light">
                                 <td colspan="6" class="text-center">There are no patient record.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
 
-                {{-- Staff Pagination --}}
-                {{-- <nav aria-label="Staff Pagination">
-                    <ul class="pagination justify-content-end">
-                    <!-- Add your pagination links here -->
-                    </ul>
-                </nav> --}}
+                <!-- Include the Pagination Component -->
+                @include('components.staff-userPagination', ['items' => $records])
+
             </div>
 
         </div>

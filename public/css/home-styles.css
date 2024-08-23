@@ -11,8 +11,8 @@
 
 main {
     padding-top: 11vh;
-    min-height: 150vh;
-    height: 193vh;
+    /* min-height: 150vh; */
+    min-height: 193vh;
 }
 
 h1.services {

@@ -60,19 +60,16 @@
                                 <td>{{ $user->first_name }}</td>
                             </tr>
                         @empty
-                            <tr>
+                            <tr class="table-light">
                                 <td colspan="6" class="text-center">There are no inquiries.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
 
-                {{-- Staff Pagination --}}
-                {{-- <nav aria-label="Staff Pagination">
-                <ul class="pagination justify-content-end">
-                <!-- Add your pagination links here -->
-                </ul>
-            </nav> --}}
+                <!-- Include the Pagination Component -->
+                @include('components.staff-userPagination', ['items' => $users])
+
             </div>
 
         </div>

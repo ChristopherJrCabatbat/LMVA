@@ -89,7 +89,7 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr>
+                            <tr class="table-light">
                                 <td colspan="3" class="text-center">There are no derms available.</td>
                             </tr>
                         @endforelse
@@ -97,7 +97,7 @@
                 </table>
 
                 <!-- Include the Pagination Component -->
-                @include('admin.components.pagination', ['derms' => $derms])
+                @include('admin.components.pagination', ['items' => $derms])
 
             </div>
         </div>

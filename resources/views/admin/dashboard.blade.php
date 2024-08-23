@@ -65,21 +65,16 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr>
+                            <tr class="table-light">
                                 <td colspan="2" class="text-center table-light">There are no records.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
 
+                <!-- Include the Pagination Component -->
+                @include('admin.components.pagination', ['items' => $records])
 
-
-                {{-- Staff Pagination --}}
-                {{-- <nav aria-label="Staff Pagination">
-                    <ul class="pagination justify-content-end">
-                    <!-- Add your pagination links here -->
-                    </ul>
-                </nav> --}}
             </div>
 
         </div>

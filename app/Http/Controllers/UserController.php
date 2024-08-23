@@ -21,7 +21,8 @@ class UserController extends Controller
         // Retrieve only the logged-in user's inquiries
         $users = User::where('role', 'User')
             ->where('id', $userId) // Filter by logged-in user ID
-            ->get();
+            // ->get();
+            ->paginate(3);
 
         return view('user.dashboard', compact('users'));
     }
@@ -58,7 +59,8 @@ class UserController extends Controller
         // Retrieve only the logged-in user's inquiries
         $users = User::where('role', 'User')
             ->where('id', $userId) // Filter by logged-in user ID
-            ->get();
+            // ->get();
+            ->paginate(3);
 
         return view('user.numberInquiries', compact('users'));
     }

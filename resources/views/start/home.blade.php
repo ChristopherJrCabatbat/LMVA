@@ -167,7 +167,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col mb-2">
                         <div
                             class="card h-100 text-center d-flex flex-column align-items-center justify-content-center p-2">
                             <img src="{{ asset('images/home-icons/transcription.png') }}" class="card-img-top mt-3"

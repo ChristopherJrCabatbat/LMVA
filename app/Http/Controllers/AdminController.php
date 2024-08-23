@@ -27,9 +27,8 @@ class AdminController extends Controller
     // Dashboard Controllers
     public function dashboard()
     {
-        // $staffs = User::where('role', 'Staff')->get();
-        // $users = User::where('role', 'User')->get();
-        $records = Record::all();
+        // $records = Record::all();
+        $records = Record::paginate(4);
         return view('admin.dashboard', compact('records'));
     }
 
@@ -72,14 +71,18 @@ class AdminController extends Controller
 
 
     // Accounts Controller
-    public function accounts()
+    public function accounts(Request $request)
     {
-        $staffs = User::where('role', 'Staff')->get();
-        $users = User::where('role', 'User')->get();
-
-        // $users = User::all();
-        return view('admin.accounts', compact('staffs', 'users'));
+        // Determine which table to show based on the query parameter
+        $activeTable = $request->query('table', 'staff');
+    
+        // Paginate the results
+        $staffs = User::where('role', 'Staff')->paginate(4);
+        $users = User::where('role', 'User')->paginate(4);
+    
+        return view('admin.accounts', compact('staffs', 'users', 'activeTable'));
     }
+    
 
     public function accountsAddStaff()
     {
@@ -205,7 +208,8 @@ class AdminController extends Controller
     // Report Controllers
     public function reports()
     {
-        $users = User::where('role', 'User')->get();
+        // $users = User::where('role', 'User')->get();
+        $users = User::where('role', 'User')->paginate(4);
         return view('admin.reports', compact('users'));
     }
 }

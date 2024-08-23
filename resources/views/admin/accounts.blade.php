@@ -26,7 +26,9 @@
         <div class="d-flex flex-column">
 
             {{-- Staff Table --}}
-            <div class="table-responsive text-center p-3 bg-light" id="staffTable">
+            <div class="table-responsive text-center p-3 bg-light" id="staffTable"
+                style="display: {{ $activeTable === 'staff' ? 'block' : 'none' }};">
+
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="d-flex justify-content-center align-items-center gap-4">
                         <h5 class="mb-0"><i class="fa-solid fa-user me-2"></i> Staff Accounts</h5>
@@ -42,8 +44,10 @@
                             <button class="btn dark-blue" type="submit"><i class="fas fa-plus"></i> Add Staff</button>
                         </form>
                         <form action="" class="d-flex">
-                            <input type="search" class="form-control-custom rounded-start-custom" placeholder="Search something...">
-                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="search" class="form-control-custom rounded-start-custom"
+                                placeholder="Search something...">
+                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i
+                                    class="fa-solid fa-magnifying-glass"></i></button>
                         </form>
                     </div>
                 </div>
@@ -97,22 +101,22 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr>
+                            <tr class="table-light">
                                 <td colspan="6" class="text-center">There are no staff accounts.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
-                {{-- Staff Pagination --}}
-                <nav aria-label="Staff Pagination">
-                    {{-- <ul class="pagination justify-content-end"> --}}
-                    <!-- Add your pagination links here -->
-                    </ul>
-                </nav>
+
+                <!-- Include the Pagination Component -->
+                @include('admin.components.accounts-pagination', ['items' => $staffs])
+
             </div>
 
             {{-- User Table --}}
-            <div class="table-responsive text-center p-3 bg-light d-none" id="userTable">
+            <div class="table-responsive text-center p-3 bg-light" id="userTable"
+                style="display: {{ $activeTable === 'user' ? 'block' : 'none' }};">
+
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="d-flex justify-content-center align-items-center gap-4">
                         <h5 class="mb-0"><i class="fa-solid fa-users me-2"></i> User Accounts</h5>
@@ -128,8 +132,10 @@
                             <button class="btn dark-blue" type="submit"><i class="fas fa-plus"></i> Add User</button>
                         </form>
                         <form action="" class="d-flex">
-                            <input type="search" class="form-control-custom rounded-start-custom" placeholder="Search something...">
-                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="search" class="form-control-custom rounded-start-custom"
+                                placeholder="Search something...">
+                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i
+                                    class="fa-solid fa-magnifying-glass"></i></button>
                         </form>
                     </div>
                 </div>
@@ -183,20 +189,16 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr>
+                            <tr class="table-light">
                                 <td colspan="6" class="text-center">There are no user accounts.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
-                {{-- User Pagination --}}
-                <nav aria-label="User Pagination">
-                    <ul class="pagination justify-content-end">
-                        {{-- {{ $users->links('pagination::bootstrap-5') }} --}}
 
-                        <!-- Add your pagination links here -->
-                    </ul>
-                </nav>
+                <!-- Include the Pagination Component -->
+                @include('admin.components.accounts-pagination', ['items' => $users])
+
             </div>
 
         </div>
@@ -230,17 +232,31 @@
     </script>
 
 
-   {{-- Table shift between staff and user --}}
-<script>
-    document.getElementById('showStaff').addEventListener('click', function() {
-        document.getElementById('staffTable').classList.remove('d-none');
-        document.getElementById('userTable').classList.add('d-none');
-    });
+    {{-- Table shift between staff and user --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the active table from the query parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const activeTable = urlParams.get('table') || 'staff';
 
-    document.getElementById('showUsers').addEventListener('click', function() {
-        document.getElementById('userTable').classList.remove('d-none');
-        document.getElementById('staffTable').classList.add('d-none');
-    });
-</script>
+            // Toggle the tables based on the active table
+            if (activeTable === 'user') {
+                document.getElementById('userTable').classList.remove('d-none');
+                document.getElementById('staffTable').classList.add('d-none');
+            } else {
+                document.getElementById('staffTable').classList.remove('d-none');
+                document.getElementById('userTable').classList.add('d-none');
+            }
+
+            // Add event listeners to the buttons to update the URL with the correct table
+            document.getElementById('showStaff').addEventListener('click', function() {
+                window.location.href = '?table=staff';
+            });
+
+            document.getElementById('showUsers').addEventListener('click', function() {
+                window.location.href = '?table=user';
+            });
+        });
+    </script>
 
 @endsection
