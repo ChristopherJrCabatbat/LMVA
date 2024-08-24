@@ -388,3 +388,8 @@ a.print i.fa-print:hover {
 }
 
 /* End Custom Pagination */
+
+
+.pointer {
+    cursor: pointer;
+}

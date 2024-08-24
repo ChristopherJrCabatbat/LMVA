@@ -74,11 +74,19 @@
                                 <td class="align-middle fs-4">{{ $derm->derm }}</td>
 
                                 <!-- Display the QR code image -->
-                                <td class="align-middle">
+                                {{-- <td class="align-middle">
                                     <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="100" height="100"
                                         class="qr-thumbnail" onclick="showQRCode('{{ asset($derm->qr_code) }}')">
+                                </td> --}}
+                                
+                                <td class="align-middle">
+                                    <a href="{{ route('admin.dermShow', ['derm' => $derm->derm]) }}">
+                                        <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="100" height="100" class="qr-thumbnail">
+                                    </a>
+                                    <i class="fa-solid fa-expand pointer" onclick="showQRCode('{{ asset($derm->qr_code) }}')"
+                                        title="Click to expand."></i>
                                 </td>
-
+                                
                                 <!-- Print button -->
                                 <td class="align-middle">
                                     <a class="print" href="#"

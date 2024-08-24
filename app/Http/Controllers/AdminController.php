@@ -75,14 +75,14 @@ class AdminController extends Controller
     {
         // Determine which table to show based on the query parameter
         $activeTable = $request->query('table', 'staff');
-    
+
         // Paginate the results
         $staffs = User::where('role', 'Staff')->paginate(4);
         $users = User::where('role', 'User')->paginate(4);
-    
+
         return view('admin.accounts', compact('staffs', 'users', 'activeTable'));
     }
-    
+
 
     public function accountsAddStaff()
     {
@@ -163,10 +163,8 @@ class AdminController extends Controller
     // DERM Controller
     public function derm()
     {
-        // $derms = Derm::all();
         $derms = Derm::paginate(3);
 
-        // Passing the derm records to the view
         return view('admin.derm', compact('derms'));
     }
 
@@ -203,6 +201,18 @@ class AdminController extends Controller
         // Redirect or return a response
         return redirect()->route('admin.derm')->with('success', 'Derm added successfully!');
     }
+
+    public function dermShow($derm)
+    {
+        // Find the DERM by name
+        $dermRecord = Derm::where('derm', $derm)->firstOrFail();
+
+        // Retrieve all records associated with this DERM
+        $records = Record::where('category', $derm)->get();
+
+        return view('admin.dermShow', compact('dermRecord', 'records'));
+    }
+
 
 
     // Report Controllers

@@ -1,6 +1,6 @@
 @extends('staff.staffLayout')
 
-@section('title', 'Scan')
+@section('title', 'Derm')
 
 @section('styles-links')
 
@@ -26,7 +26,7 @@
         <a class="nav-link" href="/staff/patientRecord"><i class="fa-solid fa-clipboard me-2"></i> Patient Record</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link side-active" href="#"><i class="fa-solid fa-qrcode me-2"></i> Scan</a>
+        <a class="nav-link side-active" href="#"><i class="fa-solid fa-notes-medical me-2"></i> Derm</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/staff/inquiry"><i class="fa-solid fa-magnifying-glass-arrow-right me-2"></i>
@@ -40,7 +40,7 @@
 
             <div class="table-responsive text-center p-3 bg-light" id="staffTable">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0"><i class="fa-solid fa-qrcode me-2"></i> Scan</h5>
+                    <h5 class="mb-0"><i class="fa-solid fa-notes-medical me-2"></i> Derm</h5>
 
                     <div class="d-flex gap-4">
                         {{-- <form action="dashboardAdd">
@@ -72,16 +72,24 @@
                                 <td class="align-middle fs-4">{{ $derm->derm }}</td>
 
                                 <!-- Display the QR code image -->
-                                <td class="align-middle">
+                                {{-- <td class="align-middle">
                                     <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="100" height="100"
-                                        class="qr-thumbnail" onclick="showQRCode('{{ asset($derm->qr_code) }}')">
+                                        class="qr-thumbnail" onclick="showQRCode('{{ asset($derm->qr_code) }}')" title="Click to expand.">
+                                </td> --}}
+                                <td class="align-middle">
+                                    <a href="{{ route('staff.dermShow', ['derm' => $derm->derm]) }}">
+                                        <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="100" height="100"
+                                            class="qr-thumbnail">
+                                    </a>
+                                    <i class="fa-solid fa-expand pointer" onclick="showQRCode('{{ asset($derm->qr_code) }}')"
+                                        title="Click to expand."></i>
                                 </td>
 
                                 <!-- Print button -->
                                 <td class="align-middle">
                                     <a class="print" href="#"
                                         onclick="printDerm('{{ $derm->derm }}', '{{ asset($derm->qr_code) }}')"
-                                        style="color: #002046;">
+                                        style="color: #002046;" title="Print the QR Code.">
                                         <i class="fa-solid fa-print fs-1"></i>
                                     </a>
                                 </td>

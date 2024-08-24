@@ -11,7 +11,7 @@
         <a class="nav-link" href="/staff/patientRecord"><i class="fa-solid fa-clipboard me-2"></i> Patient Record</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/staff/scan"><i class="fa-solid fa-qrcode me-2"></i> Scan</a>
+        <a class="nav-link" href="/staff/derm"><i class="fa-solid fa-notes-medical me-2"></i> Derm</a>
     </li>
     <li class="nav-item">
         <a class="nav-link side-active" href="#"><i class="fa-solid fa-magnifying-glass-arrow-right me-2"></i>
@@ -28,9 +28,6 @@
                     <h5 class="mb-0"><i class="fa-solid fa-magnifying-glass-arrow-right me-2"></i> Inquiries</h5>
 
                     <div class="d-flex gap-4">
-                        {{-- <form action="dashboardAdd">
-                    <button class="btn dark-blue" type="submit"><i class="fas fa-plus"></i> Add Record</button>
-                </form> --}}
                         <form action="" class="d-flex">
                             <input type="search" class="form-control-custom rounded-start-custom"
                                 placeholder="Search something...">
@@ -66,8 +63,8 @@
                     </tbody>
                 </table>
 
-                  <!-- Include the Pagination Component -->
-                  @include('components.staff-userPagination', ['items' => $users])
+                <!-- Include the Pagination Component -->
+                @include('components.staff-userPagination', ['items' => $users])
 
             </div>
 

@@ -14,47 +14,51 @@ class RoleMiddleware
         $user = Auth::user();
         $role = $user->role;
 
-        // Define the allowed routes for each role
+        // Define the allowed route names for each role
         $allowedRoutes = [
             'Admin' => [
-                'admin/dashboard',
-                'admin/dashboardAdd',
-                'admin/dashboardStore',
+                'admin.dashboard',
+                'admin.dashboardAdd',
+                'admin.dashboardStore',
 
-                'admin/accounts',
-                'admin/accountsAddStaff',
-                'admin/accountsAddStaffStore',
-                'admin/accountsAddUser',
-                'admin/accountsAddUserStore',
+                'admin.accounts',
+                'admin.accountsAddStaff',
+                'admin.accountsAddStaffStore',
+                'admin.accountsAddUser',
+                'admin.accountsAddUserStore',
 
-                'admin/derm',
-                'admin/dermAdd',
-                'admin/dermStore',
+                'admin.derm',
+                'admin.dermAdd',
+                'admin.dermStore',
+                'admin.dermShow',
 
-                'admin/reports',
+                'admin.reports',
             ],
             'Staff' => [
-                'staff/patientRecord',
-                'staff/scan',
-                'staff/inquiry',
+                'staff.patientRecord',
+                'staff.patientRecordCategorize',
+
+                'staff.derm',
+                'staff.dermShow',
+
+                'staff.inquiry',
             ],
             'User'  => [
-                'user/dashboard',
+                'user.dashboard',
 
-                'user/inquire',
-                'user/inquireAdd',
+                'user.inquire',
+                'user.inquireAdd',
                 
-                'user/numberInquiries',
+                'user.numberInquiries',
             ],
         ];
 
-        // If the current path is not in the allowed routes for the role, flash a simplified error message
-        if (!in_array($request->path(), $allowedRoutes[$role] ?? [])) {
+        // Check if the current route name is in the allowed routes for the user's role
+        if (!in_array($request->route()->getName(), $allowedRoutes[$role] ?? [])) {
             $message = "You can only access {$role}'s files. Please log out first to continue.";
             session()->flash('error', $message);
 
             // Redirect to the first allowed route (dashboard)
-            // return redirect($allowedRoutes[$role][0]);
             return back();
         }
 

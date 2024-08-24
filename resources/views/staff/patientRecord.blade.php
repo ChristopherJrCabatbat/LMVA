@@ -11,7 +11,7 @@
         <a class="nav-link side-active" href="#"><i class="fa-solid fa-clipboard me-2"></i> Patient Record</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/staff/scan"><i class="fa-solid fa-qrcode me-2"></i> Scan</a>
+        <a class="nav-link" href="/staff/derm"><i class="fa-solid fa-notes-medical me-2"></i> Derm</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/staff/inquiry"><i class="fa-solid fa-magnifying-glass-arrow-right me-2"></i>
@@ -46,7 +46,7 @@
                         <tr>
                             <th scope="col">File Details</th>
                             <th scope="col">File</th>
-                            {{-- <th scope="col">Categorize</th> --}}
+                            <th scope="col">Categorize</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,14 +62,31 @@
                                         {{ $record->original_file_name }}
                                     </a>
                                 </td>
+                                
+                                <td class="align-middle" style="width: 20%">
+                                    <form action="{{ route('staff.patientRecordCategorize') }}" method="POST">
+                                        @csrf
+                                        <select class="form-select" name="category" id="category"
+                                            aria-label="Default select example" title="Choose DERM to categorize the file."
+                                            onchange="this.form.submit()">
+                                            <option value="" disabled selected>Categorize file</option>
+                                            @foreach($derms as $derm)
+                                                <option value="{{ $derm->derm }}">{{ $derm->derm }}</option>
+                                            @endforeach
+                                        </select>
+                                        <input type="hidden" name="record_id" value="{{ $record->id }}">
+                                        <!-- Pass the record ID to identify the record being updated -->
+                                    </form>
+                                </td>
                             </tr>
                         @empty
                             <tr class="table-light">
-                                <td colspan="6" class="text-center">There are no patient record.</td>
+                                <td colspan="3" class="text-center">There are no patient records that is not categorized.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
+                
 
                 <!-- Include the Pagination Component -->
                 @include('components.staff-userPagination', ['items' => $records])
