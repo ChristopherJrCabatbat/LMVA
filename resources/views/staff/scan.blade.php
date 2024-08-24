@@ -3,7 +3,11 @@
 @section('title', 'Derm')
 
 @section('styles-links')
-
+<style>
+    body {
+        /* overflow: hidden */
+    }
+</style>
 @endsection
 
 @section('modals')
@@ -76,10 +80,10 @@
                                     <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="100" height="100"
                                         class="qr-thumbnail" onclick="showQRCode('{{ asset($derm->qr_code) }}')" title="Click to expand.">
                                 </td> --}}
-                                <td class="align-middle">
+                                <td class="align-middle d-flex flex-column">
                                     <a href="{{ route('staff.dermShow', ['derm' => $derm->derm]) }}">
-                                        <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="100" height="100"
-                                            class="qr-thumbnail">
+                                        <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="95" height="95"
+                                            class="qr-thumbnail" title="Click to view DERM information.">
                                     </a>
                                     <i class="fa-solid fa-expand pointer" onclick="showQRCode('{{ asset($derm->qr_code) }}')"
                                         title="Click to expand."></i>

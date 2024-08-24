@@ -1,6 +1,6 @@
 @extends('staff.staffLayout')
 
-@section('title', 'Inquiry')
+@section('title', 'Inquiries')
 
 @section('styles-links')
 
@@ -45,15 +45,17 @@
                             <th scope="col">Contact Number</th>
                             <th scope="col">Inquiry Details</th>
                             <th scope="col">Payment Method</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($users as $user)
+                        @forelse ($inquiries as $inquiry)
                             <tr class="table-light light-border" style="border: 1px solid #03346E">
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->contact_number }}</td>
-                                <td>{{ $user->first_name }}</td>
-                                <td>GCash</td>
+                                <td>{{ $inquiry->email }}</td>
+                                <td>{{ $inquiry->contact_number }}</td>
+                                <td>{{ $inquiry->inquiry }}</td>
+                                <td>{{ $user->payment_method ?? '--' }}</td>
+                                <td><a href="#" class="text-black pointer" style="text-decoration: none">Reply</a></td>
                             </tr>
                         @empty
                             <tr class="table-light">
@@ -64,7 +66,7 @@
                 </table>
 
                 <!-- Include the Pagination Component -->
-                @include('components.staff-userPagination', ['items' => $users])
+                @include('components.staff-userPagination', ['items' => $inquiries])
 
             </div>
 

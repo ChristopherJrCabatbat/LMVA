@@ -1,6 +1,6 @@
 @extends('admin.adminLayout')
 
-@section('title', 'Admin Dashboard')
+@section('title', 'Dashboard')
 
 @section('styles-links')
 @endsection

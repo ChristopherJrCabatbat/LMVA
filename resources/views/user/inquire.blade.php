@@ -1,6 +1,6 @@
 @extends('user.userLayout')
 
-@section('title', 'User Inquire')
+@section('title', 'Inquire')
 
 @section('styles-links')
 
@@ -30,7 +30,7 @@
         <div class="d-flex flex-column">
 
             <div class="table-responsive text-center p-3 bg-light">
-                <form action="{{ route('admin.dermStore') }}" method="POST">
+                <form action="{{ route('user.inquireStore') }}" method="POST">
                     @csrf
                     <h3 class="mb-3"><i class="fa-solid fa-magnifying-glass-arrow-right me-2"></i> Inquire</h3>
 
@@ -39,21 +39,19 @@
                         <label for="derm" class="form-label">Patient Name</label>
                     </div> --}}
                     <div class="mb-3 d-flex flex-column align-items-start">
-                        <label for="derm" class="form-label">Patient Name</label>
-                        <input type="text" name="derm" class="form-control" id="derm"
-                            placeholder="e.g. John Doe">
+                        <label for="patient_name" class="form-label">Patient Name</label>
+                        <input type="text" name="patient_name" class="form-control" id="patient_name" placeholder="e.g. John Doe" required>
                     </div>
 
-                    <div class="mb-3 d-flex flex-column align-items-start">
+                    {{-- <div class="mb-3 d-flex flex-column align-items-start">
                         <label for="derm" class="form-label">Date:</label>
                         <input type="date" name="derm" class="form-control" id="derm" placeholder="">
-                    </div>
+                    </div> --}}
 
                     <div class="mb-3 d-flex flex-column align-items-start">
-                        <label for="derm" class="form-label">Inquiry Details:</label>
-                        <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="Type something here..."></textarea>
+                        <label for="inquiry" class="form-label">Inquiry Details:</label>
+                        <textarea name="inquiry" id="inquiry" cols="30" rows="5" class="form-control" placeholder="Type something here..." required></textarea>
                     </div>
-
 
                     <div class="d-grid my-3">
                         <button class="btn btn-primary" type="submit">Submit Inquiry</button>

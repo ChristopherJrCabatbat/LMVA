@@ -1,6 +1,6 @@
     @extends('user.userLayout')
 
-    @section('title', 'User Dashboard')
+    @section('title', 'Dashboard')
 
     @section('styles-links')
 
@@ -54,12 +54,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($users as $user)
-                                {{-- @forelse ($users as $index => $user) --}}
+                            @forelse ($inquiries as $user)
+                                {{-- @forelse ($inquiries as $index => $user) --}}
                                 <tr class="table-light light-border" style="border: 1px solid #03346E">
                                     {{-- <td>{{ $index + 1 }}</td> --}}
-                                    <td>{{ $user->first_name }}</td>
-                                    <td>GCash</td>
+                                    <td>{{ $user->inquiry }}</td>
+                                    <td>{{ $user->payment_method ?? '--' }}</td>
                                     <td>Replied</td>
                                 </tr>
                             @empty
@@ -71,7 +71,7 @@
                     </table>
 
                     <!-- Include the Pagination Component -->
-                    @include('components.staff-userPagination', ['items' => $users])
+                    @include('components.staff-userPagination', ['items' => $inquiries])
 
                 </div>
 

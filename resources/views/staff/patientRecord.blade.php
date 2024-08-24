@@ -81,7 +81,7 @@
                             </tr>
                         @empty
                             <tr class="table-light">
-                                <td colspan="3" class="text-center">There are no patient records that is not categorized.</td>
+                                <td colspan="3" class="text-center">There are no patient records to be categorized.</td>
                             </tr>
                         @endforelse
                     </tbody>

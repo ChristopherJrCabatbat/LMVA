@@ -48,6 +48,7 @@ class RoleMiddleware
 
                 'user.inquire',
                 'user.inquireAdd',
+                'user.inquireStore',
                 
                 'user.numberInquiries',
             ],

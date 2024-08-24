@@ -1,6 +1,6 @@
 @extends('user.userLayout')
 
-@section('title', 'User Inquire')
+@section('title', 'Number of Inquiries')
 
 @section('styles-links')
 
@@ -49,15 +49,19 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th scope="col">Inquiry Details</th>
+                            <th>Patient Name</th>
+                            <th>Inquiry Details</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @forelse ($users as $user) --}}
-                        @forelse ($users as $index => $user)
+                        {{-- @forelse ($inquiries as $user) --}}
+                        @forelse ($inquiries as $index => $inquiry)
                             <tr class="table-light light-border" style="border: 1px solid #03346E">
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $user->first_name }}</td>
+                                <td>{{ $inquiry->patient_name }}</td>
+                                <td>{{ $inquiry->inquiry }}</td>
+                                <td style="width: 20%">{{ \Carbon\Carbon::parse($inquiry->date)->format('F j, Y') }}</td> {{-- Format date --}}
                             </tr>
                         @empty
                             <tr class="table-light">
@@ -68,7 +72,7 @@
                 </table>
 
                 <!-- Include the Pagination Component -->
-                @include('components.staff-userPagination', ['items' => $users])
+                @include('components.staff-userPagination', ['items' => $inquiries])
 
             </div>
 
