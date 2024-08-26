@@ -42,9 +42,12 @@ class RoleMiddleware
                 'staff.dermShow',
 
                 'staff.inquiry',
+                'staff.inquiryRespond',
+                'staff.inquiryRespondStore',
             ],
             'User'  => [
                 'user.dashboard',
+                'user.dashboardResponse',
 
                 'user.inquire',
                 'user.inquireAdd',

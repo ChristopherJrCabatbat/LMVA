@@ -43,11 +43,6 @@
                         <input type="text" name="patient_name" class="form-control" id="patient_name" placeholder="e.g. John Doe" required>
                     </div>
 
-                    {{-- <div class="mb-3 d-flex flex-column align-items-start">
-                        <label for="derm" class="form-label">Date:</label>
-                        <input type="date" name="derm" class="form-control" id="derm" placeholder="">
-                    </div> --}}
-
                     <div class="mb-3 d-flex flex-column align-items-start">
                         <label for="inquiry" class="form-label">Inquiry Details:</label>
                         <textarea name="inquiry" id="inquiry" cols="30" rows="5" class="form-control" placeholder="Type something here..." required></textarea>

@@ -61,10 +61,45 @@ class StaffController extends Controller
     // Inquiry Controller
     public function inquiry()
     {
-        // $users = User::where('role', 'User')->get();
-        // $users = User::where('role', 'User')->paginate(5);
-        $inquiries = Inquiry::paginate(5);
+        // $inquiries = Inquiry::paginate(5);
+        $inquiries = Inquiry::whereNull('response')->paginate(5);
 
         return view('staff.inquiry', compact('inquiries'));
+    }
+
+    public function inquiryRespond($id)
+    {
+        $inquiry = Inquiry::findOrFail($id); // Fetch the inquiry details by ID
+        return view('staff.inquiryRespond', compact('inquiry'));
+    }
+
+    public function inquiryRespondStore(Request $request, $id)
+    {
+        // Validate the incoming data
+        $request->validate([
+            'response' => 'required|string|max:5000', // Ensure response is provided and is within character limit
+            'response_file' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:2048', // Validate the uploaded file
+        ]);
+
+        // Find the inquiry by ID and update the response field
+        $inquiry = Inquiry::findOrFail($id);
+        $inquiry->response = $request->input('response');
+
+        // Handle file upload
+        if ($request->hasFile('response_file')) {
+            $file = $request->file('response_file');
+            $originalFileName = $file->getClientOriginalName(); // Get the original file name
+
+            // Store the file in the public storage under 'inquiry_responses'
+            $filePath = $file->store('inquiry_responses', 'public');
+
+            // Store the file path and original file name in the database
+            $inquiry->response_file = $filePath;
+            $inquiry->original_file_name = $originalFileName; // Save the original file name
+        }
+
+        $inquiry->save();
+
+        return redirect()->route('staff.inquiry')->with('success', 'Response submitted successfully!');
     }
 }

@@ -16,6 +16,9 @@ class Inquiry extends Model
         'patient_name',
         'date',
         'inquiry',
+        'response',
+        'response_file',
+        'original_file_name',
         'payment_method',
     ];
 }

@@ -19,7 +19,10 @@ return new class extends Migration
             $table->string('patient_name');
             $table->date('date');
             $table->text('inquiry');
-            $table->string('payment_method')->nullable(); // Nullable field
+            $table->text('response')->nullable();
+            $table->string('response_file')->nullable();
+            $table->string('original_file_name')->nullable();
+            $table->string('payment_method')->nullable();
             $table->timestamps();
         });
         

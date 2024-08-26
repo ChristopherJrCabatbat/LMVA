@@ -393,3 +393,58 @@ a.print i.fa-print:hover {
 .pointer {
     cursor: pointer;
 }
+
+
+
+/* Hide the original text when hovered */
+.status-responded {
+    position: relative;
+    text-decoration: none;
+    color: inherit; /* Keep the text color the same as surrounding text */
+}
+
+.status-responded:hover::before {
+    content: "View Response"; /* Replace the original text on hover */
+    color: #0a58ca; /* Hover color */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Hide the original text */
+.status-responded:hover {
+    color: transparent !important; /* Hide the original text */
+}
+/* End */
+
+
+.respond {
+    color: black;
+    text-decoration: none;
+}
+.respond:hover {
+    color: #0a58ca;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+/* Enhanced Animation for Modal Sliding Up */
+.modal.fade .modal-dialog {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform: translateY(100px); /* Start position off-screen from the bottom */
+    opacity: 0; /* Initially invisible */
+}
+
+.modal.show .modal-dialog {
+    transform: translateY(0); /* End position on-screen */
+    opacity: 1; /* Fully visible */
+}
+

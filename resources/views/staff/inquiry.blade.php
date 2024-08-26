@@ -54,8 +54,8 @@
                                 <td>{{ $inquiry->email }}</td>
                                 <td>{{ $inquiry->contact_number }}</td>
                                 <td>{{ $inquiry->inquiry }}</td>
-                                <td>{{ $user->payment_method ?? '--' }}</td>
-                                <td><a href="#" class="text-black pointer" style="text-decoration: none">Reply</a></td>
+                                <td>{{ $inquiry->payment_method ?? '--' }}</td>
+                                <td><a href="{{ route('staff.inquiryRespond', $inquiry->id) }}" class="pointer respond">Respond</a></td>
                             </tr>
                         @empty
                             <tr class="table-light">

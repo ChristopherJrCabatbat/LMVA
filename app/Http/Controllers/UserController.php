@@ -24,6 +24,12 @@ class UserController extends Controller
         return view('user.dashboard', compact('inquiries'));
     }
 
+    public function dashboardResponse($id)
+    {
+        $inquiry = Inquiry::findOrFail($id); // Fetch the inquiry details by ID
+        return view('user.dashboardResponse', compact('inquiry'));
+    }
+
 
     // Inquire Controller
 
@@ -61,7 +67,7 @@ class UserController extends Controller
         ]);
 
         // Redirect or return a response after saving the inquiry
-        return redirect()->route('user.inquire')->with('success', 'Inquiry submitted successfully!');
+        return redirect()->route('user.dashboard')->with('success', 'Inquiry submitted successfully!');
     }
 
     // NumberInquiries Controller

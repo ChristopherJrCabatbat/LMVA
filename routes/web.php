@@ -45,7 +45,7 @@ Route::group([
     Route::get('/dermAdd', [AdminController::class, 'dermAdd'])->name('dermAdd');
     Route::post('/dermStore', [AdminController::class, 'dermStore'])->name('dermStore');
     Route::get('/dermShow/{derm}', [AdminController::class, 'dermShow'])->name('dermShow');
-    
+
     Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
 });
 
@@ -56,7 +56,7 @@ Route::group([
     'as' => 'staff.',
     'middleware' => ['auth', 'verified', 'login'],
 ], function () {
-    
+
     Route::get('/patientRecord', [StaffController::class, 'patientRecord'])->name('patientRecord');
     Route::post('/patientRecordCategorize', [StaffController::class, 'patientRecordCategorize'])->name('patientRecordCategorize');
 
@@ -64,6 +64,8 @@ Route::group([
     Route::get('/dermShow/{derm}', [StaffController::class, 'scanShow'])->name('dermShow');
 
     Route::get('/inquiry', [StaffController::class, 'inquiry'])->name('inquiry');
+    Route::get('/inquiryRespond/{id}', [StaffController::class, 'inquiryRespond'])->name('inquiryRespond');
+    Route::post('/inquiryRespondStore/{id}', [StaffController::class, 'inquiryRespondStore'])->name('inquiryRespondStore');
 });
 
 
@@ -75,11 +77,12 @@ Route::group([
 ], function () {
 
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
-    
+    Route::get('/dashboardResponse/{id}', [UserController::class, 'dashboardResponse'])->name('dashboardResponse');
+
     // Inquiry Routes
     Route::get('/inquire', [UserController::class, 'inquire'])->name('inquire');
     Route::get('/inquireAdd', [UserController::class, 'inquireAdd'])->name('inquireAdd');
     Route::post('/inquireStore', [UserController::class, 'inquireStore'])->name('inquireStore');
-    
+
     Route::get('/numberInquiries', [UserController::class, 'numberInquiries'])->name('numberInquiries');
 });
