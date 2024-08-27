@@ -19,7 +19,7 @@ class UserController extends Controller
 
         // Retrieve only the logged-in user's inquiries from the 'inquiries' table
         $inquiries = Inquiry::where('email', $user->email)
-            ->paginate(3);
+            ->paginate(9);
 
         return view('user.dashboard', compact('inquiries'));
     }

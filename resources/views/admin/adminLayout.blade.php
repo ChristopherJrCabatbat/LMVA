@@ -104,6 +104,7 @@
     <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.js') }}"></script>
 
+    {{-- Only admin files message automatic close --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Automatically close the alert after 5 seconds
@@ -117,6 +118,12 @@
                     }, 500); // Wait for the transition to complete before removing
                 }
             }, 5000); // 5 seconds
+        });
+    </script>
+
+    <script>
+        document.getElementById('contact_number').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/[^0-9+\-() ]/g, '');
         });
     </script>
 

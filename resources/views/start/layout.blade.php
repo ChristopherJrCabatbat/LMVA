@@ -22,12 +22,9 @@
 
     main {
         background-size: cover;
-        /* This already ensures the image covers the entire background */
         background-position: center;
         background-repeat: no-repeat;
-        /* Ensures the image doesn't repeat */
         background-attachment: fixed;
-        /* Makes the background image fixed when scrolling */
         min-height: 97vh;
         padding-top: 10.5vh;
         margin-top: 1rem;
@@ -71,7 +68,8 @@
     @endif --}}
 
     <header>
-        <nav class="navbar fixed-top navbar-expand-lg p-0" style="background-color: white; border-bottom: 1px solid rgb(35, 52, 140);">
+        <nav class="navbar fixed-top navbar-expand-lg p-0"
+            style="background-color: white; border-bottom: 1px solid rgb(35, 52, 140);">
             <div class="container">
                 <a class="navbar-brand logo" href="/">
                     <img src="{{ asset('images/lmva-logo.png') }}" class="img-fluid" style="width: 110px; height: 100%"
@@ -92,7 +90,7 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main-content">
         @yield('main-content')
     </main>
 

@@ -77,8 +77,8 @@
                     
                         {{-- Contact Number --}}
                         <div class="mb-3 form-floating">
-                            <input required type="text" class="form-control" id="contact_number" name="contact_number"
-                                   placeholder="" value="{{ old('contact_number') }}" />
+                            <input required type="tel" class="form-control" id="contact_number" name="contact_number"
+                                   placeholder="" value="{{ old('contact_number') }}" pattern="[0-9+\-() ]*" title="Only numbers and certain characters are allowed" />
                             <label for="exampleInputContactNumber" class="form-label">Contact Number</label>
                         </div>
                     
@@ -88,6 +88,9 @@
                                    class="form-control @error('password') is-invalid @enderror"
                                    aria-describedby="passwordHelpBlock" placeholder="" />
                             <label for="inputPassword" class="form-label">Password</label>
+                            <div id="passwordHelpBlock" class="form-text text-start">
+                                Your password must be at least 8 characters long.
+                            </div>
                             @error('password')
                                 <div class="mt-3 login-error text-start alert alert-danger">
                                     {{ $message }}
@@ -101,9 +104,6 @@
                                    class="form-control @error('password_confirmation') is-invalid @enderror"
                                    aria-describedby="passwordHelpBlock" placeholder="" />
                             <label for="inputPasswordConfirmation" class="form-label">Confirm Password</label>
-                            <div id="passwordHelpBlock" class="form-text text-start">
-                                Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-                            </div>
                             @error('password_confirmation')
                                 <div class="mt-3 login-error text-start alert alert-danger">
                                     {{ $message }}

@@ -1,6 +1,6 @@
 @extends('admin.adminLayout')
 
-@section('title', 'Add DERM')
+@section('title', 'Add Record')
 
 @section('styles-links')
 
@@ -32,7 +32,7 @@
                     <h3 class="mb-3"><i class="fa-solid fa-plus me-2"></i> Add Record</h3>
 
                     <div class="mb-3 d-flex flex-column justify-content-start align-items-start">
-                        <label for="file_details" class="form-label">File Details:</label>
+                        <label for="file_details" class="form-label">File Details (optional):</label>
                         <input type="text" name="file_details" class="form-control" id="file_details" placeholder="Details about the file..." title="This field is not required." autofocus>
                     </div>
 

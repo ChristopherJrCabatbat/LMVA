@@ -5,6 +5,14 @@
 @section('styles-links')
 @endsection
 
+@section('modals')
+    <!-- Full-screen image Modal -->
+    <div id="qrCodeModal" class="qr-code-modal">
+        <span class="close" onclick="closeQRCode()">&times;</span>
+        <img class="qr-code-modal-content" id="qrCodeImage">
+    </div>
+@endsection
+
 @section('sidebar')
     <li class="nav-item">
         <a class="nav-link side-active" href="#"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
@@ -57,12 +65,28 @@
                                 <td class="align-middle">
                                     {{ $record->file_details ?: $record->original_file_name }}
                                 </td>
-                                <td class="py-3">
-                                    <a href="{{ asset('storage/' . $record->file) }}" class="view-file rounded p-2 px-3"
-                                        target="_blank" title="This will open the file to a new tab.">
-                                        {{ $record->original_file_name }}
-                                    </a>
-                                </td>
+                                @php
+                                    $filePath = 'storage/' . $record->file;
+                                    $fileExtension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+                                    $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp'];
+                                @endphp
+
+                                @if (in_array($fileExtension, $imageExtensions))
+                                    <td class="py-2 align-middle">
+                                        <!-- Display the image full screen -->
+                                        <img src="{{ asset($filePath) }}" alt="{{ $record->original_file_name }}"
+                                            height="70" onclick="showQRCode('{{ asset($filePath) }}')"
+                                            style="cursor: pointer;" title="Click to expand.">
+                                    </td>
+                                @else
+                                    <td class="py-3">
+                                        <a href="{{ asset($filePath) }}" class="view-file rounded p-2 px-3" target="_blank"
+                                            title="This will open the file in a new tab.">
+                                            {{ $record->original_file_name }}
+                                        </a>
+                                    </td>
+                                @endif
+
                             </tr>
                         @empty
                             <tr class="table-light">
@@ -71,6 +95,7 @@
                         @endforelse
                     </tbody>
                 </table>
+
 
                 <!-- Include the Pagination Component -->
                 @include('admin.components.pagination', ['items' => $records])

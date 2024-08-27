@@ -14,6 +14,16 @@
             padding-top: 500px;
             margin-top: 900px;
         }
+
+        /* main {
+                    padding-top: 33.4vh;
+                    min-height: auto;
+                } */
+
+        /* .form-container {
+                    padding-top: 3rem;
+                    margin-top: 1rem;
+                } */
     </style>
 
 @endsection
@@ -37,38 +47,48 @@
                 {{-- Email --}}
                 <div class="mb-3 form-floating">
                     <input required type="email" autofocus class="form-control" id="email" name="email"
-                        aria-describedby="emailHelp" placeholder="" />
+                        value="{{ old('email') }}" aria-describedby="emailHelp" placeholder="" />
                     <label for="exampleInputEmail1" class="form-label">Email</label>
                     <div id="emailHelp" class="form-text text-start">
                         We'll never share your email with anyone else.
                     </div>
                 </div>
+                @error('email')
+                    <div class="mt-3 login-error text-start alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
 
                 {{-- Username --}}
                 <div class="mb-3 form-floating">
                     <input required type="text" class="form-control" id="username" name="username"
-                        aria-describedby="emailHelp" placeholder="" />
+                        value="{{ old('username') }}" aria-describedby="emailHelp" placeholder="" />
                     <label for="exampleInputEmail1" class="form-label">Username</label>
                 </div>
+                @error('username')
+                    <div class="mt-3 login-error text-start alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
 
                 {{-- First Name --}}
                 <div class="mb-3 form-floating">
                     <input required type="text" class="form-control" id="first_name" name="first_name"
-                        aria-describedby="emailHelp" placeholder="" />
+                        value="{{ old('first_name') }}" aria-describedby="emailHelp" placeholder="" />
                     <label for="exampleInputEmail1" class="form-label">First Name</label>
                 </div>
 
                 {{-- Last Name --}}
                 <div class="mb-3 form-floating">
                     <input required type="text" class="form-control" id="last_name" name="last_name"
-                        aria-describedby="emailHelp" placeholder="" />
+                        value="{{ old('last_name') }}" aria-describedby="emailHelp" placeholder="" />
                     <label for="exampleInputEmail1" class="form-label">Last Name</label>
                 </div>
 
                 {{-- Contact Number --}}
                 <div class="mb-3 form-floating">
                     <input required type="text" class="form-control" id="contact_number" name="contact_number"
-                        aria-describedby="emailHelp" placeholder="" />
+                        value="{{ old('contact_number') }}" aria-describedby="emailHelp" placeholder="" />
                     <label for="exampleInputEmail1" class="form-label">Contact Number</label>
                 </div>
 
@@ -78,6 +98,11 @@
                         aria-describedby="passwordHelpBlock" placeholder="" />
                     <label for="inputPassword5" class="form-label">Password</label>
                 </div>
+                @error('password')
+                    <div class="mt-3 login-error text-start alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
 
                 {{-- Confirm Password --}}
                 <div class="mb-3 form-floating">
@@ -90,6 +115,11 @@
                         emoji.
                     </div>
                 </div>
+                @error('password_confirmation')
+                    <div class="mt-3 login-error text-start alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
 
                 <div class="d-grid mt-3">
                     <x-primary-button class="btn btn-primary">
@@ -101,9 +131,24 @@
                     </div>
                 </div>
             </form>
+
         </div>
     </div>
 @endsection
 
 @section('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainElement = document.getElementById('main-content');
+            const errors = document.querySelectorAll('.login-error');
+
+            if (errors.length > 0) {
+                const additionalHeight = errors.length * 70; // Adjust this value as needed
+                const additionalPadding = errors.length * 32; // Adjust this value as needed
+
+                mainElement.style.minHeight = `calc(147vh + ${additionalHeight}px)`;
+                mainElement.style.paddingTop = `calc(33.4vh + ${additionalPadding}px)`;
+            }
+        });
+    </script>
 @endsection

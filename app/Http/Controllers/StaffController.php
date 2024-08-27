@@ -17,7 +17,7 @@ class StaffController extends Controller
         $derms = Derm::all();
 
         // Retrieve records with a null category
-        $records = Record::whereNull('category')->paginate(3);
+        $records = Record::whereNull('category')->paginate(4);
 
         return view('staff.patientRecord', compact('records', 'derms'));
     }

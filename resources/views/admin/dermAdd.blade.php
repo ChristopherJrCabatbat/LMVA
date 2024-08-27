@@ -33,8 +33,8 @@
 
                     <div class="mb-3 d-flex align-items-start flex-column">
                         <label for="derm" class="form-label">DERM Name:</label>
-                        <select class="form-select" name="derm" id="derm" aria-label="Default select example">
-                            <option value="" disabled>Select DERM</option>
+                        <select autofocus class="form-select" required name="derm" id="derm" aria-label="Default select example">
+                            <option value="" disabled selected>Select DERM</option>
                             <option value="BS" {{ old('derm') === 'BS' ? 'selected' : '' }}>BS</option>
                             <option value="NC" {{ old('derm') === 'NC' ? 'selected' : '' }}>NC</option>
                             <option value="JC" {{ old('derm') === 'JC' ? 'selected' : '' }}>JC</option>
@@ -54,11 +54,6 @@
                             {{ $message }}
                         </div>
                     @enderror
-
-                    {{-- <div class="mb-3 form-floating">
-                        <input type="text" name="derm" class="form-control" id="derm" placeholder="">
-                        <label for="derm" class="form-label">DERM Name</label>
-                    </div> --}}
 
                     <div class="d-grid my-3">
                         <button class="btn btn-primary dark-blue" type="submit">Generate QR Code</button>

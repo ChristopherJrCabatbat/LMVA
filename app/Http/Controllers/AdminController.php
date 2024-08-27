@@ -77,8 +77,8 @@ class AdminController extends Controller
         $activeTable = $request->query('table', 'staff');
 
         // Paginate the results
-        $staffs = User::where('role', 'Staff')->paginate(4);
-        $users = User::where('role', 'User')->paginate(4);
+        $staffs = User::where('role', 'Staff')->paginate(8);
+        $users = User::where('role', 'User')->paginate(8);
 
         return view('admin.accounts', compact('staffs', 'users', 'activeTable'));
     }
@@ -178,6 +178,8 @@ class AdminController extends Controller
         // Validate the incoming data with a uniqueness constraint
         $request->validate([
             'derm' => 'required|string|max:255|unique:derms,derm', // Ensure 'derm' is unique in the 'derms' table
+        ], [
+            'derm.unique' => "The derm '" . $request->input('derm') . "' has already been added.",
         ]);
 
         // Generate a random QR code
@@ -202,6 +204,7 @@ class AdminController extends Controller
         return redirect()->route('admin.derm')->with('success', 'Derm added successfully!');
     }
 
+
     public function dermShow($derm)
     {
         // Find the DERM by name
@@ -219,7 +222,7 @@ class AdminController extends Controller
     public function reports()
     {
         // $users = User::where('role', 'User')->get();
-        $users = User::where('role', 'User')->paginate(4);
+        $users = User::where('role', 'User')->paginate(9);
         return view('admin.reports', compact('users'));
     }
 }

@@ -404,7 +404,7 @@ a.print i.fa-print:hover {
 }
 
 .status-responded:hover::before {
-    content: "View Response"; /* Replace the original text on hover */
+    content: "View Details"; /* Replace the original text on hover */
     color: #0a58ca; /* Hover color */
     position: absolute;
     top: 0;

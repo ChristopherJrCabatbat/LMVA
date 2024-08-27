@@ -1,4 +1,4 @@
-// QR Print Script
+// QR Show Script
 function showQRCode(src) {
     const modal = document.getElementById("qrCodeModal");
     const modalImg = document.getElementById("qrCodeImage");
@@ -10,6 +10,7 @@ function closeQRCode() {
     document.getElementById("qrCodeModal").style.display = "none";
 }
 
+// QR Print Script
 function printDerm(derm, qrCodeSrc) {
     // Inject content into the print area
     const printContent = document.getElementById("printContent");

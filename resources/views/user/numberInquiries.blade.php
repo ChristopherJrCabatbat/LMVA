@@ -45,6 +45,12 @@
                     </div>
                 </div>
 
+                @php
+                    // Get the current page number and items per page
+                    $currentPage = $inquiries->currentPage();
+                    $perPage = $inquiries->perPage();
+                @endphp
+
                 <table class="table table-bordered table-blue table-info rounded">
                     <thead>
                         <tr>
@@ -58,10 +64,11 @@
                         {{-- @forelse ($inquiries as $user) --}}
                         @forelse ($inquiries as $index => $inquiry)
                             <tr class="table-light light-border" style="border: 1px solid #03346E">
-                                <td>{{ $index + 1 }}</td>
+                                <td>{{ ($currentPage - 1) * $perPage + $index + 1 }}</td>
                                 <td>{{ $inquiry->patient_name }}</td>
                                 <td>{{ $inquiry->inquiry }}</td>
-                                <td style="width: 20%">{{ \Carbon\Carbon::parse($inquiry->date)->format('F j, Y') }}</td> {{-- Format date --}}
+                                <td style="width: 20%">{{ \Carbon\Carbon::parse($inquiry->date)->format('F j, Y') }}</td>
+                                {{-- Format date --}}
                             </tr>
                         @empty
                             <tr class="table-light">

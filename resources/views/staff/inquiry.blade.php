@@ -55,7 +55,7 @@
                                 <td>{{ $inquiry->contact_number }}</td>
                                 <td>{{ $inquiry->inquiry }}</td>
                                 <td>{{ $inquiry->payment_method ?? '--' }}</td>
-                                <td><a href="{{ route('staff.inquiryRespond', $inquiry->id) }}" class="pointer respond">Respond</a></td>
+                                <td><a href="{{ route('staff.inquiryRespond', $inquiry->id) }}" title="Click to respond to this inquiry." class="pointer respond">Respond</a></td>
                             </tr>
                         @empty
                             <tr class="table-light">
