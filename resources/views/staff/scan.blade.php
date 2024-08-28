@@ -3,11 +3,6 @@
 @section('title', 'Derm')
 
 @section('styles-links')
-<style>
-    body {
-        /* overflow: hidden */
-    }
-</style>
 @endsection
 
 @section('modals')
@@ -23,6 +18,22 @@
             <!-- Content will be injected here dynamically -->
         </div>
     </div>
+
+    <!-- Modal for QR Code Scanning -->
+    <div class="modal fade" id="scanModal" tabindex="-1" aria-labelledby="scanModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scanModalLabel">Scan QR Code</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="reader" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('sidebar')
@@ -44,7 +55,11 @@
 
             <div class="table-responsive text-center p-3 bg-light" id="staffTable">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0"><i class="fa-solid fa-notes-medical me-2"></i> Derm</h5>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <h5 class="mb-0"><i class="fa-solid fa-notes-medical me-2"></i> Derm</h5>
+                        <i class="fa-solid fa-camera ms-3 fs-5 border border-primary p-2 rounded pointer camera"
+                            title="Scan through this device." onclick="openScanModal()"></i>
+                    </div>
 
                     <div class="d-flex gap-4">
                         {{-- <form action="dashboardAdd">
@@ -85,8 +100,8 @@
                                         <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="95" height="95"
                                             class="qr-thumbnail" title="Click to view DERM information.">
                                     </a>
-                                    <i class="fa-solid fa-expand pointer" onclick="showQRCode('{{ asset($derm->qr_code) }}')"
-                                        title="Click to expand."></i>
+                                    <i class="fa-solid fa-expand pointer"
+                                        onclick="showQRCode('{{ asset($derm->qr_code) }}')" title="Click to expand."></i>
                                 </td>
 
                                 <!-- Print button -->
@@ -116,4 +131,78 @@
 @endsection
 
 @section('scripts')
+    <script>
+        function openScanModal() {
+            const scanModal = new bootstrap.Modal(document.getElementById('scanModal'));
+            scanModal.show();
+
+            const html5QrCode = new Html5Qrcode("reader");
+
+            scanModal._element.addEventListener('shown.bs.modal', function() {
+                html5QrCode.start({
+                        facingMode: "environment"
+                    }, // Use "environment" for rear camera
+                    {
+                        fps: 10,
+                        qrbox: {
+                            width: 250,
+                            height: 250
+                        }
+                    },
+                    qrCodeMessage => {
+                        alert(`QR Code detected: ${qrCodeMessage}`);
+                        html5QrCode.stop().then(() => {
+                            scanModal.hide();
+                        }).catch(err => console.log('Error stopping the QR Code scanner:', err));
+                    },
+                    errorMessage => {
+                        console.log(`QR Code scan error: ${errorMessage}`);
+                    }
+                ).catch(err => {
+                    console.log(`Unable to start scanning: ${err}`);
+                });
+            });
+
+            scanModal._element.addEventListener('hidden.bs.modal', function() {
+                html5QrCode.stop().catch(err => console.log('Error stopping the QR Code scanner:', err));
+            });
+        }
+    </script>
+
+    {{-- <script>
+        const scanner = new Html5QrcodeScanner('reader', {
+            // Scanner will be initialized in DOM inside element with id of 'reader'
+            qrbox: {
+                width: 250,
+                height: 250,
+            }, // Sets dimensions of scanning box (set relative to reader element width)
+            fps: 20, // Frames per second to attempt a scan
+        });
+
+
+        scanner.render(success, error);
+        // Starts scanner
+
+        function success(result) {
+
+            document.getElementById('result').innerHTML = `
+        <h2>Success!</h2>
+        <p><a href="${result}">${result}</a></p>
+        `;
+            // Prints result as a link inside result element
+
+            scanner.clear();
+            // Clears scanning instance
+
+            document.getElementById('reader').remove();
+            // Removes reader element from DOM since no longer needed
+
+        }
+
+        function error(err) {
+            console.error(err);
+            // Prints any errors to the console
+        }
+    </script> --}}
+
 @endsection
