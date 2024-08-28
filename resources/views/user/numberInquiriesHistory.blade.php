@@ -30,7 +30,12 @@
     <div class="container pt-5 d-flex flex-column gap-5">
         <div class="d-flex flex-column">
 
-            <div class="table-responsive p-4 bg-light mx-auto">
+            <div class="table-responsive p-4 bg-light mx-auto position-relative">
+                <div class="position-absolute top-0 start-0 p-4">
+                    <a href="{{ route('user.numberInquiries') }}">
+                        <i class="fa-solid fa-circle-left fs-2 back"></i>
+                    </a>
+                </div>
                 <h3 class="mb-4 text-center"><i class="fa-solid fa-database me-2"></i> Inquiry History</h3>
             
                 <div class="row justify-content-center">

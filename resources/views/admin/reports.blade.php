@@ -59,8 +59,7 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->contact_number }}</td>
                                 <td>{{ $user->first_name }}</td>
-                                <td>GCash</td>
-                            </tr>
+                                <td>{{ $inquiry->payment_method ?? '--' }}</td>                            </tr>
                         @empty
                             <tr class="table-light">
                                 <td colspan="6" class="text-center">There are no derm.</td>

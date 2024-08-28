@@ -29,7 +29,12 @@
     <div class="container pt-5 d-flex flex-column gap-5">
         <div class="d-flex flex-column">
 
-            <div class="table-responsive text-center p-3 bg-light">
+            <div class="table-responsive text-center p-3 bg-light position-relative">
+                <div class="position-absolute top-0 start-0 p-3">
+                    <a href="{{ route('user.dashboard') }}">
+                        <i class="fa-solid fa-circle-left fs-2 back"></i>
+                    </a>
+                </div>
                 <form action="{{ route('staff.inquiryRespondStore', $inquiry->id) }}" method="POST">
                     @csrf
                     <h3 class="mb-3"><i class="fa-solid fa-reply me-2"></i> Staff's response to your inquiry</h3>

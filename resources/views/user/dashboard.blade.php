@@ -118,15 +118,14 @@
 @endsection
 
 @section('scripts')
-    <script>
-        document.getElementById('paymentForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+    @if ($inquiries->count() > 0)
+        <script>
+            document.getElementById('paymentForm').addEventListener('submit', function(event) {
+                event.preventDefault();
 
-            // Simulate a payment process
-            // For real implementation, you would handle payment submission here
-
-            // Redirect to the dashboardResponse route after payment
-            window.location.href = "{{ route('user.dashboardResponse', $inquiry->id) }}";
-        });
-    </script>
+                // Redirect to the dashboardResponse route after payment
+                window.location.href = "{{ route('user.dashboardResponse', $inquiries->first()->id) }}";
+            });
+        </script>
+    @endif
 @endsection

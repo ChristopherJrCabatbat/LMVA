@@ -100,3 +100,12 @@ main {
 }
 
 /* End Custom Pagination */
+
+
+/* Back Style */
+.back {
+    color: #002046;
+}
+.back:hover {
+    color: #004395;
+}

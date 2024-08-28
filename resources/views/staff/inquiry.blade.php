@@ -23,7 +23,7 @@
     <div class="container pt-5 d-flex flex-column gap-5">
         <div class="d-flex flex-column">
 
-            <div class="table-responsive text-center p-3 bg-light" id="staffTable">
+            <div class="table-responsive text-center p-3 bg-light">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="mb-0"><i class="fa-solid fa-magnifying-glass-arrow-right me-2"></i> Inquiries</h5>
 
@@ -41,21 +41,21 @@
                 <table class="table table-bordered table-blue table-info rounded">
                     <thead>
                         <tr>
-                            <th scope="col">Email</th>
-                            <th scope="col">Contact Number</th>
-                            <th scope="col">Inquiry Details</th>
-                            <th scope="col">Payment Method</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" class="align-middle">Email</th>
+                            <th scope="col" class="align-middle">Contact Number</th>
+                            <th scope="col" class="align-middle">Inquiry Details</th>
+                            <th scope="col" class="align-middle">Payment Method</th>
+                            <th scope="col" class="align-middle">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($inquiries as $inquiry)
                             <tr class="table-light light-border" style="border: 1px solid #03346E">
-                                <td>{{ $inquiry->email }}</td>
-                                <td>{{ $inquiry->contact_number }}</td>
-                                <td>{{ $inquiry->inquiry }}</td>
-                                <td>{{ $inquiry->payment_method ?? '--' }}</td>
-                                <td><a href="{{ route('staff.inquiryRespond', $inquiry->id) }}" title="Click to respond to this inquiry." class="pointer respond">Respond</a></td>
+                                <td class="align-middle">{{ $inquiry->email }}</td>
+                                <td class="align-middle">{{ $inquiry->contact_number }}</td>
+                                <td class="align-middle">{{ $inquiry->inquiry }}</td>
+                                <td class="align-middle">{{ $inquiry->payment_method ?? '--' }}</td>
+                                <td class="align-middle"><a href="{{ route('staff.inquiryRespond', $inquiry->id) }}" title="Click to respond to this inquiry." class="pointer respond">Respond</a></td>
                             </tr>
                         @empty
                             <tr class="table-light">

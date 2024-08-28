@@ -452,3 +452,12 @@ a.print i.fa-print:hover {
     background-color: #0d6efd;
     color: white;
 }
+
+
+/* Back Style */
+.back {
+    color: #0d6efd;
+}
+.back:hover {
+    color: #0B5ED7;
+}

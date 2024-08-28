@@ -25,9 +25,14 @@
     <div class="container pt-5 d-flex flex-column gap-5">
         <div class="d-flex flex-column">
 
-            <div class="table-responsive text-center p-4 bg-light">
+            <div class="table-responsive text-center p-4 bg-light position-relative">
+                <div class="position-absolute top-0 start-0 p-4">
+                    <a href="{{ route('admin.accounts') }}" class="">
+                        <i class="fa-solid fa-circle-left fs-2 back"></i>
+                    </a>
+                </div>
                 <div class="">
-                    <h3 class="mb-3"><i class="fa-solid fa-plus me-2"></i> Add Staff</h3>
+                    <h3 class="mb-4"><i class="fa-solid fa-plus me-2"></i> Add Staff</h3>
 
                     <form method="POST" action="{{ route('admin.accountsAddStaffStore') }}">
                         @csrf

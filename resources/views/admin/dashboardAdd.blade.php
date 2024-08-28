@@ -25,15 +25,23 @@
 @section('main-content')
     <div class="container pt-5 d-flex flex-column gap-5">
         <div class="d-flex flex-column">
+            
+            <div class="table-responsive text-center p-3 bg-light position-relative">
+                
+                <div class="position-absolute top-0 start-0 p-3">
+                    <a href="{{ route('admin.dashboard') }}" class="">
+                        <i class="fa-solid fa-circle-left fs-2 back"></i>
+                    </a>
+                </div>
 
-            <div class="table-responsive text-center p-3 bg-light">
                 <form action="{{ route('admin.dashboardStore') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <h3 class="mb-3"><i class="fa-solid fa-plus me-2"></i> Add Record</h3>
 
                     <div class="mb-3 d-flex flex-column justify-content-start align-items-start">
                         <label for="file_details" class="form-label">File Details (optional):</label>
-                        <input type="text" name="file_details" class="form-control" id="file_details" placeholder="Details about the file..." title="This field is not required." autofocus>
+                        <input type="text" name="file_details" class="form-control" id="file_details"
+                            placeholder="Details about the file..." title="This field is not required." autofocus>
                     </div>
 
                     <div class="mb-3 d-flex flex-column justify-content-start align-items-start">
@@ -43,12 +51,12 @@
                     <div class="d-grid my-3">
                         <button class="btn btn-primary dark-blue" type="submit">Submit Record</button>
                     </div>
-
                 </form>
             </div>
 
         </div>
     </div>
+
 @endsection
 
 @section('scripts')
