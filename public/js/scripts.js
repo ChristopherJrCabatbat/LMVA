@@ -28,3 +28,21 @@ function printDerm(derm, qrCodeSrc) {
     // Hide the print area after printing
     printArea.style.display = "none";
 }
+
+// Account Delete
+function confirmDelete(userId) {
+    if (confirm("Are you sure you want to delete this account?")) {
+        document.getElementById("delete-form-" + userId).submit();
+    }
+}
+
+// Accont View
+function fetchAccountDetails(id) {
+    // Fetch account details via AJAX
+    fetch(`/accountShow/${id}`)
+        .then(response => response.text())
+        .then(data => {
+            // Insert the HTML content into the modal body
+            document.querySelector('#accountModal .modal-body').innerHTML = data;
+        });
+}

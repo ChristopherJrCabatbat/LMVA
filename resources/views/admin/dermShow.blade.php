@@ -41,11 +41,17 @@
         <div class="d-flex flex-column">
 
             <div class="table-responsive text-center p-3 bg-light position-relative">
-                <div class="position-absolute top-0 start-0 p-3">
+                {{-- <div class="position-absolute top-0 start-0 p-3">
                     <a href="{{ route('admin.derm') }}">
                         <i class="fa-solid fa-circle-left fs-2 back"></i>
                     </a>
+                </div> --}}
+                <div class="position-absolute top-0 start-0 p-3">
+                    <a href="{{ route('admin.derm', ['page' => request()->input('page', 1)]) }}">
+                        <i class="fa-solid fa-circle-left fs-2 back"></i>
+                    </a>
                 </div>
+                
                 <div class="d-flex justify-content-center align-items-ce    nter mb-3">
                     <h4 class="mb-0"><i class="fa-solid fa-notes-medical me-2"></i> {{ $dermRecord->derm }} Records</h4>
                 </div>

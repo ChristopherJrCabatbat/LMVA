@@ -26,6 +26,11 @@ class RoleMiddleware
                 'admin.accountsAddStaffStore',
                 'admin.accountsAddUser',
                 'admin.accountsAddUserStore',
+                'admin.accountsStaffShow',
+                'admin.accountsUserShow',
+                'admin.accountDestroy',
+                'admin.accountsEdit',
+                'admin.accountsUpdate',
 
                 'admin.derm',
                 'admin.dermAdd',

@@ -41,6 +41,13 @@ Route::group([
     Route::get('/accountsAddUser', [AdminController::class, 'accountsAddUser'])->name('accountsAddUser');
     Route::post('/accountsAddUserStore', [AdminController::class, 'accountsAddUserStore'])->name('accountsAddUserStore');
 
+    Route::get('accountsUserShow/{id}', [AdminController::class, 'accountsUserShow'])->name('accountsUserShow');
+    Route::get('accountsStaffShow/{id}', [AdminController::class, 'accountsStaffShow'])->name('accountsStaffShow');
+    Route::get('accountsEdit/{id}/edit', [AdminController::class, 'accountsEdit'])->name('accountsEdit');
+    Route::put('accountsUpdate/{id}', [AdminController::class, 'accountsUpdate'])->name('accountsUpdate');
+    Route::delete('/accountDestroy/{id}', [AdminController::class, 'accountDestroy'])->name('accountDestroy');
+
+
     Route::get('/derm', [AdminController::class, 'derm'])->name('derm');
     Route::get('/dermAdd', [AdminController::class, 'dermAdd'])->name('dermAdd');
     Route::post('/dermStore', [AdminController::class, 'dermStore'])->name('dermStore');

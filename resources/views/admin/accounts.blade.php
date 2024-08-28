@@ -1,8 +1,11 @@
 @extends('admin.adminLayout')
 
-@section('title', 'Admin Accounts')
+@section('title', 'Accounts')
 
 @section('styles-links')
+@endsection
+
+@section('modals')
 @endsection
 
 @section('sidebar')
@@ -78,20 +81,22 @@
                                         </button>
                                         <ul class="dropdown-menu-custom dropdown-menu-end">
                                             <li>
-                                                <a class="dropdown-item" href="employee/{{ $staff->id }}">
+                                                <a class="dropdown-item" href="{{ route('admin.accountsStaffShow', $staff->id) }}">
                                                     <i class="fas fa-eye" style="color: green"></i> View
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="employee/{{ $staff->id }}/edit">
+                                                <a class="dropdown-item" href="{{ route('admin.accountsEdit', $staff->id) }}">
                                                     <i class="fas fa-pen-to-square" style="color: blue"></i> Edit
                                                 </a>
                                             </li>
                                             <li>
-                                                <form action="employee/{{ $staff->id }}" method="POST">
+                                                <form action="{{ route('admin.accountDestroy', $staff->id) }}"
+                                                    method="POST" id="delete-form-{{ $staff->id }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="dropdown-item">
+                                                    <button type="button" class="dropdown-item"
+                                                        onclick="confirmDelete({{ $staff->id }})">
                                                         <i class="fa-solid fa-trash" style="color: red"></i> Delete
                                                     </button>
                                                 </form>
@@ -166,20 +171,22 @@
                                         </button>
                                         <ul class="dropdown-menu-custom dropdown-menu-end">
                                             <li>
-                                                <a class="dropdown-item" href="employee/{{ $user->id }}">
+                                                <a class="dropdown-item" href="{{ route('admin.accountsUserShow', $user->id) }}">
                                                     <i class="fas fa-eye" style="color: green"></i> View
                                                 </a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" href="employee/{{ $user->id }}/edit">
+                                                <a class="dropdown-item" href="{{ route('admin.accountsEdit', $user->id) }}">
                                                     <i class="fas fa-pen-to-square" style="color: blue"></i> Edit
                                                 </a>
                                             </li>
                                             <li>
-                                                <form action="employee/{{ $user->id }}" method="POST">
+                                                <form action="{{ route('admin.accountDestroy', $user->id) }}"
+                                                    method="POST" id="delete-form-{{ $user->id }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="dropdown-item">
+                                                    <button type="button" class="dropdown-item"
+                                                        onclick="confirmDelete({{ $user->id }})">
                                                         <i class="fa-solid fa-trash" style="color: red"></i> Delete
                                                     </button>
                                                 </form>

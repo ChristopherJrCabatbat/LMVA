@@ -61,7 +61,7 @@
                         </div>
                     @enderror
 
-                    <div class="d-grid my-3">
+                    <div class="d-grid my-2">
                         <button class="btn btn-primary dark-blue" type="submit">Generate QR Code</button>
                     </div>
 

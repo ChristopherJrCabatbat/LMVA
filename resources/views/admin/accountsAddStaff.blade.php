@@ -45,11 +45,11 @@
                             <div id="emailHelp" class="form-text text-start">
                                 We'll never share your email with anyone else.
                             </div>
-                            @error('email')
-                                <div class="mt-3 login-error text-start alert alert-danger">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                                @error('email')
+                                    <div class="mt-3 login-error text-start alert alert-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                         </div>
 
                         {{-- Username --}}

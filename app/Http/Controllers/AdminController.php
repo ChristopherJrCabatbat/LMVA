@@ -157,6 +157,71 @@ class AdminController extends Controller
         // return redirect('user/dashboard');
     }
 
+    public function accountsUserShow($id)
+    {
+        // Fetch the staff member details
+        $users = User::findOrFail($id);
+
+        return view('admin.accountsUserShow', compact('users'));
+    }
+    public function accountsStaffShow($id)
+    {
+        // Fetch the staff member details
+        $users = User::findOrFail($id);
+
+        return view('admin.accountsStaffShow', compact('users'));
+    }
+
+    public function accountsEdit($id)
+    {
+        // Fetch the staff member details
+        $users = User::findOrFail($id);
+
+        return view('admin.accountsEdit', compact('users'));
+    }
+
+    public function accountsUpdate(Request $request, $id)
+    {
+        // Validate the request
+        $request->validate([
+            'username' => 'required|unique:users,username,' . $id,
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'contact_number' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'role' => 'required',
+            'password' => 'nullable|min:8|confirmed', // Add password validation
+        ]);
+
+        // Fetch the staff member
+        $staff = User::findOrFail($id);
+
+        // Update the staff member's details except password
+        $staff->update($request->except('password', 'password_confirmation'));
+
+        // Update the password if it was provided
+        if ($request->filled('password')) {
+            $staff->update([
+                'password' => Hash::make($request->input('password')),
+            ]);
+        }
+
+        return redirect()->route('admin.accounts')->with('success', 'Account updated successfully.');
+    }
+
+
+    public function accountDestroy($id)
+    {
+        // Find the user by ID
+        $user = User::findOrFail($id);
+
+        // Delete the user
+        $user->delete();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Accont deleted successfully.');
+    }
+
 
 
 

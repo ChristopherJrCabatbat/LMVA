@@ -14,16 +14,6 @@
             padding-top: 500px;
             margin-top: 900px;
         }
-
-        /* main {
-                    padding-top: 33.4vh;
-                    min-height: auto;
-                } */
-
-        /* .form-container {
-                    padding-top: 3rem;
-                    margin-top: 1rem;
-                } */
     </style>
 
 @endsection

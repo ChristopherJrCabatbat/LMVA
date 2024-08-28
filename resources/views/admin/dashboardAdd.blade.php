@@ -26,9 +26,9 @@
     <div class="container pt-5 d-flex flex-column gap-5">
         <div class="d-flex flex-column">
             
-            <div class="table-responsive text-center p-3 bg-light position-relative">
+            <div class="table-responsive text-center p-4 bg-light position-relative">
                 
-                <div class="position-absolute top-0 start-0 p-3">
+                <div class="position-absolute top-0 start-0 p-4">
                     <a href="{{ route('admin.dashboard') }}" class="">
                         <i class="fa-solid fa-circle-left fs-2 back"></i>
                     </a>
@@ -48,7 +48,7 @@
                         <label for="file" class="form-label">Click to attach Record:</label>
                         <input type="file" name="file" class="form-control" id="file" placeholder="" required>
                     </div>
-                    <div class="d-grid my-3">
+                    <div class="d-grid my-2">
                         <button class="btn btn-primary dark-blue" type="submit">Submit Record</button>
                     </div>
                 </form>
