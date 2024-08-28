@@ -37,7 +37,7 @@
                     </a>
                 </div>
                 <h3 class="mb-4 text-center"><i class="fa-solid fa-database me-2"></i> Inquiry History</h3>
-            
+
                 <div class="row justify-content-center">
                     <!-- Left Column -->
                     <div class="col-md-6">
@@ -46,26 +46,27 @@
                             <label class="form-label fw-bold">Username:</label>
                             <p class="form-control-plaintext">{{ $inquiry->username }}</p>
                         </div>
-            
+
                         <!-- Contact Number -->
                         <div class="mb-3 d-flex flex-column align-items-start">
                             <label class="form-label fw-bold">Contact Number:</label>
                             <p class="form-control-plaintext">{{ $inquiry->contact_number }}</p>
                         </div>
-            
+
                         <!-- Email -->
                         <div class="mb-3 d-flex flex-column align-items-start">
                             <label class="form-label fw-bold">Email:</label>
                             <p class="form-control-plaintext">{{ $inquiry->email }}</p>
                         </div>
-            
+
                         <!-- Date -->
                         <div class="mb-3 d-flex flex-column align-items-start">
                             <label class="form-label fw-bold">Date:</label>
-                            <p class="form-control-plaintext">{{ \Carbon\Carbon::parse($inquiry->date)->format('F j, Y') }}</p>
+                            <p class="form-control-plaintext">{{ \Carbon\Carbon::parse($inquiry->date)->format('F j, Y') }}
+                            </p>
                         </div>
                     </div>
-            
+
                     <!-- Right Column -->
                     <div class="col-md-6">
                         <!-- Payment Method -->
@@ -73,48 +74,64 @@
                             <label class="form-label fw-bold">Payment Method:</label>
                             <p class="form-control-plaintext">{{ $inquiry->payment_method ?? '--' }}</p>
                         </div>
-            
+
                         <!-- Patient Name -->
                         <div class="mb-3 d-flex flex-column align-items-start">
                             <label class="form-label fw-bold">Patient Name:</label>
                             <p class="form-control-plaintext">{{ $inquiry->patient_name }}</p>
                         </div>
-            
+
                         <!-- Attached File -->
                         <div class="mb-3 d-flex flex-column align-items-start">
                             <label class="form-label fw-bold">Attached File:</label>
                             @if ($inquiry->response_file)
-                                <a href="{{ asset('storage/' . $inquiry->response_file) }}" class="view-file rounded p-2 px-3"
-                                   title="This will open the file in a new tab." target="_blank">
-                                   {{ basename($inquiry->original_file_name) }}
-                                </a>
+                                @php
+                                    $filePath = 'storage/' . $inquiry->response_file;
+                                    $fileExtension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
+                                    $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp'];
+                                @endphp
+                        
+                                @if (in_array($fileExtension, $imageExtensions))
+                                    <!-- Display the image full screen -->
+                                    <img src="{{ asset($filePath) }}" alt="{{ $inquiry->original_file_name }}"
+                                        height="70" onclick="showQRCode('{{ asset($filePath) }}')"
+                                        style="cursor: pointer;" title="Click to expand.">
+                                @else
+                                    <a href="{{ asset($filePath) }}" class="view-file rounded p-2 px-3" target="_blank"
+                                        title="This will open the file in a new tab.">
+                                        {{ basename($inquiry->original_file_name) }}
+                                    </a>
+                                @endif
                             @else
                                 <p class="form-control-plaintext">No file attached.</p>
                             @endif
                         </div>
+                        
+
                     </div>
                 </div>
-            
+
                 <!-- Full-Width Row for Inquiry Details -->
                 <div class="row mt-2">
                     <div class="col-12">
                         <div class="mb-3 d-flex flex-column align-items-start">
                             <label class="form-label fw-bold">Inquiry Details:</label>
-                            <p class="form-control-plaintext">{{ $inquiry->inquiry }}</p>
+                            <p class="form-control-plaintext">{!! nl2br(e($inquiry->inquiry)) !!}</p>
                         </div>
                     </div>
                 </div>
-            
+
                 <!-- Full-Width Row for Response -->
                 <div class="row">
                     <div class="col-12">
-                        <div class="mb-3 d-flex flex-column align-items-start">
+                        <div class="d-flex flex-column align-items-start">
                             <label class="form-label fw-bold">Response:</label>
-                            <p class="form-control-plaintext">{{ $inquiry->response ?? 'No response yet.' }}</p>
+
+                            <p class="form-control-plaintext">{!! nl2br(e($inquiry->response ?? 'No response yet.')) !!}</p>
                         </div>
                     </div>
                 </div>
-            </div>           
+            </div>
 
         </div>
     </div>

@@ -7,6 +7,7 @@
 @endsection
 
 @section('modals')
+
     <!-- Payment Modal -->
     <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -35,6 +36,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('sidebar')
@@ -78,22 +80,22 @@
                 <table class="table table-bordered table-blue table-info rounded">
                     <thead>
                         <tr>
-                            <th scope="col">Inquiry Details</th>
-                            <th scope="col">Payment Method</th>
-                            <th scope="col">Status</th>
+                            <th scope="col" class="align-middle">Inquiry Details</th>
+                            <th scope="col" class="align-middle">Payment Method</th>
+                            <th scope="col" class="align-middle">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($inquiries as $inquiry)
                             <tr class="table-light light-border" style="border: 1px solid #03346E">
-                                <td>{{ $inquiry->inquiry }}</td>
-                                <td>{{ $inquiry->payment_method ?? '--' }}</td>
-                                <td>
+                                <td class="align-middle">{{ $inquiry->inquiry }}</td>
+                                <td class="align-middle">{{ $inquiry->payment_method ?? '--' }}</td>
+                                <td class="align-middle">
                                     @if (is_null($inquiry->response))
                                         Inquiry Sent
                                     @else
-                                        <a href="#" class="status-responded" data-bs-toggle="modal"
-                                            data-bs-target="#paymentModal">
+                                        <a href="#" class="status-responded fw-bold" data-bs-toggle="modal"
+                                            data-bs-target="#paymentModal" data-inquiry-id="{{ $inquiry->id }}">
                                             <i class="fa-solid fa-circle-exclamation me-2"></i>Staff Responded
                                         </a>
                                     @endif
@@ -104,6 +106,7 @@
                                 <td colspan="3" class="text-center">There are no inquiries.</td>
                             </tr>
                         @endforelse
+
                     </tbody>
                 </table>
 
@@ -120,12 +123,28 @@
 @section('scripts')
     @if ($inquiries->count() > 0)
         <script>
-            document.getElementById('paymentForm').addEventListener('submit', function(event) {
-                event.preventDefault();
+            document.addEventListener('DOMContentLoaded', function() {
+                let inquiryId;
 
-                // Redirect to the dashboardResponse route after payment
-                window.location.href = "{{ route('user.dashboardResponse', $inquiries->first()->id) }}";
+                // Capture the inquiry ID when the modal is triggered
+                document.querySelectorAll('.status-responded').forEach(function(element) {
+                    element.addEventListener('click', function() {
+                        inquiryId = this.getAttribute('data-inquiry-id');
+                    });
+                });
+
+                // Handle form submission
+                document.getElementById('paymentForm').addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    // Redirect to the dashboardResponse route with the correct inquiry ID
+                    if (inquiryId) {
+                        window.location.href = "{{ url('user/dashboardResponse') }}/" + inquiryId;
+                    }
+                });
             });
         </script>
     @endif
+
+
 @endsection
