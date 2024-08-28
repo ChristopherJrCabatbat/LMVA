@@ -113,7 +113,7 @@ select {
 /* Table */
 
 .table-responsive {
-    min-width: 400px;
+    width: 100%;
     overflow: hidden;
     border: 1px solid #03346e;
 }
@@ -124,6 +124,7 @@ select {
     position: relative;
     border: 1px solid #03346e;
 }
+
 
 tbody tr.light-border {
     border: 1px solid #03346E

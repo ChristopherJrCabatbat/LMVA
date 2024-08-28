@@ -54,6 +54,7 @@ class RoleMiddleware
                 'user.inquireStore',
                 
                 'user.numberInquiries',
+                'user.numberInquiriesHistory',
             ],
         ];
 

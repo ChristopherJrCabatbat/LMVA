@@ -57,6 +57,7 @@
                             <th>No.</th>
                             <th>Patient Name</th>
                             <th>Inquiry Details</th>
+                            <th>Inquiry History</th>
                             <th>Date</th>
                         </tr>
                     </thead>
@@ -67,6 +68,7 @@
                                 <td>{{ ($currentPage - 1) * $perPage + $index + 1 }}</td>
                                 <td>{{ $inquiry->patient_name }}</td>
                                 <td>{{ $inquiry->inquiry }}</td>
+                                <td><a href="{{ route('user.numberInquiriesHistory', $inquiry->id) }}"><i class="me-2 fa-solid fa-eye pointer" style="color: #0d6efd;" title="View your inquiry history."></i></a></td>
                                 <td style="width: 20%">{{ \Carbon\Carbon::parse($inquiry->date)->format('F j, Y') }}</td>
                                 {{-- Format date --}}
                             </tr>

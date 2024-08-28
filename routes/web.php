@@ -85,4 +85,5 @@ Route::group([
     Route::post('/inquireStore', [UserController::class, 'inquireStore'])->name('inquireStore');
 
     Route::get('/numberInquiries', [UserController::class, 'numberInquiries'])->name('numberInquiries');
+    Route::get('/numberInquiriesHistory/{id}', [UserController::class, 'numberInquiriesHistory'])->name('numberInquiriesHistory');
 });
