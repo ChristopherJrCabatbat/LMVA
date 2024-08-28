@@ -3,6 +3,11 @@
 @section('title', 'Derm')
 
 @section('styles-links')
+    <style>
+        #scanModal {
+            --bs-modal-margin: 0px !important;
+        }
+    </style>
 @endsection
 
 @section('modals')
@@ -95,8 +100,8 @@
                                     <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="100" height="100"
                                         class="qr-thumbnail" onclick="showQRCode('{{ asset($derm->qr_code) }}')" title="Click to expand.">
                                 </td> --}}
-                                <td class="align-middle d-flex flex-column">
-                                    <a href="{{ route('staff.dermShow', ['derm' => $derm->derm]) }}">
+                                <td class="align-middle d-flex flex-column justify-content-center align-items-center">
+                                    <a href="{{ route('staff.dermShow', ['derm' => $derm->derm]) }}" style="width: 23%;">
                                         <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="95" height="95"
                                             class="qr-thumbnail" title="Click to view DERM information.">
                                     </a>
@@ -138,6 +143,7 @@
 
             const html5QrCode = new Html5Qrcode("reader");
 
+            // Start the QR code scanning when the modal is shown
             scanModal._element.addEventListener('shown.bs.modal', function() {
                 html5QrCode.start({
                         facingMode: "environment"
@@ -163,11 +169,13 @@
                 });
             });
 
+            // Stop the QR code scanning when the modal is hidden
             scanModal._element.addEventListener('hidden.bs.modal', function() {
                 html5QrCode.stop().catch(err => console.log('Error stopping the QR Code scanner:', err));
             });
         }
     </script>
+
 
     {{-- <script>
         const scanner = new Html5QrcodeScanner('reader', {
