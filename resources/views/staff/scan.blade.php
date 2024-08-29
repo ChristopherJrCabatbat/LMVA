@@ -11,6 +11,7 @@
 @endsection
 
 @section('modals')
+
     <!-- Full-screen QR Code Modal -->
     <div id="qrCodeModal" class="qr-code-modal">
         <span class="close" onclick="closeQRCode()">&times;</span>
@@ -95,13 +96,8 @@
                                 <!-- Display the DERM name -->
                                 <td class="align-middle fs-4">{{ $derm->derm }}</td>
 
-                                <!-- Display the QR code image -->
-                                {{-- <td class="align-middle">
-                                    <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="100" height="100"
-                                        class="qr-thumbnail" onclick="showQRCode('{{ asset($derm->qr_code) }}')" title="Click to expand.">
-                                </td> --}}
                                 <td class="align-middle d-flex flex-column justify-content-center align-items-center">
-                                    <a href="{{ route('staff.dermShow', ['derm' => $derm->derm]) }}" style="width: 23%;">
+                                    <a href="{{ route('staff.dermShow', ['derm' => $derm->derm]) }}">
                                         <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="95" height="95"
                                             class="qr-thumbnail" title="Click to view DERM information.">
                                     </a>
@@ -136,6 +132,7 @@
 @endsection
 
 @section('scripts')
+
     <script>
         function openScanModal() {
             const scanModal = new bootstrap.Modal(document.getElementById('scanModal'));
@@ -175,42 +172,5 @@
             });
         }
     </script>
-
-
-    {{-- <script>
-        const scanner = new Html5QrcodeScanner('reader', {
-            // Scanner will be initialized in DOM inside element with id of 'reader'
-            qrbox: {
-                width: 250,
-                height: 250,
-            }, // Sets dimensions of scanning box (set relative to reader element width)
-            fps: 20, // Frames per second to attempt a scan
-        });
-
-
-        scanner.render(success, error);
-        // Starts scanner
-
-        function success(result) {
-
-            document.getElementById('result').innerHTML = `
-        <h2>Success!</h2>
-        <p><a href="${result}">${result}</a></p>
-        `;
-            // Prints result as a link inside result element
-
-            scanner.clear();
-            // Clears scanning instance
-
-            document.getElementById('reader').remove();
-            // Removes reader element from DOM since no longer needed
-
-        }
-
-        function error(err) {
-            console.error(err);
-            // Prints any errors to the console
-        }
-    </script> --}}
 
 @endsection

@@ -190,24 +190,31 @@ class AdminController extends Controller
             'contact_number' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'role' => 'required',
-            'password' => 'nullable|min:8|confirmed', // Add password validation
+            'password' => 'nullable|confirmed|min:8', // Ensure password is nullable, confirmed, and has a minimum length
         ]);
 
         // Fetch the staff member
         $staff = User::findOrFail($id);
 
-        // Update the staff member's details except password
-        $staff->update($request->except('password', 'password_confirmation'));
+        // Update the staff member's details
+        $staff->first_name = $request->input('first_name');
+        $staff->last_name = $request->input('last_name');
+        $staff->username = $request->input('username');
+        $staff->contact_number = $request->input('contact_number');
+        $staff->email = $request->input('email');
+        $staff->role = $request->input('role');
 
-        // Update the password if it was provided
+        // Check if password is provided and needs to be updated
         if ($request->filled('password')) {
-            $staff->update([
-                'password' => Hash::make($request->input('password')),
-            ]);
+            $staff->password = Hash::make($request->input('password'));
         }
 
-        return redirect()->route('admin.accounts')->with('success', 'Account updated successfully.');
+        // Save the updated details
+        $staff->save();
+
+        return redirect()->route('admin.accounts')->with('success', 'Employee details updated successfully.');
     }
+
 
 
     public function accountDestroy($id)
