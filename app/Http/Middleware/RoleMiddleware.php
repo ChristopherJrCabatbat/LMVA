@@ -20,6 +20,7 @@ class RoleMiddleware
                 'admin.dashboard',
                 'admin.dashboardAdd',
                 'admin.dashboardStore',
+                'admin.dashboardSearch',
 
                 'admin.accounts',
                 'admin.accountsAddStaff',
@@ -31,6 +32,8 @@ class RoleMiddleware
                 'admin.accountDestroy',
                 'admin.accountsEdit',
                 'admin.accountsUpdate',
+                'admin.accountsStaffSearch',
+                'admin.accountsUserSearch',
 
                 'admin.derm',
                 'admin.dermAdd',

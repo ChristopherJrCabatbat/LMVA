@@ -41,64 +41,24 @@
                         <form action="dashboardAdd">
                             <button class="btn dark-blue" type="submit"><i class="fas fa-plus"></i> Add Record</button>
                         </form>
-                        <form action="" class="d-flex">
-                            <input type="search" class="form-control-custom rounded-start-custom"
-                                placeholder="Search something...">
-                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i
-                                    class="fa-solid fa-magnifying-glass"></i></button>
+
+                        {{-- Live Search --}}
+                        <form action="" class="d-flex position-relative">
+                            <button class="btn-custom" type="button">
+                                <i class="ms-1 fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            <input type="search" id="search-input" class="form-control-custom rounded"
+                                placeholder="Search something..." autocomplete="off">
                         </form>
+
 
                     </div>
                 </div>
 
-                <table class="table table-bordered bg-dark rounded" data-bs-theme="dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">File Details</th>
-                            <th scope="col">File</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($records as $record)
-                            <tr class="table-light light-border">
-                                <!-- Display the file details or fallback to the original file name -->
-                                <td class="align-middle">
-                                    {{ $record->file_details ?: $record->original_file_name }}
-                                </td>
-                                @php
-                                    $filePath = 'storage/' . $record->file;
-                                    $fileExtension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
-                                    $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp'];
-                                @endphp
-
-                                @if (in_array($fileExtension, $imageExtensions))
-                                    <td class="py-2 align-middle">
-                                        <!-- Display the image full screen -->
-                                        <img src="{{ asset($filePath) }}" alt="{{ $record->original_file_name }}"
-                                            height="70" onclick="showQRCode('{{ asset($filePath) }}')"
-                                            style="cursor: pointer;" title="Click to expand.">
-                                    </td>
-                                @else
-                                    <td class="py-3">
-                                        <a href="{{ asset($filePath) }}" class="view-file rounded p-2 px-3" target="_blank"
-                                            title="This will open the file in a new tab.">
-                                            {{ $record->original_file_name }}
-                                        </a>
-                                    </td>
-                                @endif
-
-                            </tr>
-                        @empty
-                            <tr class="table-light">
-                                <td colspan="2" class="text-center table-light">There are no records.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-
-
-                <!-- Include the Pagination Component -->
-                @include('admin.components.pagination', ['items' => $records])
+                {{-- Display Search Results --}}
+                <div id="search-results">
+                    @include('admin.tables.dashboard_table', ['records' => $records])
+                </div>
 
             </div>
 
@@ -107,4 +67,66 @@
 @endsection
 
 @section('scripts')
+
+    {{-- Search Script --}}
+    <script>
+        let debounceTimer;
+
+        function debounce(func, delay) {
+            return function(...args) {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        function performSearch(query) {
+            fetch(`{{ route('admin.dashboardSearch') }}?query=${query}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('search-results').innerHTML = html;
+                });
+        }
+
+        document.getElementById('search-input').addEventListener('input', debounce(function() {
+            let query = this.value.trim();
+            if (query.length > 0) {
+                performSearch(query);
+            } else {
+                // Optional: Handle the case when the search box is empty
+                // You may need to ensure the server-side handles an empty query correctly
+                fetch(`{{ route('admin.dashboardSearch') }}?query=`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('search-results').innerHTML = html;
+                    });
+            }
+        }, 500)); // Adjust the debounce delay as needed
+
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.pagination a')) {
+                e.preventDefault();
+                let page = e.target.getAttribute('href').split('page=')[1];
+                let query = document.getElementById('search-input').value.trim();
+                fetch(`{{ route('admin.dashboardSearch') }}?query=${query}&page=${page}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('search-results').innerHTML = html;
+                    });
+            }
+        });
+    </script>
+
+
 @endsection

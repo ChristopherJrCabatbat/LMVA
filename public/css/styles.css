@@ -218,7 +218,9 @@ li.profile-logout button.dropdown-item:active {
     width: 100%;
     height: calc(1.5em + 0.75rem + 2px);
     padding: 0.375rem 0.75rem;
+    padding-left: 2.5rem;
     font-size: 1rem;
+    position: relative;
     font-weight: 400;
     line-height: 1.5;
     color: #212529;
@@ -239,36 +241,20 @@ li.profile-logout button.dropdown-item:active {
 }
 
 .btn-custom {
-    display: inline-block;
-    font-weight: 400;
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    font-size: 1.25rem;
     color: #212529;
-    text-align: center;
-    vertical-align: middle;
     cursor: pointer;
-    user-select: none;
-    background-color: #002046;
-    border: 1px solid #002046;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: 0;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    z-index: 1;
 }
 
-.btn-custom:hover {
-    background-color: #002046;
-    /* border-color: #dae0e5; */
-}
-
-.btn-custom:focus {
-    color: #212529;
-    background-color: #e2e6ea;
-    /* border-color: #dae0e5; */
-    box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
-}
-
-.rounded-start-custom {
+/* .rounded-start-custom {
     border-top-left-radius: 0.375rem;
     border-bottom-left-radius: 0.375rem;
 }
@@ -276,7 +262,8 @@ li.profile-logout button.dropdown-item:active {
 .rounded-end-custom {
     border-top-right-radius: 0.375rem;
     border-bottom-right-radius: 0.375rem;
-}
+} */
+ 
 
 /* File Link Styling */
 .view-file {

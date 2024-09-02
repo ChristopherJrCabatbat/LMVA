@@ -31,11 +31,16 @@ Route::group([
     'middleware' => ['auth', 'verified', 'login'],
 ], function () {
 
+    // Dashboard Controller
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboardSearch', [AdminController::class, 'dashboardSearch'])->name('dashboardSearch');
     Route::get('/dashboardAdd', [AdminController::class, 'dashboardAdd'])->name('dashboardAdd');
     Route::post('/dashboardStore', [AdminController::class, 'dashboardStore'])->name('dashboardStore');
 
+    // Accounts Controller
     Route::get('/accounts', [AdminController::class, 'accounts'])->name('accounts');
+    Route::get('/accountsStaffSearch', [AdminController::class, 'accountsStaffSearch'])->name('accountsStaffSearch');
+    Route::get('/accountsUserSearch', [AdminController::class, 'accountsUserSearch'])->name('accountsUserSearch');
     Route::get('/accountsAddStaff', [AdminController::class, 'accountsAddStaff'])->name('accountsAddStaff');
     Route::post('/accountsAddStaffStore', [AdminController::class, 'accountsAddStaffStore'])->name('accountsAddStaffStore');
     Route::get('/accountsAddUser', [AdminController::class, 'accountsAddUser'])->name('accountsAddUser');
@@ -48,11 +53,14 @@ Route::group([
     Route::delete('/accountDestroy/{id}', [AdminController::class, 'accountDestroy'])->name('accountDestroy');
 
 
+    // Derm Controller
     Route::get('/derm', [AdminController::class, 'derm'])->name('derm');
     Route::get('/dermAdd', [AdminController::class, 'dermAdd'])->name('dermAdd');
     Route::post('/dermStore', [AdminController::class, 'dermStore'])->name('dermStore');
     Route::get('/dermShow/{derm}', [AdminController::class, 'dermShow'])->name('dermShow');
 
+
+    // Reports Controller
     Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
 });
 

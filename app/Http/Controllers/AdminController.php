@@ -27,9 +27,23 @@ class AdminController extends Controller
     // Dashboard Controllers
     public function dashboard()
     {
-        // $records = Record::all();
-        $records = Record::paginate(4);
+        $records = Record::paginate(1); // Adjust the pagination size as needed
         return view('admin.dashboard', compact('records'));
+    }
+
+    public function dashboardSearch(Request $request)
+    {
+        $searchTerm = $request->input('query');
+
+        // Search and paginate results
+        $records = Record::when($searchTerm, function ($query, $searchTerm) {
+            return $query->where('file_details', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('original_file_name', 'LIKE', "%{$searchTerm}%");
+        })
+            ->paginate(1); // Adjust pagination size here as well
+
+        // Return only the table content to be replaced via AJAX
+        return view('admin.tables.dashboard_table', compact('records'))->render();
     }
 
     public function dashboardAdd()
@@ -82,6 +96,41 @@ class AdminController extends Controller
 
         return view('admin.accounts', compact('staffs', 'users', 'activeTable'));
     }
+
+    public function accountsStaffSearch(Request $request)
+    {
+        $searchTerm = $request->input('query');
+
+        $staffs = User::where('role', 'Staff')
+            ->when($searchTerm, function ($query, $searchTerm) {
+                return $query->where('username', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('first_name', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('contact_number', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('email', 'LIKE', "%{$searchTerm}%");
+            })
+            ->paginate(8); // Adjust pagination size as needed
+
+        return view('admin.tables.accounts_staff_table', compact('staffs'))->render();
+    }
+
+    public function accountsUserSearch(Request $request)
+    {
+        $searchTerm = $request->input('query');
+
+        $users = User::where('role', 'User')
+            ->when($searchTerm, function ($query, $searchTerm) {
+                return $query->where('username', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('first_name', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('contact_number', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('email', 'LIKE', "%{$searchTerm}%");
+            })
+            ->paginate(1); // Adjust pagination size as needed
+
+        return view('admin.tables.accounts_user_table', compact('users'))->render();
+    }
+
 
 
     public function accountsAddStaff()

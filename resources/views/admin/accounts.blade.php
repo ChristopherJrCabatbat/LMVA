@@ -46,75 +46,23 @@
                         <form action="{{ route('admin.accountsAddStaff') }}">
                             <button class="btn dark-blue" type="submit"><i class="fas fa-plus"></i> Add Staff</button>
                         </form>
-                        <form action="" class="d-flex">
-                            <input type="search" class="form-control-custom rounded-start-custom"
-                                placeholder="Search something...">
-                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i
-                                    class="fa-solid fa-magnifying-glass"></i></button>
+
+                        {{-- Live Search for Staff --}}
+                        <form action="" class="d-flex position-relative" id="staff-search-form">
+                            <button class="btn-custom" type="button">
+                                <i class="ms-1 fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            <input type="search" id="staff-search-input" class="form-control-custom rounded"
+                                placeholder="Search staff..." autocomplete="off">
                         </form>
+
                     </div>
                 </div>
 
-                <table class="table table-bordered bg-dark rounded" data-bs-theme="dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">Username</th>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Contact Number</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($staffs as $staff)
-                            <tr class="table-light light-border" style="border: 1px solid #03346E">
-                                <td>{{ $staff->username }}</td>
-                                <td>{{ $staff->first_name }}</td>
-                                <td>{{ $staff->last_name }}</td>
-                                <td>{{ $staff->contact_number }}</td>
-                                <td>{{ $staff->email }}</td>
-                                <td class="position-relative">
-                                    <div class="dropdown-custom">
-                                        <button class="btn btn-sm dropdown-toggle manageDropdown1" type="button">
-                                            <i class="fas fa-gear"></i> Manage
-                                        </button>
-                                        <ul class="dropdown-menu-custom dropdown-menu-end">
-                                            <li>
-                                                <a class="dropdown-item" href="{{ route('admin.accountsStaffShow', $staff->id) }}">
-                                                    <i class="fas fa-eye" style="color: green"></i> View
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="{{ route('admin.accountsEdit', $staff->id) }}">
-                                                    <i class="fas fa-pen-to-square" style="color: blue"></i> Edit
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <form action="{{ route('admin.accountDestroy', $staff->id) }}"
-                                                    method="POST" id="delete-form-{{ $staff->id }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button" class="dropdown-item"
-                                                        onclick="confirmDelete({{ $staff->id }})">
-                                                        <i class="fa-solid fa-trash" style="color: red"></i> Delete
-                                                    </button>
-                                                </form>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr class="table-light">
-                                <td colspan="6" class="text-center">There are no staff accounts.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-
-                <!-- Include the Pagination Component -->
-                @include('admin.components.accounts-pagination', ['items' => $staffs])
+                {{-- Display Search Results --}}
+                <div id="staff-search-results">
+                    @include('admin.tables.accounts_staff_table', ['staffs' => $staffs])
+                </div>
 
             </div>
 
@@ -136,77 +84,26 @@
                         <form action="{{ route('admin.accountsAddUser') }}">
                             <button class="btn dark-blue" type="submit"><i class="fas fa-plus"></i> Add User</button>
                         </form>
-                        <form action="" class="d-flex">
-                            <input type="search" class="form-control-custom rounded-start-custom"
-                                placeholder="Search something...">
-                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i
-                                    class="fa-solid fa-magnifying-glass"></i></button>
+
+                        {{-- Live Search for Users --}}
+                        <form action="" class="d-flex position-relative" id="user-search-form">
+                            <button class="btn-custom" type="button">
+                                <i class="ms-1 fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            <input type="search" id="user-search-input" class="form-control-custom rounded"
+                                placeholder="Search user..." autocomplete="off">
                         </form>
+
                     </div>
                 </div>
 
-                <table class="table table-bordered bg-dark rounded" data-bs-theme="dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">Username</th>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Contact Number</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($users as $user)
-                            <tr class="table-light light-border" style="border: 1px solid #03346E">
-                                <td>{{ $user->username }}</td>
-                                <td>{{ $user->first_name }}</td>
-                                <td>{{ $user->last_name }}</td>
-                                <td>{{ $user->contact_number }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td class="position-relative">
-                                    <div class="dropdown-custom">
-                                        <button class="btn btn-sm dropdown-toggle manageDropdown1" type="button">
-                                            <i class="fas fa-gear"></i> Manage
-                                        </button>
-                                        <ul class="dropdown-menu-custom dropdown-menu-end">
-                                            <li>
-                                                <a class="dropdown-item" href="{{ route('admin.accountsUserShow', $user->id) }}">
-                                                    <i class="fas fa-eye" style="color: green"></i> View
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="{{ route('admin.accountsEdit', $user->id) }}">
-                                                    <i class="fas fa-pen-to-square" style="color: blue"></i> Edit
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <form action="{{ route('admin.accountDestroy', $user->id) }}"
-                                                    method="POST" id="delete-form-{{ $user->id }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button" class="dropdown-item"
-                                                        onclick="confirmDelete({{ $user->id }})">
-                                                        <i class="fa-solid fa-trash" style="color: red"></i> Delete
-                                                    </button>
-                                                </form>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr class="table-light">
-                                <td colspan="6" class="text-center">There are no user accounts.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-
-                <!-- Include the Pagination Component -->
-                @include('admin.components.accounts-pagination', ['items' => $users])
+                {{-- Display Search Results --}}
+                <div id="user-search-results">
+                    @include('admin.tables.accounts_user_table', ['users' => $users])
+                </div>
 
             </div>
+
 
         </div>
     </div>
@@ -262,6 +159,72 @@
 
             document.getElementById('showUsers').addEventListener('click', function() {
                 window.location.href = '?table=user';
+            });
+        });
+    </script>
+
+    {{-- Script Search --}}
+    <script>
+        let debounceTimer;
+
+        function debounce(func, delay) {
+            return function(...args) {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        function performSearch(query, table) {
+            let url = table === 'staff' ? `{{ route('admin.accountsStaffSearch') }}?query=${query}` :
+                `{{ route('admin.accountsUserSearch') }}?query=${query}`;
+            fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById(`${table}-search-results`).innerHTML = html;
+                });
+        }
+
+        function setupSearch(inputId, formId, table) {
+            document.getElementById(inputId).addEventListener('input', debounce(function() {
+                let query = this.value.trim();
+                if (query.length > 0) {
+                    performSearch(query, table);
+                } else {
+                    // Optional: Handle empty query
+                    performSearch('', table);
+                }
+            }, 500)); // Adjust debounce delay as needed
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize search for both staff and users
+            setupSearch('staff-search-input', 'staff-search-form', 'staff');
+            setupSearch('user-search-input', 'user-search-form', 'user');
+
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.pagination a')) {
+                    e.preventDefault();
+                    let page = e.target.getAttribute('href').split('page=')[1];
+                    let table = document.getElementById('staffTable').style.display === 'block' ? 'staff' :
+                        'user';
+                    let query = document.getElementById(`${table}-search-input`).value.trim();
+                    let url = table === 'staff' ?
+                        `{{ route('admin.accountsStaffSearch') }}?query=${query}&page=${page}` :
+                        `{{ route('admin.accountsUserSearch') }}?query=${query}&page=${page}`;
+                    fetch(url, {
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                            }
+                        })
+                        .then(response => response.text())
+                        .then(html => {
+                            document.getElementById(`${table}-search-results`).innerHTML = html;
+                        });
+                }
             });
         });
     </script>
