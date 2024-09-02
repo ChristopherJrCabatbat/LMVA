@@ -253,6 +253,9 @@ li.profile-logout button.dropdown-item:active {
     cursor: pointer;
     z-index: 1;
 }
+.btn-custom:hover {
+    cursor: default;
+}
 
 /* .rounded-start-custom {
     border-top-left-radius: 0.375rem;

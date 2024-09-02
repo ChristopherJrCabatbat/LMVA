@@ -36,6 +36,7 @@ class RoleMiddleware
                 'admin.accountsUserSearch',
 
                 'admin.derm',
+                'admin.dermSearch',
                 'admin.dermAdd',
                 'admin.dermStore',
                 'admin.dermShow',

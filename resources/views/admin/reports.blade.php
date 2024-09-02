@@ -33,12 +33,15 @@
                     <div class="d-flex gap-4">
                         {{-- <form action="dermAdd">
                         <button class="btn add" type="submit"><i class="fas fa-plus"></i> Add Report</button>
-                    </form> --}}
-                        <form action="" class="d-flex">
-                            <input type="search" class="form-control-custom rounded-start-custom"
-                                placeholder="Search something...">
-                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i
-                                    class="fa-solid fa-magnifying-glass"></i></button>
+                        </form> --}}
+
+                        {{-- Live Search --}}
+                        <form action="" class="d-flex position-relative">
+                            <button class="btn-custom" type="button">
+                                <i class="ms-1 fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            <input type="search" id="search-input" class="form-control-custom rounded"
+                                placeholder="Search something..." autocomplete="off">
                         </form>
 
                     </div>
@@ -59,7 +62,8 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->contact_number }}</td>
                                 <td>{{ $user->first_name }}</td>
-                                <td>{{ $inquiry->payment_method ?? '--' }}</td>                            </tr>
+                                <td>{{ $inquiry->payment_method ?? '--' }}</td>
+                            </tr>
                         @empty
                             <tr class="table-light">
                                 <td colspan="6" class="text-center">There are no derm.</td>

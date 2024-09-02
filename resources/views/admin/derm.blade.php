@@ -1,6 +1,6 @@
 @extends('admin.adminLayout')
 
-@section('title', 'Admin DERM')
+@section('title', 'DERM')
 
 @section('styles-links')
 @endsection
@@ -48,68 +48,86 @@
                         <form action="dermAdd">
                             <button class="btn dark-blue" type="submit"><i class="fas fa-plus"></i> Add DERM</button>
                         </form>
-                        <form action="" class="d-flex">
-                            <input type="search" class="form-control-custom rounded-start-custom"
-                                placeholder="Search something...">
-                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i
-                                    class="fa-solid fa-magnifying-glass"></i></button>
+
+                        {{-- Live Search --}}
+                        <form action="" class="d-flex position-relative">
+                            <button class="btn-custom" type="button">
+                                <i class="ms-1 fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            <input type="search" id="search-input" class="form-control-custom rounded"
+                                placeholder="Search something..." autocomplete="off">
                         </form>
 
                     </div>
                 </div>
 
-                <!-- Existing Table -->
-                <table class="table table-bordered bg-dark rounded" data-bs-theme="dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">DERM</th>
-                            <th scope="col">QR Code</th>
-                            <th scope="col">Print</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($derms as $derm)
-                            <tr class="table-light light-border" style="border: 1px solid #03346E">
-                                <!-- Display the DERM name -->
-                                <td class="align-middle fs-4">{{ $derm->derm }}</td>
-
-                                <!-- Display the QR code image -->
-                                {{-- <td class="align-middle">
-                                    <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="100" height="100"
-                                        class="qr-thumbnail" onclick="showQRCode('{{ asset($derm->qr_code) }}')">
-                                </td> --}}
-                                
-                                <td class="align-middle d-flex flex-column justify-content-center align-items-center">
-                                    <a href="{{ route('admin.dermShow', ['derm' => $derm->derm]) }}">
-                                        <img src="{{ asset($derm->qr_code) }}" title="Click to view files associated with {{ $derm->derm }}." alt="QR Code" width="95" height="95" class="qr-thumbnail">
-                                    </a>
-                                    <i class="fa-solid fa-expand pointer" onclick="showQRCode('{{ asset($derm->qr_code) }}')"
-                                        title="Click to expand."></i>
-                                </td>
-                                
-                                <!-- Print button -->
-                                <td class="align-middle">
-                                    <a class="print" href="#"
-                                        onclick="printDerm('{{ $derm->derm }}', '{{ asset($derm->qr_code) }}')"
-                                        style="color: #002046;">
-                                        <i class="fa-solid fa-print fs-1"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr class="table-light">
-                                <td colspan="3" class="text-center">There are no derms available.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-
-                <!-- Include the Pagination Component -->
-                @include('admin.components.pagination', ['items' => $derms])
+                {{-- Display Search Results --}}
+                <div id="search-results">
+                    @include('admin.tables.derm_table', ['derms' => $derms])
+                </div>
 
             </div>
         </div>
     @endsection
 
     @section('scripts')
+        {{-- Search Script --}}
+        <script>
+            let debounceTimer;
+
+            function debounce(func, delay) {
+                return function(...args) {
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(() => func.apply(this, args), delay);
+                };
+            }
+
+            function performSearch(query) {
+                fetch(`{{ route('admin.dermSearch') }}?query=${query}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('search-results').innerHTML = html;
+                    });
+            }
+
+            document.getElementById('search-input').addEventListener('input', debounce(function() {
+                let query = this.value.trim();
+                if (query.length > 0) {
+                    performSearch(query);
+                } else {
+                    // Optional: Handle the case when the search box is empty
+                    // You may need to ensure the server-side handles an empty query correctly
+                    fetch(`{{ route('admin.dermSearch') }}?query=`, {
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                            }
+                        })
+                        .then(response => response.text())
+                        .then(html => {
+                            document.getElementById('search-results').innerHTML = html;
+                        });
+                }
+            }, 500)); // Adjust the debounce delay as needed
+
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.pagination a')) {
+                    e.preventDefault();
+                    let page = e.target.getAttribute('href').split('page=')[1];
+                    let query = document.getElementById('search-input').value.trim();
+                    fetch(`{{ route('admin.dermSearch') }}?query=${query}&page=${page}`, {
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                            }
+                        })
+                        .then(response => response.text())
+                        .then(html => {
+                            document.getElementById('search-results').innerHTML = html;
+                        });
+                }
+            });
+        </script>
     @endsection

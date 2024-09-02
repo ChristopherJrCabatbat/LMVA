@@ -55,6 +55,7 @@ Route::group([
 
     // Derm Controller
     Route::get('/derm', [AdminController::class, 'derm'])->name('derm');
+    Route::get('/dermSearch', [AdminController::class, 'dermSearch'])->name('dermSearch');
     Route::get('/dermAdd', [AdminController::class, 'dermAdd'])->name('dermAdd');
     Route::post('/dermStore', [AdminController::class, 'dermStore'])->name('dermStore');
     Route::get('/dermShow/{derm}', [AdminController::class, 'dermShow'])->name('dermShow');

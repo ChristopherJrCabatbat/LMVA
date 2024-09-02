@@ -27,7 +27,7 @@ class AdminController extends Controller
     // Dashboard Controllers
     public function dashboard()
     {
-        $records = Record::paginate(1); // Adjust the pagination size as needed
+        $records = Record::paginate(5); // Adjust the pagination size as needed
         return view('admin.dashboard', compact('records'));
     }
 
@@ -40,7 +40,7 @@ class AdminController extends Controller
             return $query->where('file_details', 'LIKE', "%{$searchTerm}%")
                 ->orWhere('original_file_name', 'LIKE', "%{$searchTerm}%");
         })
-            ->paginate(1); // Adjust pagination size here as well
+            ->paginate(5); // Adjust pagination size here as well
 
         // Return only the table content to be replaced via AJAX
         return view('admin.tables.dashboard_table', compact('records'))->render();
@@ -126,7 +126,7 @@ class AdminController extends Controller
                     ->orWhere('contact_number', 'LIKE', "%{$searchTerm}%")
                     ->orWhere('email', 'LIKE', "%{$searchTerm}%");
             })
-            ->paginate(1); // Adjust pagination size as needed
+            ->paginate(8); // Adjust pagination size as needed
 
         return view('admin.tables.accounts_user_table', compact('users'))->render();
     }
@@ -287,6 +287,20 @@ class AdminController extends Controller
         $derms = Derm::paginate(3);
 
         return view('admin.derm', compact('derms'));
+    }
+
+     public function dermSearch(Request $request)
+    {
+        $searchTerm = $request->input('query');
+
+        // Search and paginate results
+        $derms = Derm::when($searchTerm, function ($query, $searchTerm) {
+            return $query->where('derm', 'LIKE', "%{$searchTerm}%");
+        })
+            ->paginate(3); // Adjust pagination size here as well
+
+        // Return only the table content to be replaced via AJAX
+        return view('admin.tables.derm_table', compact('derms'))->render();
     }
 
     public function dermAdd()
