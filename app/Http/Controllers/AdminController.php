@@ -153,8 +153,8 @@ class AdminController extends Controller
 
         // Auth::login($user);
 
-        return redirect()->route('admin.accounts')->with('success', 'Account added successfully!');
-        // return redirect('user/dashboard');
+        // return redirect()->route('admin.accounts')->with('success', 'Account added successfully!');
+        return redirect('/admin/accounts?table=user')->with('success', 'Account added successfully!');
     }
 
     public function accountsUserShow($id)

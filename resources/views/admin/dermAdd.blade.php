@@ -38,7 +38,7 @@
                     <h3 class="mb-3"><i class="fa-solid fa-plus me-2"></i> Add Derm</h3>
 
                     <div class="mb-3 d-flex align-items-start flex-column">
-                        <label for="derm" class="form-label">DERM Name:</label>
+                        <label for="derm" class="form-label">DERM:</label>
                         <select autofocus class="form-select" required name="derm" id="derm" aria-label="Default select example">
                             <option value="" disabled selected>Select DERM</option>
                             <option value="BS" {{ old('derm') === 'BS' ? 'selected' : '' }}>BS</option>
