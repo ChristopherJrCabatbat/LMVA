@@ -77,11 +77,14 @@ Route::group([
 
     Route::get('/patientRecord', [StaffController::class, 'patientRecord'])->name('patientRecord');
     Route::post('/patientRecordCategorize', [StaffController::class, 'patientRecordCategorize'])->name('patientRecordCategorize');
+    Route::get('/patientRecordSearch', [StaffController::class, 'patientRecordSearch'])->name('patientRecordSearch');
 
     Route::get('/derm', [StaffController::class, 'scan'])->name('derm');
     Route::get('/dermShow/{derm}', [StaffController::class, 'scanShow'])->name('dermShow');
+    Route::get('/dermSearch', [StaffController::class, 'scanSearch'])->name('dermSearch');
 
     Route::get('/inquiry', [StaffController::class, 'inquiry'])->name('inquiry');
+    Route::get('/inquirySearch', [StaffController::class, 'inquirySearch'])->name('inquirySearch');
     Route::get('/inquiryRespond/{id}', [StaffController::class, 'inquiryRespond'])->name('inquiryRespond');
     Route::post('/inquiryRespondStore/{id}', [StaffController::class, 'inquiryRespondStore'])->name('inquiryRespondStore');
 });

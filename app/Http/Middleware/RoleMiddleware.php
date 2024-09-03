@@ -47,12 +47,15 @@ class RoleMiddleware
             ],
             'Staff' => [
                 'staff.patientRecord',
+                'staff.patientRecordSearch',
                 'staff.patientRecordCategorize',
 
                 'staff.derm',
+                'staff.dermSearch',
                 'staff.dermShow',
 
                 'staff.inquiry',
+                'staff.inquirySearch',
                 'staff.inquiryRespond',
                 'staff.inquiryRespondStore',
             ],

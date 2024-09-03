@@ -68,62 +68,21 @@
                     </div>
 
                     <div class="d-flex gap-4">
-                        {{-- <form action="dashboardAdd">
-                        <button class="btn dark-blue" type="submit"><i class="fas fa-plus"></i> Add Record</button>
-                    </form> --}}
-                        <form action="" class="d-flex">
-                            <input type="search" class="form-control-custom rounded-start-custom"
-                                placeholder="Search something...">
-                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i
-                                    class="fa-solid fa-magnifying-glass"></i></button>
+                        {{-- Live Search --}}
+                        <form action="" class="d-flex position-relative">
+                            <button class="btn-custom" type="button">
+                                <i class="ms-1 fa-solid fa-magnifying-glass" style="color: #0d6efd"></i>
+                            </button>
+                            <input type="search" id="search-input" class="form-control-custom rounded"
+                                placeholder="Search something..." autocomplete="off">
                         </form>
-
                     </div>
                 </div>
 
-
-                <table class="table table-bordered table-blue table-info rounded">
-                    <thead>
-                        <tr>
-                            <th scope="col">DERM</th>
-                            <th scope="col">QR Code</th>
-                            <th scope="col">Print</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($derms as $derm)
-                            <tr class="table-light light-border" style="border: 1px solid #03346E">
-                                <!-- Display the DERM name -->
-                                <td class="align-middle fs-4">{{ $derm->derm }}</td>
-
-                                <td class="align-middle d-flex flex-column justify-content-center align-items-center">
-                                    <a href="{{ route('staff.dermShow', ['derm' => $derm->derm]) }}">
-                                        <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="95" height="95"
-                                            class="qr-thumbnail" title="Click to view DERM information.">
-                                    </a>
-                                    <i class="fa-solid fa-expand pointer"
-                                        onclick="showQRCode('{{ asset($derm->qr_code) }}')" title="Click to expand."></i>
-                                </td>
-
-                                <!-- Print button -->
-                                <td class="align-middle">
-                                    <a class="print" href="#"
-                                        onclick="printDerm('{{ $derm->derm }}', '{{ asset($derm->qr_code) }}')"
-                                        style="color: #002046;" title="Print the QR Code.">
-                                        <i class="fa-solid fa-print fs-1"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr class="table-light">
-                                <td colspan="6" class="text-center">There are no QR Code.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-
-                <!-- Include the Pagination Component -->
-                @include('components.staff-userPagination', ['items' => $derms])
+                {{-- Display Search Results --}}
+                <div id="search-results">
+                    @include('staff.tables.scan_table', ['derms' => $derms])
+                </div>
 
             </div>
 
@@ -133,6 +92,7 @@
 
 @section('scripts')
 
+    {{-- Open Camera --}}
     <script>
         function openScanModal() {
             const scanModal = new bootstrap.Modal(document.getElementById('scanModal'));
@@ -171,6 +131,66 @@
                 html5QrCode.stop().catch(err => console.log('Error stopping the QR Code scanner:', err));
             });
         }
+    </script>
+
+    {{-- Search Script --}}
+    <script>
+        let debounceTimer;
+
+        function debounce(func, delay) {
+            return function(...args) {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        function performSearch(query) {
+            fetch(`{{ route('staff.dermSearch') }}?query=${query}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('search-results').innerHTML = html;
+                });
+        }
+
+        document.getElementById('search-input').addEventListener('input', debounce(function() {
+            let query = this.value.trim();
+            if (query.length > 0) {
+                performSearch(query);
+            } else {
+                // Optional: Handle the case when the search box is empty
+                // You may need to ensure the server-side handles an empty query correctly
+                fetch(`{{ route('staff.dermSearch') }}?query=`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('search-results').innerHTML = html;
+                    });
+            }
+        }, 500)); // Adjust the debounce delay as needed
+
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.pagination a')) {
+                e.preventDefault();
+                let page = e.target.getAttribute('href').split('page=')[1];
+                let query = document.getElementById('search-input').value.trim();
+                fetch(`{{ route('staff.dermSearch') }}?query=${query}&page=${page}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('search-results').innerHTML = html;
+                    });
+            }
+        });
     </script>
 
 @endsection

@@ -23,6 +23,26 @@ class StaffController extends Controller
         return view('staff.patientRecord', compact('records', 'derms'));
     }
 
+    public function patientRecordSearch(Request $request)
+    {
+        $searchTerm = $request->input('query');
+        $derms = Derm::all();
+
+        // Search and paginate results for records with null category
+        $records = Record::whereNull('category')
+            ->when($searchTerm, function ($query, $searchTerm) {
+                return $query->where(function ($subQuery) use ($searchTerm) {
+                    $subQuery->where('file_details', 'LIKE', "%{$searchTerm}%")
+                        ->orWhere('original_file_name', 'LIKE', "%{$searchTerm}%");
+                });
+            })
+            ->paginate(5); // Adjust pagination size as needed
+
+        // Return only the table content to be replaced via AJAX
+        return view('staff.tables.patientRecord_table', compact('records', 'derms'))->render();
+    }
+
+
     public function patientRecordCategorize(Request $request)
     {
         // Validate the incoming data
@@ -48,6 +68,20 @@ class StaffController extends Controller
         return view('staff.scan', compact('derms'));
     }
 
+    public function scanSearch(Request $request)
+    {
+        $searchTerm = $request->input('query');
+
+        // Search and paginate results
+        $derms = Derm::when($searchTerm, function ($query, $searchTerm) {
+            return $query->where('derm', 'LIKE', "%{$searchTerm}%");
+        })
+            ->paginate(3); // Adjust pagination size here as well
+
+        // Return only the table content to be replaced via AJAX
+        return view('staff.tables.scan_table', compact('derms'))->render();
+    }
+
     public function scanShow($derm)
     {
         // Find the DERM by name
@@ -66,6 +100,27 @@ class StaffController extends Controller
         $inquiries = Inquiry::whereNull('response')->paginate(5);
 
         return view('staff.inquiry', compact('inquiries'));
+    }
+
+    public function inquirySearch(Request $request)
+    {
+        $searchTerm = $request->input('query');
+
+        // Search and paginate results for inquiries with null category
+        $inquiries = Inquiry::whereNull('response')
+            ->when($searchTerm, function ($query, $searchTerm) {
+                return $query->where(function ($subQuery) use ($searchTerm) {
+                    $subQuery->where('email', 'LIKE', "%{$searchTerm}%")
+                        ->orWhere('contact_number', 'LIKE', "%{$searchTerm}%")
+                        ->orWhere('inquiry', 'LIKE', "%{$searchTerm}%")
+                        ->orWhere('payment_method', 'LIKE', "%{$searchTerm}%")
+                        ;
+                });
+            })
+            ->paginate(5); // Adjust pagination size as needed
+
+        // Return only the table content to be replaced via AJAX
+        return view('staff.tables.inquiry_table', compact('inquiries'))->render();
     }
 
     public function inquiryRespond($id)
