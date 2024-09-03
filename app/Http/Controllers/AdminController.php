@@ -102,14 +102,14 @@ class AdminController extends Controller
         $searchTerm = $request->input('query');
 
         $staffs = User::where('role', 'Staff')
-            ->when($searchTerm, function ($query, $searchTerm) {
-                return $query->where('username', 'LIKE', "%{$searchTerm}%")
+            ->where(function ($query) use ($searchTerm) { // Nested where conditions
+                $query->where('username', 'LIKE', "%{$searchTerm}%")
                     ->orWhere('first_name', 'LIKE', "%{$searchTerm}%")
                     ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
                     ->orWhere('contact_number', 'LIKE', "%{$searchTerm}%")
                     ->orWhere('email', 'LIKE', "%{$searchTerm}%");
             })
-            ->paginate(8); // Adjust pagination size as needed
+            ->paginate(8);
 
         return view('admin.tables.accounts_staff_table', compact('staffs'))->render();
     }
@@ -119,17 +119,18 @@ class AdminController extends Controller
         $searchTerm = $request->input('query');
 
         $users = User::where('role', 'User')
-            ->when($searchTerm, function ($query, $searchTerm) {
-                return $query->where('username', 'LIKE', "%{$searchTerm}%")
+            ->where(function ($query) use ($searchTerm) { // Nested where conditions
+                $query->where('username', 'LIKE', "%{$searchTerm}%")
                     ->orWhere('first_name', 'LIKE', "%{$searchTerm}%")
                     ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
                     ->orWhere('contact_number', 'LIKE', "%{$searchTerm}%")
                     ->orWhere('email', 'LIKE', "%{$searchTerm}%");
             })
-            ->paginate(8); // Adjust pagination size as needed
+            ->paginate(8);
 
         return view('admin.tables.accounts_user_table', compact('users'))->render();
     }
+
 
 
 
@@ -289,7 +290,7 @@ class AdminController extends Controller
         return view('admin.derm', compact('derms'));
     }
 
-     public function dermSearch(Request $request)
+    public function dermSearch(Request $request)
     {
         $searchTerm = $request->input('query');
 

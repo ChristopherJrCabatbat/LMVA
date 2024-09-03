@@ -7,6 +7,7 @@ use App\Models\Derm;
 use App\Models\Record;
 use App\Models\Inquiry;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class StaffController extends Controller
@@ -85,6 +86,9 @@ class StaffController extends Controller
         $inquiry = Inquiry::findOrFail($id);
         $inquiry->response = $request->input('response');
 
+        // Save the username of the currently logged-in staff in the 'staff' field
+        $inquiry->staff = Auth::user()->username;
+
         // Handle file upload
         if ($request->hasFile('response_file')) {
             $file = $request->file('response_file');
@@ -98,8 +102,10 @@ class StaffController extends Controller
             $inquiry->original_file_name = $originalFileName; // Save the original file name
         }
 
+        // Save the updated inquiry record to the database
         $inquiry->save();
 
+        // Redirect back with a success message
         return redirect()->route('staff.inquiry')->with('success', 'Response submitted successfully!');
     }
 }

@@ -17,6 +17,7 @@ class Inquiry extends Model
         'date',
         'inquiry',
         'response',
+        'staff',
         'response_file',
         'original_file_name',
         'payment_method',

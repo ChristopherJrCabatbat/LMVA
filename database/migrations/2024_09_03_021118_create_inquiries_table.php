@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('date');
             $table->text('inquiry');
             $table->text('response')->nullable();
+            $table->string('staff')->nullable();
             $table->string('response_file')->nullable();
             $table->string('original_file_name')->nullable();
             $table->string('payment_method')->nullable();
