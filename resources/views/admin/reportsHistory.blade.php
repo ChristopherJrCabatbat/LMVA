@@ -1,6 +1,6 @@
-@extends('user.userLayout')
+@extends('admin.adminLayout')
 
-@section('title', 'Number of Inquiries')
+@section('title', 'Admin Reports')
 
 @section('styles-links')
 
@@ -8,21 +8,17 @@
 
 @section('sidebar')
     <li class="nav-item">
-        <a class="nav-link" href="/user/dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
+        <a class="nav-link" href="/admin/dashboard"><i class="fa-solid fa-gauge me-2"></i> Dashboard</a>
     </li>
-    {{-- <hr /> --}}
-
     <li class="nav-item">
-        <a class="nav-link" href="/user/inquire"><i class="me-2 fa-solid fa-magnifying-glass-arrow-right"></i>
-            Inquire</a>
+        <a class="nav-link" href="/admin/accounts"><i class="fa-solid fa-users me-2"></i> Accounts</a>
     </li>
-
     <li class="nav-item">
-        <a class="nav-link side-active" href="/user/numberInquiries"><i class="me-2 fa-solid fa-magnifying-glass-chart"></i>
-            Number of
-            Inquiries</a>
+        <a class="nav-link" href="/admin/derm"><i class="fa-solid fa-notes-medical me-2"></i> DERM</a>
     </li>
-
+    <li class="nav-item">
+        <a class="nav-link side-active" href="#"><i class="fa-solid fa-newspaper me-2"></i> Reports</a>
+    </li>
 
 @endsection
 
@@ -32,7 +28,7 @@
 
             <div class="table-responsive p-4 bg-light mx-auto position-relative">
                 <div class="position-absolute top-0 start-0 p-4">
-                    <a href="{{ route('user.numberInquiries') }}">
+                    <a href="{{ route('admin.reports') }}" class="">
                         <i class="fa-solid fa-circle-left fs-2 back"></i>
                     </a>
                 </div>
@@ -59,6 +55,12 @@
                             <p class="form-control-plaintext">{{ $inquiry->email }}</p>
                         </div>
 
+                        <!-- Date -->
+                        <div class="mb-3 d-flex flex-column align-items-start">
+                            <label class="form-label fw-bold">Date:</label>
+                            <p class="form-control-plaintext">{{ \Carbon\Carbon::parse($inquiry->date)->format('F j, Y') }}
+                            </p>
+                        </div>
                     </div>
 
                     <!-- Right Column -->
@@ -75,11 +77,10 @@
                             <p class="form-control-plaintext">{{ $inquiry->patient_name }}</p>
                         </div>
 
-                        <!-- Date -->
+                        <!-- Attached File -->
                         <div class="mb-3 d-flex flex-column align-items-start">
-                            <label class="form-label fw-bold">Date:</label>
-                            <p class="form-control-plaintext">{{ \Carbon\Carbon::parse($inquiry->date)->format('F j, Y') }}
-                            </p>
+                            <label class="form-label fw-bold">Staff Username:</label>
+                            <p class="form-control-plaintext">{{ $inquiry->staff }}</p>
                         </div>
 
 
@@ -89,7 +90,7 @@
                 <!-- Full-Width Row for Inquiry Details -->
                 <div class="row mt-2">
                     <div class="col-12">
-                        <div class="mb-3 d-flex flex-column align-items-start">
+                        <div class="d-flex flex-column align-items-start">
                             <label class="form-label fw-bold">Inquiry Details:</label>
                             <p class="form-control-plaintext">{!! nl2br(e($inquiry->inquiry)) !!}</p>
                         </div>
@@ -97,11 +98,10 @@
                 </div>
 
                 <!-- Full-Width Row for Response -->
-                <div class="row">
+                <div class="row mt-3">
                     <div class="col-12">
                         <div class="d-flex flex-column align-items-start">
                             <label class="form-label fw-bold">Response:</label>
-
                             <p class="form-control-plaintext">{!! nl2br(e($inquiry->response ?? 'No response yet.')) !!}</p>
                         </div>
                     </div>

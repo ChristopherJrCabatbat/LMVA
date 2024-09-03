@@ -176,27 +176,28 @@ tbody tr.light-border {
     cursor: pointer;
 }
 
-button.dark-blue,
+button.dark-blue, a.dark-blue,
 button.manageDropdown1 {
     background-color: #002046 !important;
     color: white !important;
     border-color: #002046 !important;
+    text-decoration: none;
 }
 
-button.dark-blue:hover,
+button.dark-blue:hover, a.dark-blue:hover,
 button.manageDropdown1:hover {
     background-color: #004395 !important;
     color: white;
     border-color: #004395 !important;
 }
 
-button.dark-blue:active,
+button.dark-blue:active, a.dark-blue:active,
 button.manageDropdown1:active {
     background-color: #002046 !important;
     color: white !important;
 }
 
-button.dark-blue:focus,
+button.dark-blue:focus, a.dark-blue:focus,
 button.manageDropdown1:focus {
     background-color: #002046 !important;
     color: white !important;

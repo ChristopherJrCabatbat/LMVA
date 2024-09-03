@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Derm;
 use App\Models\Record;
+use App\Models\Inquiry;
 
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
@@ -357,8 +358,31 @@ class AdminController extends Controller
     // Report Controllers
     public function reports()
     {
-        // $users = User::where('role', 'User')->get();
-        $users = User::where('role', 'User')->paginate(9);
-        return view('admin.reports', compact('users'));
+        $inquiries = Inquiry::paginate(5);
+        return view('admin.reports', compact('inquiries'));
+    }
+
+    public function reportsHistory($id)
+    {
+        $inquiry = Inquiry::findOrFail($id); // Fetch the inquiry details by ID
+        return view('admin.reportsHistory', compact('inquiry'));
+    }
+
+    public function reportsSearch(Request $request)
+    {
+        $searchTerm = $request->input('query');
+
+        // Search and paginate results
+        $inquiries = Inquiry::when($searchTerm, function ($query, $searchTerm) {
+            return $query->where('username', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('email', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('patient_name', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('staff', 'LIKE', "%{$searchTerm}%")
+                ;
+        })
+            ->paginate(5); // Adjust pagination size here as well
+
+        // Return only the table content to be replaced via AJAX
+        return view('admin.tables.reports_table', compact('inquiries'))->render();
     }
 }

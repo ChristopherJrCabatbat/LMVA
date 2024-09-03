@@ -63,6 +63,8 @@ Route::group([
 
     // Reports Controller
     Route::get('/reports', [AdminController::class, 'reports'])->name('reports');
+    Route::get('/reportsSearch', [AdminController::class, 'reportsSearch'])->name('reportsSearch');
+    Route::get('/reportsHistory/{id}', [AdminController::class, 'reportsHistory'])->name('reportsHistory');
 });
 
 

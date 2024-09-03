@@ -27,7 +27,6 @@
 
             <div class="table-responsive text-center p-4 bg-light position-relative">
                 <div class="position-absolute top-0 start-0 p-4">
-                    {{-- <a href="{{ route('admin.accounts', ['table' => 'user']) }}" class=""> --}}
                     <a href="/admin/accounts?table=user" class="">
                         <i class="fa-solid fa-circle-left fs-2 back"></i>
                     </a>

@@ -42,6 +42,8 @@ class RoleMiddleware
                 'admin.dermShow',
 
                 'admin.reports',
+                'admin.reportsHistory',
+                'admin.reportsSearch',
             ],
             'Staff' => [
                 'staff.patientRecord',

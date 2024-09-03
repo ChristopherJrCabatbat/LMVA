@@ -47,33 +47,10 @@
                     </div>
                 </div>
 
-                <table class="table table-bordered bg-dark rounded" data-bs-theme="dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">Email</th>
-                            <th scope="col">Contact Number</th>
-                            <th scope="col">Inquiry Details</th>
-                            <th scope="col">Payment Method</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($users as $user)
-                            <tr class="table-light light-border" style="border: 1px solid #03346E">
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->contact_number }}</td>
-                                <td>{{ $user->first_name }}</td>
-                                <td>{{ $inquiry->payment_method ?? '--' }}</td>
-                            </tr>
-                        @empty
-                            <tr class="table-light">
-                                <td colspan="6" class="text-center">There are no derm.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-
-                <!-- Include the Pagination Component -->
-                @include('admin.components.pagination', ['items' => $users])
+                {{-- Display Search Results --}}
+                <div id="search-results">
+                    @include('admin.tables.reports_table', ['inquiries' => $inquiries])
+                </div>
 
             </div>
 
@@ -82,4 +59,63 @@
 @endsection
 
 @section('scripts')
+    {{-- Search Script --}}
+    <script>
+        let debounceTimer;
+
+        function debounce(func, delay) {
+            return function(...args) {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        function performSearch(query) {
+            fetch(`{{ route('admin.reportsSearch') }}?query=${query}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('search-results').innerHTML = html;
+                });
+        }
+
+        document.getElementById('search-input').addEventListener('input', debounce(function() {
+            let query = this.value.trim();
+            if (query.length > 0) {
+                performSearch(query);
+            } else {
+                // Optional: Handle the case when the search box is empty
+                // You may need to ensure the server-side handles an empty query correctly
+                fetch(`{{ route('admin.reportsSearch') }}?query=`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('search-results').innerHTML = html;
+                    });
+            }
+        }, 500)); // Adjust the debounce delay as needed
+
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.pagination a')) {
+                e.preventDefault();
+                let page = e.target.getAttribute('href').split('page=')[1];
+                let query = document.getElementById('search-input').value.trim();
+                fetch(`{{ route('admin.reportsSearch') }}?query=${query}&page=${page}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('search-results').innerHTML = html;
+                    });
+            }
+        });
+    </script>
 @endsection

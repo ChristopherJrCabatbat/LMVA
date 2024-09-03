@@ -42,7 +42,7 @@
 
                     <!-- Patient Name -->
                     <div class="mb-3 d-flex flex-column align-items-start">
-                        <label for="patient_name" class="form-label">Patient Name</label>
+                        <label for="patient_name" class="form-label">Patient Name:</label>
                         <p class="form-control-plaintext">{{ $inquiry->patient_name }}</p>
                     </div>
 
