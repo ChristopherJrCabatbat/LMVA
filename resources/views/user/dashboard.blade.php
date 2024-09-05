@@ -67,52 +67,21 @@
                     <h5 class="mb-0"><i class="fa-solid fa-gauge me-2"></i> Dashboard</h5>
 
                     <div class="d-flex gap-4">
-                        <form action="" class="d-flex">
-                            <input type="search" class="form-control-custom rounded-start-custom"
-                                placeholder="Search something...">
-                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i
-                                    class="fa-solid fa-magnifying-glass"></i></button>
+                        {{-- Live Search --}}
+                        <form action="" class="d-flex position-relative">
+                            <button class="btn-custom" type="button">
+                                <i class="ms-1 fa-solid fa-magnifying-glass" style="color: #0d6efd"></i>
+                            </button>
+                            <input type="search" id="search-input" class="form-control-custom rounded"
+                                placeholder="Search something..." autocomplete="off">
                         </form>
-
                     </div>
                 </div>
 
-                <table class="table table-bordered table-blue table-info rounded">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="align-middle">Inquiry Details</th>
-                            <th scope="col" class="align-middle">Payment Method</th>
-                            <th scope="col" class="align-middle">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($inquiries as $inquiry)
-                            <tr class="table-light light-border" style="border: 1px solid #03346E">
-                                <td class="align-middle">{{ $inquiry->inquiry }}</td>
-                                <td class="align-middle">{{ $inquiry->payment_method ?? '--' }}</td>
-                                <td class="align-middle">
-                                    @if (is_null($inquiry->response))
-                                        Inquiry Sent
-                                    @else
-                                        <a href="#" class="status-responded fw-bold" data-bs-toggle="modal"
-                                            data-bs-target="#paymentModal" data-inquiry-id="{{ $inquiry->id }}">
-                                            <i class="fa-solid fa-circle-exclamation me-2"></i>Staff Responded
-                                        </a>
-                                    @endif
-                                </td>
-                            </tr>
-                        @empty
-                            <tr class="table-light">
-                                <td colspan="3" class="text-center">There are no inquiries.</td>
-                            </tr>
-                        @endforelse
-
-                    </tbody>
-                </table>
-
-
-                <!-- Include the Pagination Component -->
-                @include('components.staff-userPagination', ['items' => $inquiries])
+                {{-- Display Search Results --}}
+                <div id="search-results">
+                    @include('user.tables.dashboard_table', ['inquiries' => $inquiries])
+                </div>
 
             </div>
 
@@ -121,6 +90,8 @@
 @endsection
 
 @section('scripts')
+
+    {{-- Payment Form --}}
     @if ($inquiries->count() > 0)
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -146,5 +117,64 @@
         </script>
     @endif
 
+    {{-- Search Script --}}
+    <script>
+        let debounceTimer;
+
+        function debounce(func, delay) {
+            return function(...args) {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        function performSearch(query) {
+            fetch(`{{ route('user.dashboardSearch') }}?query=${query}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('search-results').innerHTML = html;
+                });
+        }
+
+        document.getElementById('search-input').addEventListener('input', debounce(function() {
+            let query = this.value.trim();
+            if (query.length > 0) {
+                performSearch(query);
+            } else {
+                // Optional: Handle the case when the search box is empty
+                // You may need to ensure the server-side handles an empty query correctly
+                fetch(`{{ route('user.dashboardSearch') }}?query=`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('search-results').innerHTML = html;
+                    });
+            }
+        }, 500)); // Adjust the debounce delay as needed
+
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.pagination a')) {
+                e.preventDefault();
+                let page = e.target.getAttribute('href').split('page=')[1];
+                let query = document.getElementById('search-input').value.trim();
+                fetch(`{{ route('user.dashboardSearch') }}?query=${query}&page=${page}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('search-results').innerHTML = html;
+                    });
+            }
+        });
+    </script>
 
 @endsection

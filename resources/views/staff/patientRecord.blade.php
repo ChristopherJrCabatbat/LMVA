@@ -44,7 +44,6 @@
                             <input type="search" id="search-input" class="form-control-custom rounded"
                                 placeholder="Search something..." autocomplete="off">
                         </form>
-
                     </div>
                 </div>
 

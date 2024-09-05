@@ -61,6 +61,7 @@ class RoleMiddleware
             ],
             'User'  => [
                 'user.dashboard',
+                'user.dashboardSearch',
                 'user.dashboardResponse',
 
                 'user.inquire',
@@ -68,6 +69,7 @@ class RoleMiddleware
                 'user.inquireStore',
                 
                 'user.numberInquiries',
+                'user.numberInquiriesSearch',
                 'user.numberInquiriesHistory',
             ],
         ];

@@ -15,9 +15,9 @@
                 <td class="align-middle">{{ $inquiry->username }}</td>
                 <td class="align-middle">{{ $inquiry->email }}</td>
                 <td class="align-middle">{{ $inquiry->patient_name }}</td>
-                <td class="align-middle">{{ $inquiry->staff }}</td>
+                <td class="align-middle">{{ $inquiry->staff ?? 'No staff responded yet.' }}</td>
                 <td class="align-middle py-3"><a
-                        href="{{ route('admin.reportsHistory', $inquiry->id) }}" class="p-2 rounded dark-blue"><i
+                        href="{{ route('admin.reportsHistory', $inquiry->id) }}" class="py-2 px-3 rounded dark-blue"><i
                             class="me-1 fa-solid fa-eye pointer"
                             title="View your inquiry history."></i>View</a></td>
                 <td class="align-middle" style="width: 20%">

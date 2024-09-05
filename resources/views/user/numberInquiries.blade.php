@@ -35,53 +35,21 @@
                     <h5 class="mb-0"><i class="fa-solid fa-magnifying-glass-chart me-2"></i> Number of Inquiries</h5>
 
                     <div class="d-flex gap-4">
-                        <form action="" class="d-flex">
-                            <input type="search" class="form-control-custom rounded-start-custom"
-                                placeholder="Search something...">
-                            <button class="btn-custom dark-blue rounded-end-custom" type="submit"><i
-                                    class="fa-solid fa-magnifying-glass"></i></button>
+                        {{-- Live Search --}}
+                        <form action="" class="d-flex position-relative">
+                            <button class="btn-custom" type="button">
+                                <i class="ms-1 fa-solid fa-magnifying-glass" style="color: #0d6efd"></i>
+                            </button>
+                            <input type="search" id="search-input" class="form-control-custom rounded"
+                                placeholder="Search something..." autocomplete="off">
                         </form>
-
                     </div>
                 </div>
 
-                @php
-                    // Get the current page number and items per page
-                    $currentPage = $inquiries->currentPage();
-                    $perPage = $inquiries->perPage();
-                @endphp
-
-                <table class="table table-bordered table-blue table-info rounded">
-                    <thead>
-                        <tr>
-                            <th class="align-middle">No.</th>
-                            <th class="align-middle">Patient Name</th>
-                            <th class="align-middle">Inquiry Details</th>
-                            <th class="align-middle">Inquiry History</th>
-                            <th class="align-middle">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{-- @forelse ($inquiries as $user) --}}
-                        @forelse ($inquiries as $index => $inquiry)
-                            <tr class="table-light light-border" style="border: 1px solid #03346E">
-                                <td class="align-middle">{{ ($currentPage - 1) * $perPage + $index + 1 }}</td>
-                                <td class="align-middle">{{ $inquiry->patient_name }}</td>
-                                <td class="align-middle">{{ $inquiry->inquiry }}</td>
-                                <td class="align-middle"><a href="{{ route('user.numberInquiriesHistory', $inquiry->id) }}"><i class="me-2 fa-solid fa-eye pointer" style="color: #0d6efd;" title="View your inquiry history."></i></a></td>
-                                <td class="align-middle" style="width: 20%">{{ \Carbon\Carbon::parse($inquiry->date)->format('F j, Y') }}</td>
-                                {{-- Format date --}}
-                            </tr>
-                        @empty
-                            <tr class="table-light">
-                                <td colspan="6" class="text-center">There are no inquiries.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-
-                <!-- Include the Pagination Component -->
-                @include('components.staff-userPagination', ['items' => $inquiries])
+                {{-- Display Search Results --}}
+                <div id="search-results">
+                    @include('user.tables.numberInquiries_table', ['inquiries' => $inquiries])
+                </div>
 
             </div>
 
@@ -90,4 +58,65 @@
 @endsection
 
 @section('scripts')
+
+    {{-- Search Script --}}
+    <script>
+        let debounceTimer;
+
+        function debounce(func, delay) {
+            return function(...args) {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        function performSearch(query) {
+            fetch(`{{ route('user.numberInquiriesSearch') }}?query=${query}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('search-results').innerHTML = html;
+                });
+        }
+
+        document.getElementById('search-input').addEventListener('input', debounce(function() {
+            let query = this.value.trim();
+            if (query.length > 0) {
+                performSearch(query);
+            } else {
+                // Optional: Handle the case when the search box is empty
+                // You may need to ensure the server-side handles an empty query correctly
+                fetch(`{{ route('user.numberInquiriesSearch') }}?query=`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('search-results').innerHTML = html;
+                    });
+            }
+        }, 500)); // Adjust the debounce delay as needed
+
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.pagination a')) {
+                e.preventDefault();
+                let page = e.target.getAttribute('href').split('page=')[1];
+                let query = document.getElementById('search-input').value.trim();
+                fetch(`{{ route('user.numberInquiriesSearch') }}?query=${query}&page=${page}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    })
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('search-results').innerHTML = html;
+                    });
+            }
+        });
+    </script>
+
 @endsection

@@ -98,6 +98,7 @@ Route::group([
 ], function () {
 
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboardSearch', [UserController::class, 'dashboardSearch'])->name('dashboardSearch');
     Route::get('/dashboardResponse/{id}', [UserController::class, 'dashboardResponse'])->name('dashboardResponse');
 
     // Inquiry Routes
@@ -106,5 +107,6 @@ Route::group([
     Route::post('/inquireStore', [UserController::class, 'inquireStore'])->name('inquireStore');
 
     Route::get('/numberInquiries', [UserController::class, 'numberInquiries'])->name('numberInquiries');
+    Route::get('/numberInquiriesSearch', [UserController::class, 'numberInquiriesSearch'])->name('numberInquiriesSearch');
     Route::get('/numberInquiriesHistory/{id}', [UserController::class, 'numberInquiriesHistory'])->name('numberInquiriesHistory');
 });

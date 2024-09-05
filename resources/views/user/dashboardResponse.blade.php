@@ -77,7 +77,7 @@
                         <div class="col-12">
                             <div class="mb-3 d-flex flex-column align-items-start">
                                 <label for="inquiry" class="form-label">Inquiry Details:</label>
-                                <p class="form-control">{!! nl2br(e($inquiry->inquiry)) !!}</p>
+                                <p class="form-control-plaintext">{!! nl2br(e($inquiry->inquiry)) !!}</p>
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                         <div class="col-12">
                             <div class=" d-flex flex-column align-items-start">
                                 <label for="response" class="form-label">Response:</label>
-                                <p class="form-control">{!! nl2br(e($inquiry->response)) !!}</p>
+                                <p class="form-control-plaintext">{!! nl2br(e($inquiry->response)) !!}</p>
                             </div>
                         </div>
                     </div>

@@ -19,9 +19,24 @@ class UserController extends Controller
 
         // Retrieve only the logged-in user's inquiries from the 'inquiries' table
         $inquiries = Inquiry::where('email', $user->email)
-            ->paginate(9);
+            ->paginate(8);
 
         return view('user.dashboard', compact('inquiries'));
+    }
+
+    public function dashboardSearch(Request $request)
+    {
+        $searchTerm = $request->input('query');
+
+        // Search and paginate results
+        $inquiries = Inquiry::when($searchTerm, function ($query, $searchTerm) {
+            return $query->where('inquiry', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('payment_method', 'LIKE', "%{$searchTerm}%");
+        })
+            ->paginate(5); // Adjust pagination size here as well
+
+        // Return only the table content to be replaced via AJAX
+        return view('user.tables.dashboard_table', compact('inquiries'))->render();
     }
 
     public function dashboardResponse($id)
@@ -82,6 +97,21 @@ class UserController extends Controller
             ->paginate(7);
 
         return view('user.numberInquiries', compact('inquiries'));
+    }
+
+    public function numberInquiriesSearch(Request $request)
+    {
+        $searchTerm = $request->input('query');
+
+        // Search and paginate results
+        $inquiries = Inquiry::when($searchTerm, function ($query, $searchTerm) {
+            return $query->where('inquiry', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('patient_name', 'LIKE', "%{$searchTerm}%");
+        })
+            ->paginate(5); // Adjust pagination size here as well
+
+        // Return only the table content to be replaced via AJAX
+        return view('user.tables.numberInquiries_table', compact('inquiries'))->render();
     }
 
     public function numberInquiriesHistory($id)

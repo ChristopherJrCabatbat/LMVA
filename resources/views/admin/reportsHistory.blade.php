@@ -80,7 +80,7 @@
                         <!-- Attached File -->
                         <div class="mb-3 d-flex flex-column align-items-start">
                             <label class="form-label fw-bold">Staff Username:</label>
-                            <p class="form-control-plaintext">{{ $inquiry->staff }}</p>
+                            <p class="form-control-plaintext">{{ $inquiry->staff ?? 'No staff responded yet.' }}</p>
                         </div>
 
 
