@@ -133,8 +133,6 @@ class AdminController extends Controller
     }
 
 
-
-
     public function accountsAddStaff()
     {
         return view('admin.accountsAddStaff');
@@ -244,24 +242,24 @@ class AdminController extends Controller
             'password' => 'nullable|confirmed|min:8', // Ensure password is nullable, confirmed, and has a minimum length
         ]);
 
-        // Fetch the staff member
-        $staff = User::findOrFail($id);
+        // Fetch the Account
+        $users = User::findOrFail($id);
 
-        // Update the staff member's details
-        $staff->first_name = $request->input('first_name');
-        $staff->last_name = $request->input('last_name');
-        $staff->username = $request->input('username');
-        $staff->contact_number = $request->input('contact_number');
-        $staff->email = $request->input('email');
-        $staff->role = $request->input('role');
+        // Update the account member's details
+        $users->first_name = $request->input('first_name');
+        $users->last_name = $request->input('last_name');
+        $users->username = $request->input('username');
+        $users->contact_number = $request->input('contact_number');
+        $users->email = $request->input('email');
+        $users->role = $request->input('role');
 
         // Check if password is provided and needs to be updated
         if ($request->filled('password')) {
-            $staff->password = Hash::make($request->input('password'));
+            $users->password = Hash::make($request->input('password'));
         }
 
         // Save the updated details
-        $staff->save();
+        $users->save();
 
         return redirect()->route('admin.accounts')->with('success', 'Employee details updated successfully.');
     }

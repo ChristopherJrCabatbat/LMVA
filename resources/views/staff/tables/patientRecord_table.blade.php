@@ -28,10 +28,10 @@
                     </td>
                 @else
                     <td class="py-3">
-                        <a href="{{ asset($filePath) }}" class="view-file rounded p-2 px-3" target="_blank"
-                            title="This will open the file in a new tab.">
+                        <a href="{{ asset($filePath) }}" class="view-file rounded p-2 px-3" target="_blank" title="This will open the file in a new tab.">
+                            <i class="fa-solid fa-file-lines me-3"></i> <!-- FontAwesome Icon -->
                             {{ $record->original_file_name }}
-                        </a>
+                        </a>   
                     </td>
                 @endif
 

@@ -176,7 +176,8 @@ tbody tr.light-border {
     cursor: pointer;
 }
 
-button.dark-blue, a.dark-blue,
+button.dark-blue,
+a.dark-blue,
 button.manageDropdown1 {
     background-color: #002046 !important;
     color: white !important;
@@ -184,20 +185,23 @@ button.manageDropdown1 {
     text-decoration: none;
 }
 
-button.dark-blue:hover, a.dark-blue:hover,
+button.dark-blue:hover,
+a.dark-blue:hover,
 button.manageDropdown1:hover {
     background-color: #004395 !important;
     color: white;
     border-color: #004395 !important;
 }
 
-button.dark-blue:active, a.dark-blue:active,
+button.dark-blue:active,
+a.dark-blue:active,
 button.manageDropdown1:active {
     background-color: #002046 !important;
     color: white !important;
 }
 
-button.dark-blue:focus, a.dark-blue:focus,
+button.dark-blue:focus,
+a.dark-blue:focus,
 button.manageDropdown1:focus {
     background-color: #002046 !important;
     color: white !important;
@@ -257,23 +261,33 @@ li.profile-logout button.dropdown-item:active {
 .btn-custom:hover {
     cursor: default;
 }
- 
 
 /* File Link Styling */
 .view-file {
     color: #002046; /* Dark text color for contrast */
-    background-color: #c0c0c0; /* Darker grayish background color */
+    background-color: #c0c0c0; /* Grayish background color */
     text-decoration: none; /* Remove underline */
-    display: inline-block; /* To apply padding correctly */
-    padding: 0.5rem 1rem; /* Adjust padding as needed */
+    display: inline-flex; /* Align icon and text horizontally */
+    align-items: center; /* Center the icon and text vertically */
+    padding: 0.5rem 1rem; /* Adjust padding */
     border-radius: 0.25rem; /* Rounded corners */
     border: 1px solid #a0a0a0; /* Subtle border for definition */
+    font-size: 1rem; /* Adjust font size as needed */
+}
+
+.view-file i {
+    margin-right: 0.5rem; /* Add spacing between icon and text */
 }
 
 .view-file:hover {
-    background-color: #a0a0a0; /* Even darker gray for hover effect */
-    color: #002046; /* Darker text color on hover to maintain visibility */
+    background-color: #a0a0a0; /* Darker gray on hover */
+    color: #002046; /* Keep text color consistent */
     border-color: #808080; /* Darker border on hover */
+}
+
+.view-file i.fa-file-lines {
+    font-size: 1.25rem; /* Slightly larger icon for emphasis */
+    color: #002046; /* Same color as the text */
 }
 
 /* Full-Screen Modal Styles */
@@ -410,19 +424,47 @@ a.print i.fa-print:hover {
     cursor: pointer;
 }
 
-/* Enhanced Animation for Modal Sliding Up */
+/* Slide Up/Down Animation for Modal */
 .modal.fade .modal-dialog {
     transition: transform 0.5s ease, opacity 0.5s ease;
-    transform: translateY(
-        100px
-    ); /* Start position off-screen from the bottom */
+    transform: translateY(100px); /* Start position (slide up) */
     opacity: 0; /* Initially invisible */
 }
 
 .modal.show .modal-dialog {
-    transform: translateY(0); /* End position on-screen */
+    transform: translateY(0); /* End position (on-screen) */
     opacity: 1; /* Fully visible */
 }
+
+/* Slide down effect for hiding modal */
+.modal-dialog.slide-down {
+    transform: translateY(200px); /* Slide down when closing */
+    opacity: 0; /* Invisible */
+}
+
+    .modal-header {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        position: relative;
+        text-align: center;
+    }
+
+    .modal-header .btn-close {
+        position: absolute;
+        right: 1rem;
+        /* top: 1rem; */
+    }
+
+    .modal-title {
+        margin-bottom: 0;
+    }
+
+    .modal-header i {
+        margin-right: 0.5rem;
+    }
+
+
 
 /* Staff Scan Camera */
 .camera {
@@ -434,11 +476,10 @@ a.print i.fa-print:hover {
     color: white;
 }
 
-
 /* Back Style */
 .back {
     color: #0d6efd;
 }
 .back:hover {
-    color: #0B5ED7;
+    color: #0b5ed7;
 }

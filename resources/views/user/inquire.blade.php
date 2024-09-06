@@ -39,7 +39,7 @@
                         <label for="derm" class="form-label">Patient Name</label>
                     </div> --}}
                     <div class="mb-3 d-flex flex-column align-items-start">
-                        <label for="patient_name" class="form-label">Patient Name</label>
+                        <label for="patient_name" class="form-label">Patient Name:</label>
                         <input type="text" name="patient_name" class="form-control" id="patient_name" placeholder="e.g. John Doe" required>
                     </div>
 

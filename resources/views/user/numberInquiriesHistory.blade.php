@@ -129,7 +129,8 @@
                                     @else
                                         <a href="{{ asset($filePath) }}" class="view-file rounded p-2 px-3" target="_blank"
                                             title="This will open the file in a new tab.">
-                                            {{ basename($inquiry->original_file_name) }}
+                                            <i class="fa-solid fa-file-lines me-3"></i> <!-- FontAwesome Icon -->
+                                            {{ $inquiry->original_file_name }}
                                         </a>
                                     @endif
                                 @else
