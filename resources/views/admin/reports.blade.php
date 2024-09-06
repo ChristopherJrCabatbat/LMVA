@@ -3,6 +3,24 @@
 @section('title', 'Admin Reports')
 
 @section('styles-links')
+<style>
+    /* @media (max-width: 1052px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .hamburger-icon {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+    .container, .container-md, .container-sm {
+        max-width: 100%;
+    }
+} */
+</style>
 
 @endsection
 
@@ -31,10 +49,6 @@
                     <h5 class="mb-0"><i class="fa-solid fa-notes-medical me-2"></i> Reports</h5>
 
                     <div class="d-flex gap-4">
-                        {{-- <form action="dermAdd">
-                        <button class="btn add" type="submit"><i class="fas fa-plus"></i> Add Report</button>
-                        </form> --}}
-
                         {{-- Live Search --}}
                         <form action="" class="d-flex position-relative">
                             <button class="btn-custom" type="button">

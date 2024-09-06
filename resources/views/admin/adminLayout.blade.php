@@ -148,8 +148,71 @@
     </div>
 
     <header>
-        {{-- Top Navbar --}}
+        <!-- Top Navbar -->
         <nav class="navbar fixed-top navbar-expand-lg p-0 bg-dark" data-bs-theme="dark"
+            style="border-bottom: 1px solid #03346E;">
+            <div class="container">
+                <!-- Hamburger Menu Button (Visible on Small Screens) -->
+                <div class="hamburger-icon d-lg-none p-3 text-white" id="hamburgerToggle">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <a class="navbar-brand logo" href="#">
+                    <img src="{{ asset('images/lmva-logo.png') }}" class="img-fluid"
+                        style="width: 110px; height: 100%" alt="User Image" />
+                </a>
+
+                <div id="">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        @if (Auth::check())
+                            <li class="nav-item dropdown" style="position: relative;">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-user"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown"
+                                    style="position: absolute; top: 100%; left: 0; right: 0; margin-top: 0; z-index: 1000;">
+                                    <!-- Profile Dropdown Link -->
+                                    <li class="profile-logout">
+                                        <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                            data-bs-target="#profileModal">
+                                            <i class="me-2 fa-solid fa-user"></i> Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="me-2 fa-solid fa-arrow-right-from-bracket rotate"></i> Log
+                                                Out
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        {{-- Side Navbar --}}
+        <div class="sidebar bg-dark text-white" data-bs-theme="dark">
+            <div class="user-info">
+                <div class="username text-white">Hello, {{ Auth::user()->first_name }}!</div>
+                <div class="position">You are logged in as {{ Auth::user()->role }}.</div>
+            </div>
+            <hr />
+
+            <ul class="nav flex-column text-white">
+                @yield('sidebar')
+            </ul>
+        </div>
+
+        {{-- Top Navbar --}}
+        {{-- <nav class="navbar fixed-top navbar-expand-lg p-0 bg-dark" data-bs-theme="dark"
             style="border-bottom: 1px solid #03346E;">
             <div class="container">
                 <a class="navbar-brand logo" href="#">
@@ -190,21 +253,9 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
 
 
-        {{-- Side Navbar --}}
-        <div class="sidebar bg-dark text-white" data-bs-theme="dark">
-            <div class="user-info">
-                <div class="username text-white">Hello, {{ Auth::user()->first_name }}!</div>
-                <div class="position">You are logged in as {{ Auth::user()->role }}.</div>
-            </div>
-            <hr />
-
-            <ul class="nav flex-column text-white">
-                @yield('sidebar')
-            </ul>
-        </div>
     </header>
 
     <main class="main-content">

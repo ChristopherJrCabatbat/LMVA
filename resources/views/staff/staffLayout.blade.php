@@ -163,7 +163,11 @@
         {{-- Top Navbar --}}
         <nav class="navbar fixed-top navbar-expand-lg p-0 staff-user-nav">
             <div class="container">
-                <a class="navbar-brand logo" href="#">
+                <!-- Hamburger Menu Button (Visible on Small Screens) -->
+                <div class="hamburger-icon d-lg-none p-3" id="hamburgerToggle">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <a class="navbar-brand logo" href="{{ route('staff.patientRecord') }}">
                     <img src="{{ asset('images/lmva-logo.png') }}" class="img-fluid"
                         style="width: 110px; height: 100%" alt="User Image" />
                 </a>
@@ -203,7 +207,6 @@
             </div>
         </nav>
 
-
         {{-- Side Navbar --}}
         <div class="sidebar">
             <div class="user-info">
@@ -217,6 +220,7 @@
                 @yield('sidebar')
             </ul>
         </div>
+        
     </header>
 
     <main class="main-content">

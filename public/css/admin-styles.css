@@ -4,6 +4,10 @@ main {
     min-height: 100vh;
 }
 
+.admin-top-nav {
+    border-bottom: 1px solid #03346e;
+}
+
 .sidebar {
     border-right: 1px solid #03346e;
 }

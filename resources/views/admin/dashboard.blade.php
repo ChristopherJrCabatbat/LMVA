@@ -26,7 +26,6 @@
     <li class="nav-item">
         <a class="nav-link" href="/admin/reports"><i class="fa-solid fa-newspaper me-2"></i> Reports</a>
     </li>
-
 @endsection
 
 @section('main-content')

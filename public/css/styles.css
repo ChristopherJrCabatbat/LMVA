@@ -35,8 +35,95 @@ main {
     text-decoration: underline;
 }
 
+/* Adjusting Dropdown Menu Position */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    right: auto; /* Reset right alignment */
+    transform: translateX(-10%);
+    overflow: hidden; /* Prevent overflow */
+}
+
+/* Top Navbar adjustments */
+.staff-user-nav {
+    height: 60px; /* Ensure the top navbar has enough height */
+    z-index: 1000; /* Keep top navbar above other elements */
+}
+
 /* Sidebar */
 .sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    padding-top: 29px;
+    z-index: 1;
+    border-right: 1px solid #0d6efd;
+    transition: transform 0.3s ease, margin-left 0.3s ease; /* Smooth transition */
+}
+
+/* Sidebar should be hidden on small screens initially */
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(-100%); /* Slide the sidebar off-screen */
+    }
+
+    .hamburger-icon {
+        display: block; /* Show the hamburger icon */
+        font-size: 24px;
+        color: #0d6efd;
+        z-index: 1100; /* Ensure it stays above other elements */
+    }
+
+    .main-content {
+        margin-left: 0; /* Remove left margin when sidebar is hidden */
+    }
+    .container,
+    .container-md,
+    .container-sm {
+        max-width: 100%;
+    }
+    .dropdown-menu {
+        transform: translateX(-80%);
+    }
+}
+@media (max-width: 1120px) {
+    .dropdown-menu {
+        transform: translateX(-50%);
+    }
+}
+
+/* Sidebar active state (slide in) */
+.sidebar.active {
+    transform: translateX(0); /* Slide sidebar into view */
+}
+
+/* Hamburger icon */
+.hamburger-icon {
+    display: none; /* Hide by default */
+    cursor: pointer;
+    z-index: 1100; /* Ensure it stays above other elements */
+}
+
+/* Main content */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    padding-top: 7vh;
+    transition: margin-left 0.3s ease; /* Smooth content transition */
+}
+
+/* On small screens, remove the margin when the sidebar is hidden */
+@media (max-width: 992px) {
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+/* .sidebar {
     height: 100vh;
     width: 250px;
     position: fixed;
@@ -46,7 +133,8 @@ main {
     padding-top: 29px;
     z-index: 1;
     border-right: 1px solid #0d6efd;
-}
+} */
+
 .sidebar .user-info {
     text-align: center;
     margin-bottom: 20px;
@@ -82,11 +170,21 @@ main {
 
 /* End Sidebar */
 
-.main-content {
+/* Main content */
+
+/* .main-content {
     margin-left: 250px;
     padding: 20px;
     padding-top: 7vh;
-}
+} */
+
+/* .main-content {
+    margin-left: 250px;
+    padding: 20px;
+    padding-top: 7vh;
+    transition: margin-left 0.3s ease;
+} */
+/* End main content */
 
 /* Alert Message */
 #error-alert {
@@ -427,7 +525,7 @@ a.print i.fa-print:hover {
 /* Slide Up/Down Animation for Modal */
 .modal.fade .modal-dialog {
     transition: transform 0.5s ease, opacity 0.5s ease;
-    transform: translateY(100px); /* Start position (slide up) */
+    transform: translateY(100px); /* Slide up when opened */
     opacity: 0; /* Initially invisible */
 }
 
@@ -442,29 +540,27 @@ a.print i.fa-print:hover {
     opacity: 0; /* Invisible */
 }
 
-    .modal-header {
-        display: flex;
-        justify-content: center; /* Center horizontally */
-        align-items: center; /* Center vertically */
-        position: relative;
-        text-align: center;
-    }
+.modal-header {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    position: relative;
+    text-align: center;
+}
 
-    .modal-header .btn-close {
-        position: absolute;
-        right: 1rem;
-        /* top: 1rem; */
-    }
+.modal-header .btn-close {
+    position: absolute;
+    right: 1rem;
+    /* top: 1rem; */
+}
 
-    .modal-title {
-        margin-bottom: 0;
-    }
+.modal-title {
+    margin-bottom: 0;
+}
 
-    .modal-header i {
-        margin-right: 0.5rem;
-    }
-
-
+.modal-header i {
+    margin-right: 0.5rem;
+}
 
 /* Staff Scan Camera */
 .camera {

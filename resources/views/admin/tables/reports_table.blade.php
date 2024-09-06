@@ -5,7 +5,7 @@
             <th class="align-middle">Email</th>
             <th class="align-middle">Patient Name</th>
             <th class="align-middle">Staff</th>
-            <th class="align-middle">Inquiry Overview</th>
+            <th class="align-middle">Overview</th>
             <th class="align-middle">Date</th>
         </tr>
     </thead>
@@ -16,7 +16,7 @@
                 <td class="align-middle">{{ $inquiry->email }}</td>
                 <td class="align-middle">{{ $inquiry->patient_name }}</td>
                 <td class="align-middle">{{ $inquiry->staff ?? 'No staff responded yet.' }}</td>
-                <td class="align-middle py-3"><a
+                <td class="align-middle py-3" style="white-space: nowrap;"><a
                         href="{{ route('admin.reportsHistory', $inquiry->id) }}" class="py-2 px-3 rounded dark-blue"><i
                             class="me-1 fa-solid fa-eye pointer"
                             title="View your inquiry history."></i>View</a></td>

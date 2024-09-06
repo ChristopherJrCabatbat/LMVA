@@ -158,6 +158,10 @@
         {{-- Top Navbar --}}
         <nav class="navbar fixed-top navbar-expand-lg p-0 staff-user-nav">
             <div class="container">
+                <!-- Hamburger Menu Button (Visible on Small Screens) -->
+                <div class="hamburger-icon d-lg-none p-3" id="hamburgerToggle">
+                    <i class="fa fa-bars"></i>
+                </div>
                 <a class="navbar-brand logo" href="#">
                     <img src="{{ asset('images/lmva-logo.png') }}" class="img-fluid"
                         style="width: 110px; height: 100%" alt="User Image" />
