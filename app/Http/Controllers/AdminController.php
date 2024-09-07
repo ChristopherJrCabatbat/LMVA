@@ -345,12 +345,30 @@ class AdminController extends Controller
         // Find the DERM by name
         $dermRecord = Derm::where('derm', $derm)->firstOrFail();
 
-        // Retrieve all records associated with this DERM
-        $records = Record::where('category', $derm)->get();
+        // Retrieve paginated records associated with this DERM
+        $records = Record::where('category', $derm)->paginate(3); // Adjust pagination size as needed
 
         return view('admin.dermShow', compact('dermRecord', 'records'));
     }
 
+    public function dermShowSearch(Request $request, $derm)
+    {
+        $searchTerm = $request->input('query');
+
+        // Retrieve paginated records associated with the selected DERM
+        $records = Record::whereNotNull('category')  // Only include records with a non-null category
+            ->where('category', $derm)  // Ensure the category matches the selected derm
+            ->when($searchTerm, function ($query, $searchTerm) {
+                return $query->where(function ($q) use ($searchTerm) {
+                    $q->where('file_details', 'LIKE', "%{$searchTerm}%")
+                        ->orWhere('original_file_name', 'LIKE', "%{$searchTerm}%");
+                });
+            })
+            ->paginate(3); // Adjust pagination size as needed
+
+        // Return only the table content to be replaced via AJAX
+        return view('admin.tables.dermShow_table', compact('records'))->render();
+    }
 
 
     // Report Controllers
@@ -376,7 +394,7 @@ class AdminController extends Controller
                 ->orWhere('email', 'LIKE', "%{$searchTerm}%")
                 ->orWhere('patient_name', 'LIKE', "%{$searchTerm}%")
                 ->orWhere('staff', 'LIKE', "%{$searchTerm}%")
-                ;
+            ;
         })
             ->paginate(5); // Adjust pagination size here as well
 

@@ -1,12 +1,12 @@
 <table class="table table-bordered bg-dark rounded" data-bs-theme="dark">
     <thead>
         <tr>
-            <th scope="col">Username</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Contact Number</th>
-            <th scope="col">Email</th>
-            <th scope="col">Actions</th>
+            <th class="align-middle" scope="col">Username</th>
+            <th class="align-middle" scope="col">First Name</th>
+            <th class="align-middle" scope="col">Last Name</th>
+            <th class="align-middle" scope="col">Contact Number</th>
+            <th class="align-middle" scope="col">Email</th>
+            <th class="align-middle" scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>

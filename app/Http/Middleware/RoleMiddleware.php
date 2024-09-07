@@ -40,6 +40,7 @@ class RoleMiddleware
                 'admin.dermAdd',
                 'admin.dermStore',
                 'admin.dermShow',
+                'admin.dermShowSearch',
 
                 'admin.reports',
                 'admin.reportsHistory',

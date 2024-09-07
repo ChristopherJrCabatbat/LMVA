@@ -61,6 +61,7 @@ Route::group([
     Route::get('/dermAdd', [AdminController::class, 'dermAdd'])->name('dermAdd');
     Route::post('/dermStore', [AdminController::class, 'dermStore'])->name('dermStore');
     Route::get('/dermShow/{derm}', [AdminController::class, 'dermShow'])->name('dermShow');
+    Route::get('/dermShowSearch/{derm}', [AdminController::class, 'dermShowSearch'])->name('dermShowSearch');
 
 
     // Reports Controller
