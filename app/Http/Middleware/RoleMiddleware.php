@@ -64,6 +64,10 @@ class RoleMiddleware
                 'user.dashboard',
                 'user.dashboardSearch',
                 'user.dashboardResponse',
+                
+                'user.payment.gcash',
+                'user.payment.maya',
+                'user.payment.paypal',
 
                 'user.inquire',
                 'user.inquireAdd',

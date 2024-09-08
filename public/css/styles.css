@@ -60,7 +60,7 @@ main {
     left: 0;
     background-color: white;
     padding-top: 29px;
-    z-index: 1;
+    z-index: 2;
     border-right: 1px solid #0d6efd;
     transition: transform 0.3s ease, margin-left 0.3s ease; /* Smooth transition */
 }
@@ -228,6 +228,10 @@ select {
 
 tbody tr.light-border {
     border: 1px solid #03346e;
+}
+
+.table-responsive th, .table-responsive td {
+    vertical-align: middle;
 }
 
 .dropdown-custom {

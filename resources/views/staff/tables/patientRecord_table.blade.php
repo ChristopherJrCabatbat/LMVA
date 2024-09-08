@@ -10,7 +10,7 @@
         @forelse ($records as $record)
             <tr class="table-light light-border">
                 <!-- Display the file details or fallback to the original file name -->
-                <td class="align-middle">
+                <td class="">
                     {{ $record->file_details ?: $record->original_file_name }}
                 </td>
                 @php
@@ -20,7 +20,7 @@
                 @endphp
 
                 @if (in_array($fileExtension, $imageExtensions))
-                    <td class="py-2 align-middle">
+                    <td class="py-2">
                         <!-- Display the image full screen -->
                         <img src="{{ asset($filePath) }}" alt="{{ $record->original_file_name }}"
                             height="70" onclick="showQRCode('{{ asset($filePath) }}')"
@@ -36,7 +36,7 @@
                 @endif
 
 
-                <td class="align-middle" style="width: 20%">
+                <td class="" style="width: 20%">
                     <form action="{{ route('staff.patientRecordCategorize') }}" method="POST"
                         id="categorizeForm-{{ $record->id }}">
                         @csrf

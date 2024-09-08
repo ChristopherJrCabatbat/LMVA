@@ -10,9 +10,9 @@
         @forelse ($derms as $derm)
             <tr class="table-light light-border" style="border: 1px solid #03346E">
                 <!-- Display the DERM name -->
-                <td class="align-middle fs-4">{{ $derm->derm }}</td>
+                <td class="fs-4">{{ $derm->derm }}</td>
 
-                <td class="align-middle d-flex flex-column justify-content-center align-items-center">
+                <td class="d-flex flex-column justify-content-center align-items-center">
                     <a href="{{ route('staff.dermShow', ['derm' => $derm->derm]) }}">
                         <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="95" height="95"
                             class="qr-thumbnail" title="Click to view DERM information.">
@@ -22,7 +22,7 @@
                 </td>
 
                 <!-- Print button -->
-                <td class="align-middle">
+                <td class="">
                     <a class="print" href="#"
                         onclick="printDerm('{{ $derm->derm }}', '{{ asset($derm->qr_code) }}')"
                         style="color: #002046;" title="Print the QR Code.">

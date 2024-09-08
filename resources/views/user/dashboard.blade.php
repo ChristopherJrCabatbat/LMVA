@@ -8,34 +8,34 @@
 
 @section('modals')
 
-    <!-- Payment Modal -->
-    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="paymentModalLabel">Please fill-up the form to proceed</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="paymentForm">
-                        <div class="mb-3">
-                            <label for="payment-method" class="form-label">Select Payment Method:</label>
-                            <select id="payment-method" class="form-select">
-                                <option value="" disabled selected>Select a payment method</option>
-                                <option value="credit-card">Credit Card</option>
-                                <option value="paypal">PayPal</option>
-                                <option value="bank-transfer">Bank Transfer</option>
-                            </select>
-                        </div>
-                        {{-- <button type="submit" class="btn btn-primary">Proceed to Payment</button> --}}
-                        <div class="d-grid my-2">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
+  <!-- Payment Modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Please fill-up the form to proceed</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="paymentForm">
+                    <div class="mb-3">
+                        <label for="payment-method" class="form-label">Select Payment Method:</label>
+                        <select id="payment-method" class="form-select" required>
+                            <option value="" disabled selected>Select a payment method</option>
+                            <option value="GCash">GCash</option>
+                            <option value="Maya">Maya</option>
+                            <option value="PayPal">PayPal</option>
+                        </select>
+                    </div>
+                    <div class="d-grid my-2">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
 
 @endsection
 
@@ -91,31 +91,54 @@
 
 @section('scripts')
 
-    {{-- Payment Form --}}
-    @if ($inquiries->count() > 0)
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                let inquiryId;
+@if ($inquiries->count() > 0)
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let inquiryId;
 
-                // Capture the inquiry ID when the modal is triggered
-                document.querySelectorAll('.status-responded').forEach(function(element) {
-                    element.addEventListener('click', function() {
-                        inquiryId = this.getAttribute('data-inquiry-id');
-                    });
-                });
-
-                // Handle form submission
-                document.getElementById('paymentForm').addEventListener('submit', function(event) {
-                    event.preventDefault();
-
-                    // Redirect to the dashboardResponse route with the correct inquiry ID
-                    if (inquiryId) {
-                        window.location.href = "{{ url('user/dashboardResponse') }}/" + inquiryId;
-                    }
-                });
+        // Capture the inquiry ID when the modal is triggered
+        document.querySelectorAll('.status-responded').forEach(function(element) {
+            element.addEventListener('click', function() {
+                inquiryId = this.getAttribute('data-inquiry-id');
             });
-        </script>
-    @endif
+        });
+
+        // Handle form submission for payment
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get the selected payment method
+            const paymentMethod = document.getElementById('payment-method').value;
+
+            if (paymentMethod && inquiryId) {
+                // Redirect based on the selected payment method
+                switch (paymentMethod) {
+                    case 'GCash':
+                        // Simulate GCash transaction redirection
+                        alert('Redirecting to GCash...');
+                        window.location.href = `{{ url('user/payment/gcash') }}/${inquiryId}`;
+                        break;
+                    case 'Maya':
+                        // Simulate Maya transaction redirection
+                        alert('Redirecting to Maya...');
+                        window.location.href = `{{ url('user/payment/maya') }}/${inquiryId}`;
+                        break;
+                    case 'PayPal':
+                        // Simulate PayPal transaction redirection
+                        alert('Redirecting to PayPal...');
+                        window.location.href = `{{ url('user/payment/paypal') }}/${inquiryId}`;
+                        break;
+                    default:
+                        alert('Please select a valid payment method.');
+                }
+            } else {
+                alert('Please select a payment method and try again.');
+            }
+        });
+    });
+</script>
+@endif
+
 
     {{-- Search Script --}}
     <script>

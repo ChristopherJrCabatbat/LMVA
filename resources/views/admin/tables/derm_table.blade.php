@@ -11,15 +11,15 @@
         @forelse ($derms as $derm)
             <tr class="table-light light-border" style="border: 1px solid #03346E">
                 <!-- Display the DERM name -->
-                <td class="align-middle fs-4">{{ $derm->derm }}</td>
+                <td class="fs-4">{{ $derm->derm }}</td>
 
                 <!-- Display the QR code image -->
-                {{-- <td class="align-middle">
+                {{-- <td class="">
                     <img src="{{ asset($derm->qr_code) }}" alt="QR Code" width="100" height="100"
                         class="qr-thumbnail" onclick="showQRCode('{{ asset($derm->qr_code) }}')">
                 </td> --}}
 
-                <td class="align-middle d-flex flex-column justify-content-center align-items-center">
+                <td class="d-flex flex-column justify-content-center align-items-center">
                     <a href="{{ route('admin.dermShow', ['derm' => $derm->derm]) }}">
                         <img src="{{ asset($derm->qr_code) }}"
                             title="Click to view files associated with {{ $derm->derm }}." alt="QR Code"
@@ -30,7 +30,7 @@
                 </td>
 
                 <!-- Print button -->
-                <td class="align-middle">
+                <td class="">
                     <a class="print" href="#"
                         onclick="printDerm('{{ $derm->derm }}', '{{ asset($derm->qr_code) }}')"
                         style="color: #002046;">

@@ -46,9 +46,28 @@
                         <p class="form-control-plaintext">{{ $inquiry->patient_name }}</p>
                     </div>
 
+                    <!-- Full-Width Row for Inquiry Details and Response -->
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div class="mb-3 d-flex flex-column align-items-start">
+                                <label for="inquiry" class="form-label">Inquiry Details:</label>
+                                <p class="form-control-plaintext">{!! nl2br(e($inquiry->inquiry)) !!}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class=" d-flex flex-column align-items-start">
+                                <label for="response" class="form-label">Response:</label>
+                                <p class="form-control-plaintext">{!! nl2br(e($inquiry->response)) !!}</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Attached File -->
-                    <div class="mb-3 d-flex flex-column align-items-start">
-                        <label for="response_file" class="form-label">Attached file:</label>
+                    <div class="d-flex flex-column align-items-start">
+                        <label for="response_file" class="form-label mb-3">Attached file:</label>
                         @if ($inquiry->response_file)
                             @php
                                 $filePath = 'storage/' . $inquiry->response_file;
@@ -71,25 +90,6 @@
                         @else
                             <p class="form-control-plaintext">No file attached.</p>
                         @endif
-                    </div>
-
-                    <!-- Full-Width Row for Inquiry Details and Response -->
-                    <div class="row mt-2">
-                        <div class="col-12">
-                            <div class="mb-3 d-flex flex-column align-items-start">
-                                <label for="inquiry" class="form-label">Inquiry Details:</label>
-                                <p class="form-control-plaintext">{!! nl2br(e($inquiry->inquiry)) !!}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <div class=" d-flex flex-column align-items-start">
-                                <label for="response" class="form-label">Response:</label>
-                                <p class="form-control-plaintext">{!! nl2br(e($inquiry->response)) !!}</p>
-                            </div>
-                        </div>
                     </div>
 
                 </form>

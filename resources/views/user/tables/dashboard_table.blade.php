@@ -1,17 +1,17 @@
 <table class="table table-bordered table-blue table-info rounded">
     <thead>
         <tr>
-            <th scope="col" class="align-middle">Inquiry Details</th>
-            <th scope="col" class="align-middle">Payment Method</th>
-            <th scope="col" class="align-middle">Status</th>
+            <th scope="col" class="">Inquiry Details</th>
+            <th scope="col" class="">Payment Method</th>
+            <th scope="col" class="">Status</th>
         </tr>
     </thead>
     <tbody>
         @forelse ($inquiries as $inquiry)
             <tr class="table-light light-border" style="border: 1px solid #03346E">
-                <td class="align-middle">{{ $inquiry->inquiry }}</td>
-                <td class="align-middle">{{ $inquiry->payment_method ?? '--' }}</td>
-                <td class="align-middle">
+                <td class="">{{ $inquiry->inquiry }}</td>
+                <td class="">{{ $inquiry->payment_method ?? '--' }}</td>
+                <td class="">
                     @if (is_null($inquiry->response))
                         Inquiry Sent
                     @else

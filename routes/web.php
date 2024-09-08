@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
 });
@@ -103,6 +103,11 @@ Route::group([
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboardSearch', [UserController::class, 'dashboardSearch'])->name('dashboardSearch');
     Route::get('/dashboardResponse/{id}', [UserController::class, 'dashboardResponse'])->name('dashboardResponse');
+
+    // Payment Routes
+    Route::get('/payment/gcash/{id}', [UserController::class, 'gcash'])->name('payment.gcash');
+    Route::get('/payment/maya/{id}', [UserController::class, 'maya'])->name('payment.maya');
+    Route::get('/payment/paypal/{id}', [UserController::class, 'paypal'])->name('payment.paypal');
 
     // Inquiry Routes
     Route::get('/inquire', [UserController::class, 'inquire'])->name('inquire');

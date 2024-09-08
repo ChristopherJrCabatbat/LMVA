@@ -8,7 +8,7 @@
     <tbody id="search-results-body">
         @forelse ($records as $record)
             <tr class="table-light light-border">
-                <td class="align-middle">
+                <td class="">
                     {{ $record->file_details ?: $record->original_file_name }}
                 </td>
                 @php
@@ -18,7 +18,7 @@
                 @endphp
 
                 @if (in_array($fileExtension, $imageExtensions))
-                    <td class="py-2 align-middle">
+                    <td class="py-2">
                         <img src="{{ asset($filePath) }}" alt="{{ $record->original_file_name }}"
                              height="70" onclick="showQRCode('{{ asset($filePath) }}')"
                              style="cursor: pointer;" title="Click to expand.">

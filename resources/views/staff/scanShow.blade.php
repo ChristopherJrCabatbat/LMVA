@@ -59,7 +59,7 @@
                     <tbody>
                         @forelse ($records as $record)
                             <tr class="table-light light-border" style="border: 1px solid #03346E">
-                                <td class="align-middle">{{ $record->file_details ?: $record->original_file_name }}</td>
+                                <td class="">{{ $record->file_details ?: $record->original_file_name }}</td>
                                 @php
                                     $filePath = 'storage/' . $record->file;
                                     $fileExtension = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
@@ -67,7 +67,7 @@
                                 @endphp
 
                                 @if (in_array($fileExtension, $imageExtensions))
-                                    <td class="py-2 align-middle">
+                                    <td class="py-2">
                                         <!-- Display the image full screen -->
                                         <img src="{{ asset($filePath) }}" alt="{{ $record->original_file_name }}"
                                             height="70" onclick="showQRCode('{{ asset($filePath) }}')"

@@ -45,6 +45,25 @@ class UserController extends Controller
         return view('user.dashboardResponse', compact('inquiry'));
     }
 
+    // Payment Controller
+    public function gcash($id)
+    {
+        // Redirect to GCash payment page
+        return redirect()->away('https://gcash-payment-gateway-url?inquiry_id='.$id);
+    }
+
+    public function maya($id)
+    {
+        // Redirect to Maya payment page
+        return redirect()->away('https://maya-payment-gateway-url?inquiry_id='.$id);
+    }
+
+    public function paypal($id)
+    {
+        // Redirect to PayPal payment page
+        return redirect()->away('https://paypal-payment-gateway-url?inquiry_id='.$id);
+    }
+
 
     // Inquire Controller
 
